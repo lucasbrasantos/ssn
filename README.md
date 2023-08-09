@@ -14,6 +14,8 @@
 
 > ### 4.    **abra no _vscode_ essa pasta `ssn` do repositorio clonado, abra o terminal integrado do vscode apertando as teclas `ctrl+', ou na aba view>terminal`, após isso de o comando `'cd app'` para abrir a pasta app**
 
+> ## CERTIFIQUE-SE que o terminal está aberto como `prompt de comando` e não o powershell!
+
 > ### 5.    **apos ter executado o comando `'cd app'` deve estar mais ou menos assim seu terminal `C:\Users\seu usuario\tcc\ssn\app> | `, apos isso execute o comando `npm i` para instalar todas as bibliotecas necessarias para executar o app**
 
 > ### 4.    **apos instalado tudo, para rodar o app execute `npm run dev`**
