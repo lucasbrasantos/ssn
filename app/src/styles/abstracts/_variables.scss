@@ -1,8 +1,70 @@
 
 
 $gray: #707070;
-$fontWhite: #e1e1e1;
+$black: #232123;
 $c1: #2C2C2E;
 $c2: #D44949;
-$c3: #232123;
 $c4: #000;
+
+
+// // ----- color variables custom function
+
+@function clr($a, $b: base) {
+    $color: map-get(map-get($colors, $a), $b);
+    @return $color;
+}
+
+
+$colors: (
+
+    dark:(
+        base: #232123,
+        100: #2C2C2E,
+        200: #383638,
+        300: #4d4c4d,
+        400: #707070,
+    ),
+    text:(
+        base: hsl(0, 0%, 90%),
+    ),
+    icon:(
+        base: hsl(0, 0%, 90%),
+    )
+
+);
+
+
+
+
+
+
+/*
+@function clr-x($a, $b: a, $c: a3) {
+    $color: map-get(map-get(map-get($colorsx, $a), $b), $c);
+    @return $color;
+}
+
+
+$colorsx: (
+
+    dark:(
+        a: (
+            a1: hsl(175, 80%, 10%),
+            a2: hsl(175, 80%, 20%),
+            a3: hsl(175, 80%, 30%),
+            a4: hsl(175, 80%, 40%),
+            a5: hsl(175, 80%, 50%),
+        ),
+        b: (
+            a1: hsl(4, 80%, 10%),
+            a2: hsl(4, 80%, 20%),
+            a3: hsl(4, 80%, 30%),
+            a4: hsl(4, 80%, 40%),
+            a5: hsl(4, 80%, 50%),
+        )    
+                
+    )
+
+);
+*/
+
