@@ -5,16 +5,13 @@
 
 @use './base/base' as *;
 
-// -components- // 
-
-@use './components/navbar' as *;
-
+@use './layouts/entry' as *;
 
 //-  pages  -// 
 
-@use './pages/entry' as *;
 @use './pages/login' as *;
 @use './pages/register' as *;
+@use './pages/home' as *;
 
 
 
