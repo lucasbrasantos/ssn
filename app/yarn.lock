@@ -249,6 +249,71 @@
   resolved "https://registry.npmjs.org/@eslint/js/-/js-8.46.0.tgz"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
+"@fluentui/dom-utilities@^2.2.11":
+  version "2.2.11"
+  resolved "https://registry.npmjs.org/@fluentui/dom-utilities/-/dom-utilities-2.2.11.tgz"
+  integrity sha512-2tXfg7/9PXu9nfU72/P3o3waHEFEQtHUfQbVexUaYqNNAxMj6sOfsqpUx4vd5nPgO+grSWrl+spqlLN2yej51w==
+  dependencies:
+    "@fluentui/set-version" "^8.2.11"
+    tslib "^2.1.0"
+
+"@fluentui/font-icons-mdl2@^8.5.23":
+  version "8.5.23"
+  resolved "https://registry.npmjs.org/@fluentui/font-icons-mdl2/-/font-icons-mdl2-8.5.23.tgz"
+  integrity sha512-jZjUtfQm9/84jX34zhwwsoZME86xXXgKAgBYuMvRStKzXGdZcd7YSOlmuT8lbISmtFL/SWwUGOEal1nLCUNeNA==
+  dependencies:
+    "@fluentui/set-version" "^8.2.11"
+    "@fluentui/style-utilities" "^8.9.16"
+    "@fluentui/utilities" "^8.13.18"
+    tslib "^2.1.0"
+
+"@fluentui/merge-styles@^8.5.12":
+  version "8.5.12"
+  resolved "https://registry.npmjs.org/@fluentui/merge-styles/-/merge-styles-8.5.12.tgz"
+  integrity sha512-ZnUo0YuMP7AYi68dkknFqVxopIAgbrUnqR/MZlemmRvBYyy1SMj1WQeHcoiLFA8mF8YKn7B+jxQgJbN2bfcrRw==
+  dependencies:
+    "@fluentui/set-version" "^8.2.11"
+    tslib "^2.1.0"
+
+"@fluentui/set-version@^8.2.11":
+  version "8.2.11"
+  resolved "https://registry.npmjs.org/@fluentui/set-version/-/set-version-8.2.11.tgz"
+  integrity sha512-UI03tysau/adBO1a3q4uFZWQ3lfkiFcAWIFng4k5odWcCokfCm5IxA0urKqj5W5JRYdyoBUaq8QbcNGkFB4dCw==
+  dependencies:
+    tslib "^2.1.0"
+
+"@fluentui/style-utilities@^8.9.16":
+  version "8.9.16"
+  resolved "https://registry.npmjs.org/@fluentui/style-utilities/-/style-utilities-8.9.16.tgz"
+  integrity sha512-8hS5HscCFYvcWjAdk37frPZJZthr7f/cu5db7gjrPy+DEhf13WAZRHsropWm17+8GhJhvKt98BQf/Kzxtt34Eg==
+  dependencies:
+    "@fluentui/merge-styles" "^8.5.12"
+    "@fluentui/set-version" "^8.2.11"
+    "@fluentui/theme" "^2.6.34"
+    "@fluentui/utilities" "^8.13.18"
+    "@microsoft/load-themed-styles" "^1.10.26"
+    tslib "^2.1.0"
+
+"@fluentui/theme@^2.6.34":
+  version "2.6.34"
+  resolved "https://registry.npmjs.org/@fluentui/theme/-/theme-2.6.34.tgz"
+  integrity sha512-2Ssi3sX2snnbPJ4PmxbpCDCGePRE36tvGj2qKgdKiSh/fPVsg1b+Q50YlpFl9sXmbhl1uFmxjAx6WPsVGTl7vQ==
+  dependencies:
+    "@fluentui/merge-styles" "^8.5.12"
+    "@fluentui/set-version" "^8.2.11"
+    "@fluentui/utilities" "^8.13.18"
+    tslib "^2.1.0"
+
+"@fluentui/utilities@^8.13.18":
+  version "8.13.18"
+  resolved "https://registry.npmjs.org/@fluentui/utilities/-/utilities-8.13.18.tgz"
+  integrity sha512-/0rX9EzltLKwU1SS14VV7agWoOzruVTU3oagZq1QgFAvoj8qi7fNqvSX/VEeRy+0gmbsCkrEViUPkmC7drKzPg==
+  dependencies:
+    "@fluentui/dom-utilities" "^2.2.11"
+    "@fluentui/merge-styles" "^8.5.12"
+    "@fluentui/set-version" "^8.2.11"
+    tslib "^2.1.0"
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.10.tgz"
@@ -305,6 +370,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@microsoft/load-themed-styles@^1.10.26":
+  version "1.10.295"
+  resolved "https://registry.npmjs.org/@microsoft/load-themed-styles/-/load-themed-styles-1.10.295.tgz"
+  integrity sha512-W+IzEBw8a6LOOfRJM02dTT7BDZijxm+Z7lhtOAz1+y9vQm1Kdz9jlAO+qCEKsfxtUOmKilW8DIRqFw2aUgKeGg==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -338,7 +408,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.28":
+"@types/react@*", "@types/react@^18.0.28", "@types/react@>=16.8.0 <19.0.0":
   version "18.2.18"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.2.18.tgz"
   integrity sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==
@@ -1572,7 +1642,7 @@ react-refresh@^0.14.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react@^18.2.0:
+react@^18.2.0, "react@>=16.8.0 <19.0.0":
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -1789,6 +1859,11 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+tslib@^2.1.0:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.1.tgz"
+  integrity sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
