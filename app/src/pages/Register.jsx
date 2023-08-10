@@ -8,7 +8,7 @@ const Register = () => {
 
     
     return(
-        <div className="registerContainer">
+        <div className="entry registerContainer">
             
             
             <div className="formWrapper">
