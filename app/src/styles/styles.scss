@@ -1,3 +1,13 @@
+
+$gray: #707070;
+$fontWhite: #e1e1e1;
+$c1: #2C2C2E;
+$c2: #D44949;
+$c3: #232123;
+$c4: #000;
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;900&display=swap');
 
@@ -11,6 +21,7 @@
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .loginContainer{
@@ -19,35 +30,143 @@
     @include center();
     background: linear-gradient(to bottom, #232123, #2F3134);
 
-    
+    z-index: 10;
+    position: relative;
+
+
 
     .formWrapper{
+        position: relative;
+        z-index: initial;
+
+        color: $fontWhite;
+        font-weight: 300;
         @include center();
         flex-direction: row;
         height: 550px;
         column-gap: 20px;
         padding: 20px;
-
-        background: rgba(31, 32, 36, 0.87);
         
-
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 20%);
+        background: rgba($c3, 60%);
+        border: 1px solid #707070;
+        // background: rgba(31, 32, 36, 0.87);
+        
+        
         form{
             @include center();
-            justify-content: space-evenly;
+            justify-content: initial;
             flex-direction: column;
+            gap: 45px 0;
             height: 100%;
             width: 420px;
-            background: #585858;
-
+            
+            
+            //background: #585858;
+            
+            //////
+            
 
             h1{
-                text-transform: uppercase;
-            }
+                font-weight: 400;
+                text-transform: uppercase;                
+            }       
 
             .inputs,
             .buttons{
                 display: flex;
                 flex-direction: column;
+            }
+
+            $w: 70%;
+            
+            .inputs{                
+
+                width: $w;
+                
+                input{
+                    outline: none;
+                    border: none;
+                    width: 100%;
+                    padding: 14px 20px;
+                    border-radius: 25px;
+                    box-shadow: 2px 2px 5px rgba(0, 0, 0, 20%);
+
+                    &:nth-child(2){ // 2 / 4
+                        margin-bottom: 10px;
+                    }
+                }
+                
+                label{
+                    text-transform: capitalize;
+                    margin-left: 14px;
+                    font-size: .9rem;
+                }
+
+                
+            }
+
+
+            .buttons{
+                
+                width: $w;
+
+                button{
+                    background: $c1;
+                    color: $fontWhite;
+                    border: none;
+                    width: 85%;
+                    padding: 14px 16px;
+                    margin: 0 auto;
+                    transition: .2s;
+                    box-shadow: 2px 2px 5px rgba(0, 0, 0, 20%);
+
+                    &:nth-child(3){
+                        margin-bottom: 10px;
+                    }
+
+                    
+                    &[id='googleBtn']{
+                        background: $c2;
+                    }
+
+                    &:hover{
+                        filter: brightness(120%);
+                        color: #c5c5c5;
+                    }
+                }
+
+
+                .line{
+                    @include center();
+                    margin: 10px 0; // margin up and down 10px
+
+                    p{
+                        text-align: center;
+                        position: relative;;
+
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            background: $fontWhite;
+                            width: 80px;
+                            height: 1px;
+                            
+                            top: .65rem;
+                            right: 28px;
+                        }
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            background: $fontWhite;
+                            width: 80px;
+                            height: 1px;
+                            
+                            top: .65rem;
+                            left: 28px;
+                        }
+                    }
+                }
             }
 
 
@@ -59,5 +178,80 @@
         }
     }
 
+
+    #ball1{
+        $radius: 180px;
+        width: $radius;
+        height: $radius;
+        border-radius: 100%;
+
+        position: absolute;
+        z-index: -1;
+
+        top: -30px;
+        right: -80px;
+        
+        background: rgb(30, 173, 216, 90%);
+        filter: blur(4rem);
+
+        -webkit-animation: slide-top 3s ease-in-out infinite alternate ;
+        animation: slide-top 3s ease-in-out infinite alternate ;
+    }
+    #ball2{
+        $radius: 100px;
+        width: $radius;
+        height: $radius;
+        border-radius: 100%;
+
+        position: absolute;
+        z-index: -1;
+
+        bottom: -20px;
+        left: -50px;
+        
+        background: rgba(180, 51, 212, 0.9);
+        filter: blur(3rem);
+
+        -webkit-animation: slide-top 2s ease-in-out infinite alternate ;
+        animation: slide-top 2s ease-in-out infinite alternate 1s;
+    }
+
 }
+
+
+
+
+
+
+
+
+/**
+ * ----------------------------------------
+ * animation slide-top
+ * ----------------------------------------
+ */
+
+$slide-top: 60%;
+
+@-webkit-keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY($slide-top);
+        transform: translateY($slide-top);
+    }
+}
+@keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY($slide-top);
+        transform: translateY($slide-top);
+    }
+}
+  
 
