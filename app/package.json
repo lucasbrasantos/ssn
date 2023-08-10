@@ -8,12 +8,12 @@
     "url": "git+https://github.com/lucasbrasantos/ssn.git"
   },
   "keywords": [],
-  "author": "lucas",
+  "author": "Lucas, Daniel, Matheus, Thiago",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lucasbrasantos/ssn/issues"
   },
-  "homepage": "https://github.com/lucasbrasantos/ssn#readme"
+  "homepage": "https://github.com/lucasbrasantos/ssn#readme",
   
   "private": true,
   "type": "module",
