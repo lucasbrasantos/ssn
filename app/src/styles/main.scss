@@ -24,7 +24,7 @@ $c4: #000;
     box-sizing: border-box;
 }
 
-.loginContainer{
+.loginContainer, .registerContainer{
     width: 100vw;
     height: 100vh;
     @include center();
@@ -32,7 +32,6 @@ $c4: #000;
 
     z-index: 10;
     position: relative;
-
 
 
     .formWrapper{
@@ -217,7 +216,21 @@ $c4: #000;
     }
 
 }
+.registerContainer .formWrapper form{
+    gap: 0;
 
+    .inputs{                
+        
+        input{
+            margin-bottom: 10px !important;
+
+        }
+    }
+
+
+
+    
+}
 
 
 
