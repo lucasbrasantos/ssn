@@ -9,7 +9,7 @@ const Login = () => {
 
             <div className="formWrapper">
                 <form action="">
-                    <h1>login</h1>
+                    <h1>logsin</h1>
 
                     <div className="inputs">
                         <input type="text" />
