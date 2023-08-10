@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;900&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+// // // // // // ANIMATIONS 
+
+
+/*
+ * ----------------------------------------
+ * animation slide-top
+ * ----------------------------------------
+ */
+ $slide-top: 60%;
+
+ @-webkit-keyframes slide-top {
+     0% {
+         -webkit-transform: translateY(0);
+         transform: translateY(0);
+     }
+     100% {
+         -webkit-transform: translateY($slide-top);
+         transform: translateY($slide-top);
+     }
+ }
+ @keyframes slide-top {
+     0% {
+         -webkit-transform: translateY(0);
+         transform: translateY(0);
+     }
+     100% {
+         -webkit-transform: translateY($slide-top);
+         transform: translateY($slide-top);
+     }
+ }

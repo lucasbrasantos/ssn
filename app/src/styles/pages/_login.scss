@@ -1,0 +1,49 @@
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+// // 
+
+
+.loginContainer{
+
+    
+    #ball1{
+        $radius: 180px;
+        width: $radius;
+        height: $radius;
+        border-radius: 100%;
+        
+        position: absolute;
+        z-index: -1;
+        
+        top: -30px;
+        right: -80px;
+        
+        background: rgba(212, 51, 212, 0.9);
+        filter: blur(4rem);
+        
+        -webkit-animation: slide-top 3s ease-in-out infinite alternate ;
+        animation: slide-top 3s ease-in-out infinite alternate ;
+    }
+
+    #ball2{
+        $radius: 100px;
+        width: $radius;
+        height: $radius;
+        border-radius: 100%;
+        
+        position: absolute;
+        z-index: -1;
+        
+        bottom: -20px;
+        left: -50px;
+        
+        background: rgba(110, 212, 51, 0.9);
+        filter: blur(3rem);
+        
+        -webkit-animation: slide-top 2s ease-in-out infinite alternate ;
+        animation: slide-top 2s ease-in-out infinite alternate 1s;
+    }
+
+}
