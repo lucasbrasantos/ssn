@@ -1,8 +1,23 @@
 {
-  "name": "vite",
+  "name": "ssn",
+  "version": "1.0.0",
+  "description": "",
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasbrasantos/ssn.git"
+  },
+  "keywords": [],
+  "author": "lucas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasbrasantos/ssn/issues"
+  },
+  "homepage": "https://github.com/lucasbrasantos/ssn#readme"
+  
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
