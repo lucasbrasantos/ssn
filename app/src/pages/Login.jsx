@@ -6,32 +6,41 @@ const Login = () => {
     
     return(
         <div className="loginContainer">
-
+            
+            
             <div className="formWrapper">
+                
+                <div id="ball1"></div>
+                <div id="ball2"></div>
+            
+
                 <form action="">
                     <h1>login</h1>
 
                     <div className="inputs">
-                        <input type="text" />
-                        <input type="password" />
+                        <label htmlFor="user">usuario</label>
+                        <input id='user' type="text" />
+
+                        <label htmlFor="password">senha</label>
+                        <input id='password' type="password" />
                     </div>
 
                     <div className="buttons">
-                        <button>entrar</button>
+                        <button>Entrar</button>
                         
                         <div className="line">
-                            <hr />
-                            <p>ou</p>
-                            <hr />
+                            <p>Ou</p>
                         </div>
 
-                        <button>login com google</button>
-                        <button>cadastrar-se</button>
+                        <button id='googleBtn'>Login com Google</button>
+                        <button>Cadastrar-se</button>
                     </div>
                 </form>
 
-                <img src="https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg" alt="test img" />
+                <img src="../../src/assets/sampleImg.png" alt="test img" />
             </div>
+
+            
 
         </div>
     )
