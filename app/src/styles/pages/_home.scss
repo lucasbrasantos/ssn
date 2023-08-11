@@ -29,6 +29,7 @@
         .col1, .col2{
             display: flex;
             gap: 30px;
+
         }
 
         .logo {
@@ -45,7 +46,7 @@
 
         .search{
             width: 42%;
-            height: 60px;
+            height: 40px;
             padding: 20px;
             border-radius: 30px;
             outline: none;
