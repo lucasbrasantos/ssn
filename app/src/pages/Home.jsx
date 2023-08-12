@@ -35,7 +35,7 @@ const Home = () => {
                 </div>
 
                 <div className='postImg'></div>
-                <div className='postButton'></div>
+                <div className='postBottom'></div>
             </div>
             
         </div>

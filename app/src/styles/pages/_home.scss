@@ -4,7 +4,7 @@
 
 
 .HomeContainer{
-    height: 100vh;
+    height: auto;
     width: 100vw;
     background: clr(dark, 100);
     @include center();
@@ -41,7 +41,10 @@
         
         
         .avatar{
-            width: 40px;
+            width: 58px;
+            box-shadow: 0px 0px 6px 2px rgba(109, 109, 109, 0.25);
+            border-radius: 67px;
+            border: 1px solid #707070;
         }
 
         .search{
@@ -59,8 +62,9 @@
 
     .postContainer{
         width: 544px;
-        height: 70%;
+        height: 751px;
         margin-top: 145px;
+        margin-bottom: 145px;
         background-color: white;
         display: flex;
         flex-direction: column;
@@ -72,33 +76,43 @@
             flex-direction: row;
             background-color: #2D2D30;
             width: 100%;
-            height: 20%;
+            height: 15%;
             align-items: center;
             justify-content: space-around;
             border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+            color: white;
 
 
             .followBtn{
                 width: 134px;
                 height: 44px;
+                color: white;
+                border: none;
+                background: rgba(44, 44, 46, 0.99);
+                border-left: solid 3px rgba(24, 89, 166, 0.70);
+                border-top: solid 2px rgba(24, 89, 166, 0.70);
+                box-shadow: 4px 2px 5px rgba(72, 171, 242, 0.21);
             }
 
             
             .avatar{
-                height: 50px;
+                height: 59px;
+                box-shadow: 0px 0px 6px 2px rgba(109, 109, 109, 0.25);
+                border-radius: 67px;
+                border: 1px solid #707070;
             }
         }
 
 
         .postImg{
-            height: 70%;
+            height: 77%;
             width: 100%;
             background-color: #232123;
         }
 
 
-        .postButton{
-            height: 10%;
+        .postBottom{
+            height: 8%;
             width: 100%;
             background-color: #2D2D30;
         }
