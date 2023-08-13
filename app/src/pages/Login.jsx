@@ -1,10 +1,24 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
+
 import '../styles/main.scss'
 
 const Login = () => {
     
+    const navigate = useNavigate();
+    
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        
+                 
+        navigate('/');
+    }
+
+    
     
     return(
+
+
         <div className="entry loginContainer">
             
             
@@ -14,7 +28,7 @@ const Login = () => {
                 <div id="ball2"></div>
             
 
-                <form action="">
+                <form action="" onSubmit={handleSubmit}>
                     <h1>login</h1>
 
                     <div className="inputs">
@@ -26,14 +40,16 @@ const Login = () => {
                     </div>
 
                     <div className="buttons">
-                        <button>Entrar</button>
+                        <button type='submit'>Entrar</button>
                         
                         <div className="line">
                             <p>Ou</p>
                         </div>
 
-                        <button id='googleBtn'>Login com Google</button>
-                        <button>Cadastrar-se</button>
+                        <button type='button' id='googleBtn'>Login com Google</button>
+                        <button type='button' onClick={ () => {
+                          navigate('/register');
+                        }} >Cadastrar-se</button>
                     </div>
                 </form>
 

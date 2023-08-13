@@ -1,7 +1,12 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
+
 import './style.scss'
 
 const LateralMenu = () => {
+
+	const navigate = useNavigate();
+
   return (
 	<div className='boxMenu'>
 		<div className='opcs opcs-user'>
@@ -24,7 +29,9 @@ const LateralMenu = () => {
 			tema
 		</div>
 
-		<div className='opcs'>
+		<div className='opcs' onClick={ () => {
+		  navigate('login')
+		} }>
 			<img src="../../../src/assets/icons/fluent-mdl2_chrome-back.png" alt="" />
 			sair
 		</div>

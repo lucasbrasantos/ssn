@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 import './style.scss'
 
 const Navbar = () => {
@@ -7,7 +9,7 @@ const Navbar = () => {
                 <span className='logo'>Logo</span>
 
                 <div className="col1">
-                    <span><img src="../../../src/assets/icons/fluent-mdl2_home.png" alt="" /></span>
+                    <span><Link to="/"><img src="../../../src/assets/icons/fluent-mdl2_home.png" alt="" /></Link></span>
                     <span><img src="../../../src/assets/icons/Vector.png" alt="" /></span>
                 </div>
 
