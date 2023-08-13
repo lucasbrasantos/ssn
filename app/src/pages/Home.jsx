@@ -10,12 +10,14 @@ import '../styles/main.scss'
 
 const Home = () => {
 	return(
-		<div className='HomeContainer'>
-			
+		<div className='homeContainer'>
 			<Navbar />
-			<LateralMenu />
-			<Post />
-			<FriendsMenu />
+			
+			<div className="homeContent">
+				<LateralMenu />
+				<Post />
+				<FriendsMenu />
+			</div>
 			
 		</div>
 	);
