@@ -47,3 +47,35 @@
          transform: translateY($slide-top);
      }
  }
+
+
+
+ /*
+ * ----------------------------------------
+ * animation border bottom
+ * ----------------------------------------
+ */
+
+ @-webkit-keyframes color-change-3x {
+    0% {
+      border-bottom: 1px solid #19dcea;
+    }
+    50% {
+      border-bottom: 1px solid #33ff2c;
+    }
+    100% {
+      border-bottom: 1px solid #f9efff;
+    }
+  }
+  @keyframes color-change-3x {
+    0% {
+      border-bottom: 1px solid #19dcea;
+    }
+    50% {
+      border-bottom: 1px solid #33ff2c;
+    }
+    100% {
+      border-bottom: 1px solid #f9efff;
+    }
+  }
+  
