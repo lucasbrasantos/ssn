@@ -1,4 +1,5 @@
-
+@use '../../styles/base/base' as *;
+@use '../../styles/abstracts/variables' as *;
 
 .boxMenu{
     width: 378px;
@@ -17,6 +18,30 @@
         align-items: center;
         color: white;
         padding: 30px;
+        cursor: pointer;
+
+        &:hover{
+            transition: .3s;
+            transform: translate(5px);
+            -webkit-animation: color-change-3x 4s linear infinite alternate both;
+	        animation: color-change-3x 4s linear infinite alternate both;
+        }
+
+
+
+        img{
+            width: 28px;
+            height: auto;
+            aspect-ratio: 1/1;
+            // border-radius: 100%;
+            margin-right: 20px;                        
+        }
+        
+        
+    }
+    
+    .opcs-user img{
+        width: 45px;
     }
 }
 
