@@ -8,6 +8,7 @@
     width: 100vw;
     background: clr(dark, 100);
     @include center();
+    justify-content: space-between;
     position: relative;
     z-index: 10;
     
