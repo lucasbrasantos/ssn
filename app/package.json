@@ -2,7 +2,6 @@
   "name": "ssn",
   "version": "1.0.0",
   "description": "",
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lucasbrasantos/ssn.git"
@@ -14,10 +13,8 @@
     "url": "https://github.com/lucasbrasantos/ssn/issues"
   },
   "homepage": "https://github.com/lucasbrasantos/ssn#readme",
-  
   "private": true,
   "type": "module",
-  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,9 +23,13 @@
   },
   "dependencies": {
     "@fluentui/font-icons-mdl2": "^8.5.23",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
     "sass": "^1.64.2",
+    "sort-by": "^1.2.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
