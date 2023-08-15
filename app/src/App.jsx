@@ -6,6 +6,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 
+import './styles/main.scss';
+
 
 const App = () => {
 	return (

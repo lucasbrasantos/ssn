@@ -1,7 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import '../styles/main.scss'
 
 const Login = () => {
     

@@ -5,9 +5,6 @@ import LateralMenu from '../components/LateralMenu/LateralMenu'
 import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
 
-import '../styles/main.scss'
-
-
 const Home = () => {
 	return(
 		<div className='homeContainer'>
