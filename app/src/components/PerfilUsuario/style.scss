@@ -38,5 +38,25 @@
         height: 555px;
         width: 100%;
         background-color: #232123;
+    
+
+        .grid{
+            width: 633.999px;
+            margin: auto;
+            display: grid;
+            gap: 0px;
+            grid-template-columns: repeat(3, 2fr);
+            margin-top: 7px;
+        
+
+            .post{
+                width: 211.333px;
+                height: 195px;
+                margin-top: 0px;
+                border: 1px solid #555;
+                background-color: greenyellow;
+            }
+
+        }
     }
 }

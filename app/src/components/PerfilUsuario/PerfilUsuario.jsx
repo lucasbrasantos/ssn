@@ -21,9 +21,14 @@ const Post = () => {
 
 			</div>
 		<div className='posts'>
-			<div className='post'></div>
-			<div className='post'></div>
-			<div className='post'></div>
+				<div className='grid'>
+				<div className='post'></div>
+				<div className='post'></div>
+				<div className='post'></div>
+				<div className='post'></div>
+				<div className='post'></div>
+			</div>
+
 		</div>
 	</div>
   )
