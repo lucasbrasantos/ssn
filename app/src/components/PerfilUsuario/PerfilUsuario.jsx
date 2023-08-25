@@ -25,8 +25,15 @@ const Post = () => {
 				<div className='grid'>
 				<PostPerfil />
 				<PostPerfil />
-				<PostPerfil /><PostPerfil /><PostPerfil />
-				<PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil />
 			</div>
 
 		</div>
