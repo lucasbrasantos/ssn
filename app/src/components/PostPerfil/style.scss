@@ -1,0 +1,10 @@
+@use '../../styles/abstracts/mixins' as *;
+@use '../../styles/abstracts/variables' as *;
+
+.post{
+    width: 211.333px;
+    height: 195px;
+    margin-top: 0px;
+    border: 1px solid #555;
+    background-color: greenyellow;
+}

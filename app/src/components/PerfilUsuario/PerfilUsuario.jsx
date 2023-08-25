@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import PostPerfil from '../PostPerfil/PostPerfil'
 
 const Post = () => {
   return (
@@ -22,11 +23,10 @@ const Post = () => {
 			</div>
 		<div className='posts'>
 				<div className='grid'>
-				<div className='post'></div>
-				<div className='post'></div>
-				<div className='post'></div>
-				<div className='post'></div>
-				<div className='post'></div>
+				<PostPerfil />
+				<PostPerfil />
+				<PostPerfil /><PostPerfil /><PostPerfil />
+				<PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil /><PostPerfil />
 			</div>
 
 		</div>
