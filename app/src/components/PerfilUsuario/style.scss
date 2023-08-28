@@ -36,11 +36,10 @@
 
 
     .posts{
-        overflow-y: hidden;
+        overflow-y: scroll;
         height: 555px;
         width: 100%;
         background-color: #232123;
-    
 
         .grid{
             width: 633.999px;
@@ -49,7 +48,6 @@
             gap: 0px;
             grid-template-columns: repeat(3, 2fr);
             margin-top: 7px;
-        
 
             .post{
                 width: 211.333px;
@@ -62,3 +60,5 @@
         }
     }
 }
+
+::-webkit-scrollbar {width: 0}
