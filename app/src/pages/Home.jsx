@@ -13,7 +13,7 @@ const Home = () => {
 			
 			<div className="homeContent">
 				<LateralMenu />
-				<PerfilUsuario />
+				<Post />
 				<FriendsMenu />
 			</div>
 			

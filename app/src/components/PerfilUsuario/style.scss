@@ -47,7 +47,8 @@
             display: grid;
             gap: 0px;
             grid-template-columns: repeat(3, 2fr);
-            margin-top: 7px;
+            margin-top: 10px;
+            margin-bottom: 10px;
 
             .post{
                 width: 211.333px;
@@ -61,4 +62,4 @@
     }
 }
 
-::-webkit-scrollbar {width: 0}
+::-webkit-scrollbar {display: none;}
