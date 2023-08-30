@@ -156,3 +156,38 @@
         }
     }
 }
+
+
+
+
+/*
+ * ----------------------------------------
+ * animation slide-top
+ * ----------------------------------------
+ */
+ $slide-top: 60%;
+
+ @-webkit-keyframes slide-top {
+     0% {
+         -webkit-transform: translateY(0);
+         transform: translateY(0);
+     }
+     100% {
+         -webkit-transform: translateY($slide-top);
+         transform: translateY($slide-top);
+     }
+ }
+ @keyframes slide-top {
+     0% {
+         -webkit-transform: translateY(0);
+         transform: translateY(0);
+     }
+     100% {
+         -webkit-transform: translateY($slide-top);
+         transform: translateY($slide-top);
+     }
+ }
+
+
+
+ 

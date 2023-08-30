@@ -23,7 +23,7 @@ const Navbar = () => {
                     <span><img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" /></span>
                 </div>
 
-                <img className="avatar" src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png" alt="" />
+                <img className="navbarAvatar" src="../../../src/assets/Profile-Avatar-PNG.png" alt="" />
             </nav>
   )
 }

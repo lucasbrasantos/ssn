@@ -35,6 +35,7 @@ const Register = () => {
                 
                 <div id="ball1"></div>
                 <div id="ball2"></div>
+                
             
                 <img src="../../src/assets/sampleImg.png" alt="test img" />
 

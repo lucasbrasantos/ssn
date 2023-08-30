@@ -1,9 +1,10 @@
-@use '../../styles/base/base' as *;
 @use '../../styles/abstracts/variables' as *;
 
 .boxMenu{
+    position: fixed;
+    z-index: 2;
     width: 378px;
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -45,3 +46,32 @@
     }
 }
 
+/*
+ * ----------------------------------------
+ * animation border bottom
+ * ----------------------------------------
+ */
+
+ @-webkit-keyframes color-change-3x {
+    0% {
+      border-bottom: 1px solid #19dcea;
+    }
+    50% {
+      border-bottom: 1px solid #33ff2c;
+    }
+    100% {
+      border-bottom: 1px solid #f9efff;
+    }
+  }
+  @keyframes color-change-3x {
+    0% {
+      border-bottom: 1px solid #19dcea;
+    }
+    50% {
+      border-bottom: 1px solid #33ff2c;
+    }
+    100% {
+      border-bottom: 1px solid #f9efff;
+    }
+  }
+  

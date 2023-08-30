@@ -1,11 +1,14 @@
 
 
 .boxF{
+    position: fixed;
+    right: 0;
     width: 378px;
-    height: 751px;
+    height: 80%;
     border-radius: 40px;
     display: flex;
     margin-top: 35px;
+    margin-bottom: 45px;
     align-items: center;
     flex-direction: column;
     color: white;

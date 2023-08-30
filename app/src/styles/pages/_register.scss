@@ -60,24 +60,7 @@
         -webkit-animation: slide-top 2s ease-in-out infinite alternate ;
         animation: slide-top 2s ease-in-out infinite alternate 1s;
     }
-    #ball3{
-        $radius: 100px;
-        width: $radius;
-        height: $radius;
-        border-radius: 100%;
     
-        position: absolute;
-        z-index: -1;
-    
-        bottom: -20px;
-        left: -50px;
-        
-        background: rgba(51, 75, 212, 0.9);
-        filter: blur(3rem);
-    
-        -webkit-animation: slide-top 2s ease-in-out infinite alternate ;
-        animation: slide-top 2s ease-in-out infinite alternate 1s;
-    }
 }
 
 
