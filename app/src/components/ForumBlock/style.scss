@@ -1,0 +1,79 @@
+@use '../../styles/abstracts/variables' as *;
+
+
+#Forum{
+
+    width: 607px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 29px;
+    border: 1px solid clr(dark, 400);
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.25);
+    
+    padding: 20px 30px;
+    gap: 10px 0;
+
+    color: clr(text);
+    font-weight: 300;
+
+    position: relative;
+    transition: .4s;
+    cursor: pointer;
+    margin-top: 20px;
+    
+    &:hover{
+        box-shadow: 0px 0px 11px 0px rgba(220, 220, 220, 0.15);
+    }
+    &:active{
+        transition: .1s;
+        box-shadow: none;;
+    }
+
+
+    .forumName{
+        font-weight: normal;
+    }
+
+
+
+    .userInfo{
+        display: flex;
+        align-items: center;
+        gap: 0 20px;
+
+        img{
+            height: 50px;
+            aspect-ratio: 1/1;
+        }
+
+        .timePosted{
+            font-size: .8rem;
+        }
+    }
+
+    .forumInfo{
+        width: 80%;
+        margin-top: 20px;
+    }
+
+    .likes{
+        position: absolute;
+        bottom: 20px;
+        right: 30px;
+        cursor: pointer;
+    }
+
+    .tag{
+        position: absolute;
+        width: 80px;
+        border-radius: 10px;
+        padding: 4px;
+        text-align: center;
+        background: clr(colors);
+
+        right: 20px;
+    }
+}
+
