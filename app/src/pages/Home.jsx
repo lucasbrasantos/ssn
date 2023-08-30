@@ -9,11 +9,13 @@ import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario'
 
 
 import { ComponentProvider, useComponentContext } from '../context/ComponentContext';
+import Forum from '../components/Forum/Forum';
 
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
 	post: Post,
+	forum: Forum,
 }
 
 const Home = () => {
@@ -31,7 +33,11 @@ const Home = () => {
 				<LateralMenu />
 				
 				
-					{ComponentToRender ? <ComponentToRender /> : <p>nada aqui por enquanto</p>}
+					{
+						ComponentToRender ? <ComponentToRender /> : <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
+						// e a condição ? = if
+						// se existe o ComponentToRender, renderiza ele, se nao renderiza o <p>
+					}
 				
 				
 
