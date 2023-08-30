@@ -8,7 +8,7 @@ const Post = () => {
 
 		<div className='postTopPerfil'>
 		<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
-			<img className='avatarUser' src="../../../src/assets/Icon.png" alt="" />
+			<img className='avatarUser' src="../../../src/assets/Profile-Avatar-PNG.png" alt="" />
 
 				<div>
 					<p>Nome de Ususario</p>

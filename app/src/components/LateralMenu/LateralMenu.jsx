@@ -2,19 +2,26 @@ import React from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import './style.scss'
+import { useComponentContext } from '../../context/ComponentContext';
 
 const LateralMenu = () => {
 
 	const navigate = useNavigate();
+	
+	const {setSelectedComponent} = useComponentContext();
+
+	const handleButtonClick = (component) => {
+		setSelectedComponent(component)
+	}
 
   return (
 	<div className='boxMenu'>
-		<div className='opcs opcs-user'>
+		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
 			<img src="../../../src/assets/Icon.png" alt="" />
 			nome usuario
 		</div>
 
-		<div className='opcs'>
+		<div className='opcs' onClick={() => handleButtonClick('post')} >
 			<img src="../../../src/assets/icons/fluent-mdl2_add-friend.png" alt="" />
 			add amigo
 		</div>
