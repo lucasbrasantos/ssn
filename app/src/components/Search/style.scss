@@ -1,0 +1,44 @@
+
+@use '../../styles/abstracts/mixins' as *;
+@use '../../styles/abstracts/variables' as *;
+
+.searchBox{
+    width: 660px;
+    height: 757px;
+    background-color: #232123;
+    margin: 35px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    select {
+        appearance: none;
+        color: white;
+        background-color: #181818;
+        border: none;
+        padding: 5px;
+        margin: 0;
+        width: 100%;
+        font-size: inherit;
+        cursor: pointer;
+    }
+
+    .searchPosts{
+        overflow-y: scroll;
+        height: 100%;
+        width: 100%;
+        margin-top: 10px;
+        background-color: #232123;
+    
+        .searchGrid{
+            width: 633.999px;
+            margin: auto;
+            display: grid;
+            gap: 0px;
+            grid-template-columns: repeat(3, 2fr);
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+}

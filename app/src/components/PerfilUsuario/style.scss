@@ -36,7 +36,6 @@
         }
     }
 
-
     .posts{
         overflow-y: scroll;
         height: 555px;
@@ -51,15 +50,6 @@
             grid-template-columns: repeat(3, 2fr);
             margin-top: 10px;
             margin-bottom: 10px;
-
-            .post{
-                width: 211.333px;
-                height: 195px;
-                margin-top: 0px;
-                border: 1px solid #555;
-                background-color: greenyellow;
-            }
-
         }
     }
 }

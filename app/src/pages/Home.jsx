@@ -5,7 +5,8 @@ import LateralMenu from '../components/LateralMenu/LateralMenu'
 import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
 import Post from '../components/Post/Post';
-import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario'
+import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
+import Search from '../components/search/Search';
 
 
 import { ComponentProvider, useComponentContext } from '../context/ComponentContext';
@@ -14,7 +15,7 @@ import Forum from '../components/Forum/Forum';
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
-	post: Post,
+	post: Search,
 	forum: Forum,
 }
 
