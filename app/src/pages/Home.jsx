@@ -11,12 +11,16 @@ import Search from '../components/search/Search';
 
 import { ComponentProvider, useComponentContext } from '../context/ComponentContext';
 import Forum from '../components/Forum/Forum';
+import ChatAll from '../components/Chat/ChatAll';
+import ChatRecent from '../components/Chat/ChatRecent';
 
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
 	post: Search,
 	forum: Forum,
+	chatAll: ChatAll,
+	chatRecent: ChatRecent
 }
 
 const Home = () => {

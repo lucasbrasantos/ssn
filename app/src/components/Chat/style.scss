@@ -1,0 +1,62 @@
+@use '../../styles/abstracts/variables' as *;
+
+
+
+.chat  {
+
+    width: 657px;
+    min-height: 80vh;
+    border-radius: 30px;
+    background: clr(dark, base);
+    margin: 35px auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 0;
+
+    h1{
+        color: clr(text);
+        text-transform: capitalize;
+    }
+
+
+    .toggleChat{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        // padding: 10px 0;
+        border-top: 1px solid clr(dark, 400);
+
+        p{
+            color: clr(text);
+            font-size: 1.3rem;
+            transition: .2s;
+            padding: 10px 0;
+            width: 50%;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover{
+                text-shadow: 1px 1px 4px rgba(255, 255, 255, 20%);
+                background: clr(dark, 200);
+                
+            }
+            &:active{
+                text-shadow: 1px 1px 4px rgba(255, 255, 255, 40%);
+                background: clr(dark, 300);
+            }
+        }
+
+        hr{
+            background: clr(dark, 400);
+            width: 1.6px;
+            margin: 4px 0;
+            border: none;
+        }
+    }
+}

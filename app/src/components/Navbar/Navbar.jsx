@@ -32,7 +32,7 @@ const Navbar = () => {
 		<div className="col2">
 			<span onClick={() => handleButtonClick('ranking')} ><img src="../../../src/assets/icons/fluent-mdl2_trophy.png" alt="" /></span>
 			<span onClick={() => handleButtonClick('forum')} ><img src="../../../src/assets/icons/fluent-mdl2_office-chat.png" alt="" /></span>
-			<span onClick={() => handleButtonClick('chat')} ><img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" /></span>
+			<span onClick={() => handleButtonClick('chatAll')} ><img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" /></span>
 		</div>
 
 		<img className="navbarAvatar" src="../../../src/assets/Profile-Avatar-PNG.png" alt="" />
