@@ -1,0 +1,23 @@
+@use '../../styles/abstracts/variables' as *;
+
+
+#Ranking{
+    width: 657px;
+    min-height: 80vh;
+    border-radius: 30px;
+    background: clr(dark, base);
+    margin: 35px auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 0;
+
+    h1{
+        color: clr(text);
+        text-transform: capitalize;
+    }
+
+}
+

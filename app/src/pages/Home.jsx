@@ -13,6 +13,7 @@ import { ComponentProvider, useComponentContext } from '../context/ComponentCont
 import Forum from '../components/Forum/Forum';
 import ChatAll from '../components/Chat/ChatAll';
 import ChatRecent from '../components/Chat/ChatRecent';
+import Ranking from '../components/Ranking/Ranking';
 
 
 const components = { // name for the button click // <component name>
@@ -20,7 +21,8 @@ const components = { // name for the button click // <component name>
 	post: Search,
 	forum: Forum,
 	chatAll: ChatAll,
-	chatRecent: ChatRecent
+	chatRecent: ChatRecent,
+	ranking: Ranking,
 }
 
 const Home = () => {

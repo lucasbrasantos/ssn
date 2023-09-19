@@ -1,0 +1,63 @@
+@use '../../styles/abstracts/variables' as *;
+
+
+
+
+#RankUser{
+    width: 576px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    // background: clr(dark, 300);
+    position: relative;
+    border-bottom: 1px solid clr(dark, 400);
+    transition: .2s;
+    cursor: pointer;
+
+    &:hover{
+        transform: translateX(10px);
+        border-bottom: 1px solid white;
+    }
+
+    img{
+        width: 60px;
+    }
+
+    .box{
+        text-align: center;
+        margin-left: 20px;
+        color: clr(text);
+    }
+
+    button{
+        position: absolute;
+        right: 40px;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 20px;
+        color: clr(text);
+        background: clr(colors, 200);
+        transition: .2s;
+        cursor: pointer;
+        &:hover{
+            filter: brightness(110%);
+        }
+        &:active{
+            transform: translateY(0);
+            filter: brightness(80%);
+        }
+    }
+
+    .RankPosition{
+        color: clr(text);
+        font-size: 1.4rem;
+    }
+
+    .Trophy{
+        width: auto;
+        height: 40px;
+        margin: 0 20px 0 20px;
+        filter: invert(62%) sepia(78%) saturate(390%) hue-rotate(9deg) brightness(180%) contrast(89%);
+    }
+}
