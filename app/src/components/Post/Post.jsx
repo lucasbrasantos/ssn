@@ -15,6 +15,7 @@ const Post = () => {
 		
 		<div className='postImg'></div>
 		<div className='postBottom'></div>
+		
 	</div>
   )
 }

@@ -5,6 +5,7 @@ import LateralMenu from '../components/LateralMenu/LateralMenu'
 import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
 import Post from '../components/Post/Post';
+import CreatePost from '../components/CreatePost/CreatePost';
 import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
 import Search from '../components/search/Search';
 
@@ -18,7 +19,9 @@ import Ranking from '../components/Ranking/Ranking';
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
-	post: Search,
+	post: Post,
+	createPost: CreatePost,
+	search: Search,
 	forum: Forum,
 	chatAll: ChatAll,
 	chatRecent: ChatRecent,
@@ -42,6 +45,7 @@ const Home = () => {
 				
 					{
 						ComponentToRender ? <ComponentToRender /> : <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
+						
 						// e a condição ? = if
 						// se existe o ComponentToRender, renderiza ele, se nao renderiza o <p>
 					}

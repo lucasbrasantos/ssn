@@ -25,7 +25,7 @@ const Navbar = () => {
 			<span onClick={() => handleButtonClick('createPost')} ><img src="../../../src/assets/icons/Vector.png" alt="" /></span>
 		</div>
 
-		<span className='searchSpan'>
+		<span className='searchSpan'  onClick={() => handleButtonClick('search')}>
 			<input name='search' className='search' type="text" placeholder='Pesquisar...' />
 		</span>
 
