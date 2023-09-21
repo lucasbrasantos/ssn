@@ -2,27 +2,29 @@ import React from 'react'
 import './style.scss'
 
 
-const ForumBlock = () => {
+const ForumBlock = (props) => {
+	 
+
 	return (
 		<div id='Forum'>
 			
-			<h1 className='forumName'>Forum name</h1>
+			<h1 className='forumName'>{props.title}</h1>
 
 			<div className="userInfo">
 				<img src="../../../src/assets/Icon.png" alt="" />
 				<div>
-					<p className='username'>username</p>
-					<p className='timePosted'>time posted</p>
+					<p className='username'>{props.username}</p>
+					<p className='timePosted'>{props.created_at}</p>
 				</div>
 			</div>
 
 			<div className="forumInfo">
-				<p>descrição bolada do forum</p><br />
-				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem perspiciatis minus quos minima dolorum. Corporis ipsa pariatur quibusdam sed sit. Nihil aliquid cum odio accusantium ex architecto aspernatur vel dolorum.</p>
+				<p>Descrição:</p><br />
+				<p>{props.description}</p>
 			</div>
 
-			<div className="tag">tag top</div>
-			<span className='likes' ><img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" /></span>
+			<div className="tag">{props.tag}</div>
+			<span className='likes' ><img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{props.likes}</span>
 		</div>
 	)
 }
