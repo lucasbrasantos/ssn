@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext.jsx';
 
 import Chat from '../Chats/Chat';
 import Chat2 from '../Chats/Chat2';
+import axios from 'axios';
 
 const ChatAll = () => {
 
@@ -14,14 +15,38 @@ const ChatAll = () => {
 		setSelectedComponent(component)
 	}
 
+	const [data, setData] = useState([])
+
+	useEffect(() => {
+		
+		axios.get('http://localhost:3000/users')
+		.then((res) => {
+		  setData(res.data);
+		})
+		.catch((err) => {
+		  console.error(err);
+		});
+	  }, []);
+
 
 	return (
 		<div id='ChatAll' className='chat'>
 			<h1>todos</h1>
 
-			<Chat/>
-			<Chat/>
-			<Chat/>
+			<div className="chats">
+
+			{
+				data.map((e) => (
+					
+					<Chat
+					imgUrl={e.photourl}
+					username={e.username}
+					userInfo={'info'}
+					/>
+				))
+
+			}
+			</div>
 			
 
 			<div className="toggleChat">

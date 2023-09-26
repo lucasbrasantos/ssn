@@ -3,13 +3,13 @@ import React from 'react'
 import './style.scss'
 
 
-const Chat = () => {
+const Chat = (props) => {
 	return (
 		<div id='Chat'>
-			<img src="../../../src/assets/IconDark.png" alt="" />
+			<img src={props.imgUrl || '../../../src/assets/IconDark.png'} alt="" />
 			<div className="box">
-				<p className='username'>nome usuario</p>
-				<p className='userInfo'>info usuario</p>
+				<p className='username'>{props.username}</p>
+				<p className='userInfo'>{props.userinfo}</p>
 			</div>
 			
 

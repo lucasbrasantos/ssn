@@ -10,7 +10,11 @@
     position: relative;
     border-bottom: 1px solid clr(dark, 400);
     transition: .2s;
-    cursor: pointer;
+    cursor: pointer;    
+
+    &:last-child{
+        border-bottom: none;
+    }
 
     &:hover{
         transform: translateX(10px);
@@ -19,6 +23,9 @@
 
     img{
         width: 60px;
+        border: 0px solid black;
+        aspect-ratio: 1/1;
+        border-radius: 100%;
     }
 
     .box{
