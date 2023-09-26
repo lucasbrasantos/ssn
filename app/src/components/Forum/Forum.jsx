@@ -25,7 +25,7 @@ const Forum = () => {
 	function tag(tag){
 
 		const matchingInterest = interests.find((e) => e.interestsid === tag);
-		return matchingInterest.description
+		return matchingInterest && matchingInterest.description
 	}
 
 	return (
