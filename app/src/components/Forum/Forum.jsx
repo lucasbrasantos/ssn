@@ -1,50 +1,32 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import ForumBlock from '../ForumBlock/ForumBlock.jsx'
 
 import './style.scss'
 
 const Forum = () => {
 
-
-	const data = [
-		
-		{
-			"title": "Opiniões sobre o jogo de ontem?",
-			"username": "Mathias Galvão",
-			"created_at": "2032-09-03T04:42:20.000Z",
-			"description": "Comentários sobre os jogos recentes.",
-			"tag": 'asdasd',
-			"likes": 118,
-		},
-		{
-			"title": "Opiniões sobre o jogo de ontem?",
-			"username": "Mathias Galvão",
-			"created_at": "2032-09-03T04:42:20.000Z",
-			"description": "Comentários sobre os jogos recentes.",
-			"tag": 'asdasd',
-			"likes": 118,
-		},
-		{
-			"title": "Opiniões sobre o jogo de ontem?",
-			"username": "Mathias Galvão",
-			"created_at": "2032-09-03T04:42:20.000Z",
-			"description": "Comentários sobre os jogos recentes.",
-			"tag": 'asdasd',
-			"likes": 118,
-		},
-		{
-			"title": "Opiniões sobre o jogo de ontem?",
-			"username": "Mathias Galvão",
-			"created_at": "2032-09-03T04:42:20.000Z",
-			"description": "date equator arrive directly take club meal was garden finish clearly our available bank fly mysterious national beauty combine brush species health driver whetherlorem",
-			"tag": 'asdasd',
-			"likes": 118,
-		},
-
-	]
 	
+	const [data, setData] = useState([])
+	const [interests, setInterests] = useState([])
 
+	useEffect(() => {
+		axios.get('http://localhost:3000/forum')
+		.then(res => setData(res.data))
+		.catch(err => console.log(err))
+
+		axios.get('http://localhost:3000/interests')
+		.then(res => setInterests(res.data))
+		.catch(err => console.log(err))
+
+		
+	}, [])
+
+	function tag(tag){
+
+		const matchingInterest = interests.find((e) => e.interestsid === tag);
+		return matchingInterest.description
+	}
 
 	return (
 		<div id='ForumPage'>
@@ -56,16 +38,20 @@ const Forum = () => {
 
 
 			{
+				(data && data.length > 0) ?
+
 				data.map(e => {
 					return <ForumBlock
 					title={e.title}
 					username={e.username}
 					created_at={e.created_at}
 					description={e.description}
-					tag={e.tag}
+					tag={tag(e.tag)}
 					likes={e.likes}
 					/>
-				})
+				}) : (
+					<p className='noData'>nada aqui</p>
+				)
 			}
 
 

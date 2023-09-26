@@ -10,7 +10,7 @@ const RankUser = (props) => {
             <img src="../../../src/assets/icons/fluent-mdl2_trophy.png" alt="" className='Trophy'/>
             <img src="../../../src/assets/IconDark.png" alt="" />
             <div className="box">
-                <p className='username'>nome usuario</p>
+                <p className='username'>{props.name}</p>
                 <p className='userInfo'>info usuario</p>
             </div>
 
