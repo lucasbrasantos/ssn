@@ -20,7 +20,7 @@ const Ranking = () => {
 		
 		axios.get('http://localhost:3000/users', {
 		  params: {
-			limit: 6,      // Limit the results to 5 users
+			limit: 5,      // Limit the results to 5 users
 		  },
 		})
 		.then((res) => {
