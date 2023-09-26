@@ -65,11 +65,21 @@
         bottom: 20px;
         right: 30px;
         cursor: pointer;
+        
+        img{
+            transition: .2s;
+
+            &:hover{
+                transform: translateY(-2px);
+                
+            }
+        }
+
     }
 
     .tag{
         position: absolute;
-        width: 80px;
+        min-width: 80px;
         border-radius: 10px;
         padding: 4px;
         text-align: center;
