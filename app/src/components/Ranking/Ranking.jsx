@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext.jsx';
 import RankUser from '../RankUser/RankUser';
+import axios from 'axios'
 
 const Ranking = () => {
 
@@ -12,38 +13,23 @@ const Ranking = () => {
 		setSelectedComponent(component)
 	}
 
-	const data = [
-		{
-			"userid": 1,
-			"name": "Stephen Curry",
-			"points": 4245,
-		},
-		{
-			"userid": 2,
-			"name": "Calvo Klein",
-			"points": 3890,
-		},
-		{
-			"userid": 3,
-			"name": "Estêvão Curi",
-			"points": 2350,
-		},
-		{
-			"userid": 4,
-			"name": "Tomas Moreno",
-			"points": 2278,
-		},
-		{
-			"userid": 5,
-			"name": "Herrero Victor",
-			"points": 900,
-		},
-		{
-			"userid": 6,
-			"name": "Andre Pierce",
-			"points": 60,
-		},
-	]
+	const [data, setData] = useState([]);
+
+
+	useEffect(() => {
+		
+		axios.get('http://localhost:3000/users', {
+		  params: {
+			limit: 6,      // Limit the results to 5 users
+		  },
+		})
+		.then((res) => {
+		  setData(res.data);
+		})
+		.catch((err) => {
+		  console.error(err);
+		});
+	  }, []);
 
 	return (
 		<div id='Ranking'>
@@ -51,13 +37,16 @@ const Ranking = () => {
 			
 			
 			{
-				data.map(e => {
-					return <RankUser
+				data.slice().sort((a,b) => b.points- a.points).map((e, i) => (
+					<RankUser
 					name={e.name}
 					points={e.points}
-					ranking={e.userid}
+					ranking={i+1}
 					/>
-				})
+				))
+
+				
+
 			}
 
 		</div>
