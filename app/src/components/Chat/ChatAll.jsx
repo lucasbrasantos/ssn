@@ -41,7 +41,7 @@ const ChatAll = () => {
 					<Chat
 					imgUrl={e.photourl}
 					username={e.username}
-					userInfo={'info'}
+					userInfo={e.description} // after, put the chat context, last message description
 					/>
 				))
 
