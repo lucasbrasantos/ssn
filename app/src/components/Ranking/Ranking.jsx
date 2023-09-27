@@ -29,7 +29,7 @@ const Ranking = () => {
 		.catch((err) => {
 		  console.error(err);
 		});
-	  }, []);
+	}, []);
 
 	return (
 		<div id='Ranking'>
