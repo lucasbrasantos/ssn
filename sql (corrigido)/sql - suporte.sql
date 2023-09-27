@@ -11,6 +11,10 @@
 -- CREATE SCHEMA `bagaca` ;
 -- use `bagaca`;
 
+ALTER TABLE users
+ADD firebase data_type column_constraint;
+
+
 -- DROP TABLE --
 DROP TABLE	`bd_tcc_etim_121_g2`.`forum_interactions`;
 DROP TABLE	`bd_tcc_etim_121_g2`.`forum`;
@@ -34,7 +38,7 @@ SELECT * FROM	`bd_tcc_etim_121_g2`.`comment`;
 SELECT * FROM	`bd_tcc_etim_121_g2`.`forum`;
 SELECT * FROM	`bd_tcc_etim_121_g2`.`forum_interactions`;
 
-SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated` FROM `bd_tcc_etim_121_g2`.`users`;
+SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated`, `firebase`, `description` FROM `bd_tcc_etim_121_g2`.`users`;
 --
 SELECT	`postid`, `title`, `photourl`, `timeposted`, `likes`, `userid`, `tag`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`posts`;
 --

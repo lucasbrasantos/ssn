@@ -13,16 +13,16 @@
 -- // users -= 10 inserts
 
 -- (					  pk_userid, username,   			 name,		         email,                  photourl,                       					points,     timecreated) 
-insert into users value  (1,	  'lsemper0',			'Stephen Curry',   'estevaocuri@joma.aq',	'http://dummyimage.com/248x100.png/5fa2dd/ffffff',		19,		'2023/5/11 10:27:35');
-insert into users value  (2,	  'sstores1',			'Calvo Klein', 		'niv@tivovlof.ag',		'http://dummyimage.com/202x100.png/dddddd/000000',		11,		'2022/8/14 02:28:47');
-insert into users value  (3,	  'LeBronMalabarista',  'Estêvão Curi',	  	'efbi@tozotut.nf',		'http://dummyimage.com/171x100.png/cc0000/ffffff',		37,		'2022/9/14 23:09:15');
-insert into users value  (4,	  'rgenney3',			'Tomas Moreno',    	'bo@sicfi.ar',			'http://dummyimage.com/151x100.png/5fa2dd/ffffff',		60,		'2022/7/17 08:19:17');
-insert into users value  (5,	  'ksilberschatz4',		'Herrero Victor',   'new@apposfa.la',		'http://dummyimage.com/127x100.png/cc0000/ffffff',		83,		'2022/12/29 10:18:31');
-insert into users value  (6,	  'apietron5',			'Andre Pierce',    	'umazaj@le.so',			'http://dummyimage.com/153x100.png/dddddd/000000',		29,		'2022/7/23 00:36:29');
-insert into users value  (7,	  'hdevaen6',			'Luis Lawson',     	'ifa@wivozbe.lt',		'http://dummyimage.com/192x100.png/5fa2dd/ffffff',		68,		'2022/12/22 15:38:19');
-insert into users value  (8,	  'wpryell7',			'Vargas Vaughn',    'gawen@zopuol.pa',		'http://dummyimage.com/234x100.png/ff4444/ffffff',		82,		'2022/9/6 06:16:56');
-insert into users value  (9,	  'cmarskell8',			'Kate Williams',   	'ka@cen.vc',			'http://dummyimage.com/162x100.png/dddddd/000000',		87,		'2023/4/18 15:10:47');
-insert into users value (10,	  'SambaLeBron',		'Lebrão da Silva', 	'lebraosilva@lab.nz',	'http://dummyimage.com/127x100.png/cc0000/ffffff',		52,		'2023/5/3 05:38:21');
+insert into users value  (1,	  'lsemper0',			'Stephen Curry',   'estevaocuri@joma.aq',	'http://dummyimage.com/248x100.png/5fa2dd/ffffff',		19,		'2023/5/11 10:27:35', '', 'everybody hair tall advice neighborhood differ zoo sink bank be flow this neighbor mission observe triangle equal. ');
+insert into users value  (2,	  'sstores1',			'Calvo Klein', 		'niv@tivovlof.ag',		'http://dummyimage.com/202x100.png/dddddd/000000',		11,		'2022/8/14 02:28:47', '', 'block customs anyway tail bell bound forget scared sand nor syllable aloud indeed rear again pleasant fairly. ');
+insert into users value  (3,	  'LeBronMalabarista',  'Estêvão Curi',	  	'efbi@tozotut.nf',		'http://dummyimage.com/171x100.png/cc0000/ffffff',		37,		'2022/9/14 23:09:15', '', 'wing crew coat bank original occur cave fireplace horn queen replace take daily all printed agree mill. ');
+insert into users value  (4,	  'rgenney3',			'Tomas Moreno',    	'bo@sicfi.ar',			'http://dummyimage.com/151x100.png/5fa2dd/ffffff',		60,		'2022/7/17 08:19:17', '', 'rice let early consist instance seat chance village best threw halfway shade more discussion dead believed tune. ');
+insert into users value  (5,	  'ksilberschatz4',		'Herrero Victor',   'new@apposfa.la',		'http://dummyimage.com/127x100.png/cc0000/ffffff',		83,		'2022/12/29 10:18:31', '', 'nearer whenever adventure dear search actual selection metal party express act our store few guess substance complete. ');
+insert into users value  (6,	  'apietron5',			'Andre Pierce',    	'umazaj@le.so',			'http://dummyimage.com/153x100.png/dddddd/000000',		29,		'2022/7/23 00:36:29', '', 'at wrong stone means health shinning soldier spread some six color dog rough felt present sugar canal. ');
+insert into users value  (7,	  'hdevaen6',			'Luis Lawson',     	'ifa@wivozbe.lt',		'http://dummyimage.com/192x100.png/5fa2dd/ffffff',		68,		'2022/12/22 15:38:19', '', 'soft major home hang every everyone rays price event ability because six please tired secret away rather. ');
+insert into users value  (8,	  'wpryell7',			'Vargas Vaughn',    'gawen@zopuol.pa',		'http://dummyimage.com/234x100.png/ff4444/ffffff',		82,		'2022/9/6 06:16:56', '', 'stiff steep least bowl chair second type cry purple tropical heard of air careful five factory face. ');
+insert into users value  (9,	  'cmarskell8',			'Kate Williams',   	'ka@cen.vc',			'http://dummyimage.com/162x100.png/dddddd/000000',		87,		'2023/4/18 15:10:47', '', 'direct lost increase apple beauty dirty aside sight affect character interest trick angle forgot about dry deal. ');
+insert into users value (10,	  'SambaLeBron',		'Lebrão da Silva', 	'lebraosilva@lab.nz',	'http://dummyimage.com/127x100.png/cc0000/ffffff',		52,		'2023/5/3 05:38:21', '', 'full shut third look add aid plus partly medicine thrown riding shoulder done ate friendly needle kids. ');
 
 --  //////////////////
 

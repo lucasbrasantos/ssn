@@ -9,6 +9,8 @@ CREATE TABLE `users` (
 	`photourl` varchar(512) NOT NULL,
 	`points` INT NOT NULL,
 	`timecreated` DATETIME NOT NULL,
+	`firebase` varchar(128),
+	`description` varchar(128),
 	PRIMARY KEY (`userid`)
 );
 
