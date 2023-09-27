@@ -11,7 +11,7 @@ const RankUser = (props) => {
             <img src="../../../src/assets/IconDark.png" alt="" />
             <div className="box">
                 <p className='username'>{props.name}</p>
-                <p className='userInfo'>info usuario</p>
+                {/* <p className='userInfo'>info usuario</p> */}
             </div>
 
             <button>Points: {props.points}</button>	
