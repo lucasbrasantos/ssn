@@ -9,6 +9,7 @@ const Forum = () => {
 	
 	const [data, setData] = useState([])
 	const [interests, setInterests] = useState([])
+	const [users, setUsers] = useState([])
 
 	useEffect(() => {
 		axios.get('http://localhost:3000/forum')
@@ -19,14 +20,25 @@ const Forum = () => {
 		.then(res => setInterests(res.data))
 		.catch(err => console.log(err))
 
+		axios.get('http://localhost:3000/users')
+		.then(res => setUsers(res.data))
+		.catch(err => console.log(err))
 		
 	}, [])
 
-	function tag(tag){
+	function findTag(tag){
 
 		const matchingInterest = interests.find((e) => e.interestsid === tag);
 		return matchingInterest && matchingInterest.description
 	}
+
+	function findUsers(userid){
+
+		const matchingUser = users.find((e) => e.userid === userid);
+		return matchingUser && `${matchingUser.name} | ${matchingUser.username}`
+	}
+
+	
 
 	return (
 		<div id='ForumPage'>
@@ -43,10 +55,10 @@ const Forum = () => {
 				data.map(e => {
 					return <ForumBlock
 					title={e.title}
-					username={e.username}
+					username={findUsers(e.userid)}
 					created_at={e.created_at}
 					description={e.description}
-					tag={tag(e.tag)}
+					tag={findTag(e.tag)}
 					likes={e.likes}
 					/>
 				}) : (
