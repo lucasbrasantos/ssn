@@ -12,7 +12,10 @@
     .inputs{                
         
         input{
+            background-color: clr(dark, 500);
+            color: clr(text, 200);
             margin-bottom: 10px !important;
+            cursor: text;
 
         }
     }    
