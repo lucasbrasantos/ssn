@@ -1,31 +1,83 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
+import Swal from 'sweetalert2';
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase.js";
 
 
 
 
 const Register = () => {
     
+
     const navigate = useNavigate();
-    const [values, setValues] = useState({});
+    const alertTime = 2000;
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         
-        setValues({
-            'user': e.target[0].value,
-            'email': e.target[1].value,
-            'senha': e.target[2].value,
-            're_senha': e.target[3].value
-        })
+        const user = e.target[0].value;
+        const email = e.target[1].value;
+        const senha = e.target[2].value;
+        const re_senha = e.target[3].value;
 
         // const displayName = e.target[0].value.toLowerCase();
         // const email = e.target[1].value;
         // const password = e.target[2].value;
 
-        navigate('/');
+        createUserWithEmailAndPassword(auth, email, senha)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            navigate('/');
+            // ..
+        })
+        .catch((error) => {
+            
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.warn(`${errorCode}\n${errorMessage}`);
+                
+
+                errorCode === "auth/invalid-email" ? Swal.fire({
+                    title: 'Error!',
+                    text: "Invalid email",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === "auth/weak-password" ? Swal.fire({
+                    title: 'Error!',
+                    text: `Weak password, password should be at least 6 characters`,
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === "auth/email-already-in-use" ? Swal.fire({
+                    title: 'Error!',
+                    text: `Email already in use! try again with another email`,
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === "auth/missing-email" ? Swal.fire({
+                    title: 'Error!',
+                    text: `Missing email`,
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })             
+                : console.warn(`Diferent error: ${errorCode}\n${errorMessage}`);
+
+
+        });
+
     }
+
+
+    
     
     return(
         <div className="entry registerContainer">
