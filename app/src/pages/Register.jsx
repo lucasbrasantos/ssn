@@ -17,10 +17,10 @@ const Register = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         
-        const user = e.target[0].value;
-        const email = e.target[1].value;
-        const senha = e.target[2].value;
-        const re_senha = e.target[3].value;
+        const name = e.target[0].value;
+        const username = e.target[1].value;
+        const email = e.target[2].value;
+        const senha = e.target[3].value;
 
         // const displayName = e.target[0].value.toLowerCase();
         // const email = e.target[1].value;
@@ -30,7 +30,12 @@ const Register = () => {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log(user);
+            const userUid = user.uid
+            
+            console.log(user);              
+
+            // axios.post (user)
+
             navigate('/');
             // ..
         })
@@ -96,8 +101,11 @@ const Register = () => {
 
 
                     <div className="inputs">
-                        <label htmlFor="user">nome</label>
-                        <input name='user' id='user' type="text" />
+                        <label htmlFor="name">nome</label>
+                        <input name='name' id='name' type="text" />
+
+                        <label htmlFor="username">username</label>
+                        <input name='username' id='username' type="text" />
 
                         <label htmlFor="password">email</label>
                         <input name='email' id='email' type="email" />
@@ -105,8 +113,6 @@ const Register = () => {
                         <label htmlFor="password">senha</label>
                         <input name='senha' id='senha' type="password" />
 
-                        <label htmlFor="password">confirmar senha</label>
-                        <input name='re-senha' id='re-senha' type="password" />
                     </div>
 
                     <div className="buttons">
