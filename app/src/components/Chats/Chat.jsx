@@ -9,7 +9,7 @@ const Chat = (props) => {
 			<img src={props.imgUrl || '../../../src/assets/IconDark.png'} alt="" />
 			<div className="box">
 				<p className='username'>{props.username}</p>
-				<p className='userInfo'>{props.userinfo}</p>
+				<p className='userInfo'>{props.userInfo}</p>
 			</div>
 			
 

@@ -34,6 +34,18 @@
         color: clr(text);
     }
 
+    .username{
+        text-align: left;
+    }
+
+    .userInfo{
+        text-align: left;
+        width: 40ch;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     button{
         position: absolute;
         right: 40px;
