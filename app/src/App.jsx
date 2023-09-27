@@ -10,6 +10,7 @@ import { ComponentProvider } from './context/ComponentContext.jsx'
 import { AuthContext } from './context/AuthContext.jsx';
 
 import './styles/main.scss';
+import NotFound from './pages/NotFound';
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
 
                     <Route path="Register" element={<Register/>} />
                     <Route path="Login" element={<Login/>} />
+                    <Route path="*" element={ <NotFound/> } />
                 </Route>
             </Routes>
 
