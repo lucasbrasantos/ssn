@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext';
+import { AuthContext } from '../../context/AuthContext.jsx'
+import axios from 'axios';
+import { auth } from '../../firebase';
+
 
 const LateralMenu = () => {
 
@@ -14,6 +18,12 @@ const LateralMenu = () => {
 		setSelectedComponent(component)
 	}
 
+	const {currentUser} = useContext(AuthContext); // curent user logged in
+
+	
+
+	console.log(currentUser);
+	console.log(auth.currentUser.getIdToken());
   return (
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
