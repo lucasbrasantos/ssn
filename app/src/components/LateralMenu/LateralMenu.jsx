@@ -20,10 +20,9 @@ const LateralMenu = () => {
 
 	const {currentUser} = useContext(AuthContext); // curent user logged in
 
-	
 
-	console.log(currentUser);
-	console.log(auth.currentUser.getIdToken());
+
+
   return (
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
