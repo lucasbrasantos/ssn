@@ -32,11 +32,11 @@ const App = () => {
                 <Route path="/">
                     
                     <Route index element={ 
-                        // <ProtectedRoute>
+                        <ProtectedRoute>
                             <ComponentProvider>
                                 <Home/> 
                             </ComponentProvider>
-                        // </ProtectedRoute>
+                         </ProtectedRoute>
                     } />
 
                     <Route path="Register" element={<Register/>} />
