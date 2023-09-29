@@ -1,5 +1,8 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
@@ -9,8 +12,68 @@ const Login = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         
-                 
-        navigate('/');
+        const email = e.target[0].value;
+        const password = e.target[1].value;
+        
+        await signInWithEmailAndPassword(auth, email, password)
+
+
+
+            .then((response) => {
+                const res = response;
+                
+                console.log(res);                
+                // Swal.fire('Success', ' ', 'success');
+                navigate("/");
+
+            }).catch((error) => {
+
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(`${errorCode}\n${errorMessage}`);
+
+                const alertTime = 2000;
+
+                errorCode === 'auth/user-not-found' ? Swal.fire({
+                    title: 'Error!',
+                    text: "User not found",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === 'auth/wrong-password' ? Swal.fire({
+                    title: 'Error!',
+                    text: "Wrong password",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === 'auth/missing-password' ? Swal.fire({
+                    title: 'Error!',
+                    text: "Missing password",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === 'auth/invalid-email' ? Swal.fire({
+                    title: 'Error!',
+                    text: "Invalid email",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: alertTime
+                })
+                : errorCode === 'auth/too-many-requests' ? Swal.fire({
+                    title: 'Error!',
+                    text: "Access to this account has been temporarily disabled due to many failed login attempts. Please, try again later.",
+                    icon: 'error',
+                    confirmButtonText: 'Return',
+                    timer: 4000
+                })
+                : console.log(`${errorCode}\n${errorMessage}`);
+
+
+            })
+        
     }
 
     
@@ -31,8 +94,8 @@ const Login = () => {
                     <h1>login</h1>
 
                     <div className="inputs">
-                        <label htmlFor="user">usuario</label>
-                        <input id='user' type="text" />
+                        <label htmlFor="email">email</label>
+                        <input id='email' type="email" />
 
                         <label htmlFor="password">senha</label>
                         <input id='password' type="password" />

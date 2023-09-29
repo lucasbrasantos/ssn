@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import './style.scss'
@@ -19,15 +19,29 @@ const LateralMenu = () => {
 	}
 
 	const {currentUser} = useContext(AuthContext); // curent user logged in
+	const [resUser, setResUser] = useState()
 
-
-
-
+	useEffect(() => {
+		
+		axios.get('http://localhost:3000/user_uid', {
+		  params: {
+			uid: currentUser.uid,
+		  },
+		})
+		.then( async(res) => {
+			setResUser(res.data[0])
+		})
+		.catch((err) => {
+		  	console.error(err);
+		});
+	}, []);
+	
+	console.log(resUser);
   return (
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
-			<img src="../../../src/assets/Icon.png" alt="" />
-			nome usuario
+			<img src={currentUser.photoURL || "../../../src/assets/Icon.png"} alt="" />
+			{resUser ? resUser.name : currentUser.displayName}
 		</div>
 
 		<div className='opcs' onClick={() => handleButtonClick('post')} >

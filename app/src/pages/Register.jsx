@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import Swal from 'sweetalert2';
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase.js";
+import axios from 'axios';
 
 
 
@@ -21,22 +22,58 @@ const Register = () => {
         const username = e.target[1].value;
         const email = e.target[2].value;
         const senha = e.target[3].value;
+        
+        const basePhotoUrl = 'https://dummyimage.com/200x200.png/5fa2dd/ffffff'
+        const dateNow = () => {
+            let date = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
-        // const displayName = e.target[0].value.toLowerCase();
-        // const email = e.target[1].value;
-        // const password = e.target[2].value;
+            let parts = date.split(', ');                
+            let dateParts = parts[0].split('/');
+            let timeParts = parts[1].split(':');
 
-        createUserWithEmailAndPassword(auth, email, senha)
+            return dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0] + ' ' + timeParts[0] + ':' + timeParts[1] + ':' + timeParts[2];
+        } 
+
+        await createUserWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
             const userUid = user.uid
+                       
             
-            console.log(user);              
+            updateProfile(auth.currentUser, {
+                displayName: name, photoURL: basePhotoUrl
+            }).then(res => {
+                console.log('success');
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+            
+            console.log(user); // log user after profile is updated
 
-            // axios.post (user)
+            
+            axios.post('http://localhost:3000/users', {
+                username: username,
+                name: name,
+                email: email,
+                photourl: basePhotoUrl,
+                points: 0,
+                timecreated: dateNow(),
+                firebase: userUid,
+                description: ''
+            })
+            .then((res) => {
+                console.log(res);
 
-            navigate('/');
+            })
+            .catch((error) => {
+                console.log(error);
+                
+            }); 
+
+
+            navigate('/?usercreated');
             // ..
         })
         .catch((error) => {

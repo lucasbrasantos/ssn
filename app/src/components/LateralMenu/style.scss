@@ -1,49 +1,57 @@
 @use '../../styles/abstracts/variables' as *;
 
 .boxMenu{
-    position: fixed;
-    z-index: 2;
-    width: 378px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: linear-gradient(180deg, #232123 0%, #232123 78.65%, #222127 100%);
+		position: fixed;
+		z-index: 2;
+		width: 378px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		background: linear-gradient(180deg, #232123 0%, #232123 78.65%, #222127 100%);
 
 
-    .opcs{
-        width: 90%;
-        height: 73px;
-        border-bottom: 1px solid var(--stroke, #707070);
-        display: flex;
-        align-items: center;
-        color: white;
-        padding: 30px;
-        cursor: pointer;
+		.opcs{
+				width: 90%;
+				height: 73px;
+				border-bottom: 1px solid var(--stroke, #707070);
+				display: flex;
+				align-items: center;
+				color: white;
+				padding: 30px;
+				cursor: pointer;
 
-        &:hover{
-            transition: .3s;
-            transform: translate(5px);
-            -webkit-animation: color-change-3x 4s linear infinite alternate both;
-	        animation: color-change-3x 4s linear infinite alternate both;
-        }
+				&:hover{
+						transition: .3s;
+						transform: translate(5px);
+						-webkit-animation: color-change-3x 4s linear infinite alternate both;
+					animation: color-change-3x 4s linear infinite alternate both;
+				}
 
 
 
-        img{
-            width: 28px;
-            height: auto;
-            aspect-ratio: 1/1;
-            // border-radius: 100%;
-            margin-right: 20px;                        
-        }
-        
-        
-    }
-    
-    .opcs-user img{
-        width: 45px;
-    }
+				img{
+						width: 28px;
+						height: auto;
+						aspect-ratio: 1/1;
+						// border-radius: 100%;
+						margin-right: 20px;                        
+				}
+				
+				
+		}
+		
+		.opcs-user{
+
+			text-transform: uppercase;
+			
+			
+			img{
+				width: 45px;
+				aspect-ratio: 1/1;
+				border-radius: 100%;
+			}
+		}
 }
 
 /*
@@ -53,25 +61,25 @@
  */
 
  @-webkit-keyframes color-change-3x {
-    0% {
-      border-bottom: 1px solid #19dcea;
-    }
-    50% {
-      border-bottom: 1px solid #33ff2c;
-    }
-    100% {
-      border-bottom: 1px solid #f9efff;
-    }
-  }
-  @keyframes color-change-3x {
-    0% {
-      border-bottom: 1px solid #19dcea;
-    }
-    50% {
-      border-bottom: 1px solid #33ff2c;
-    }
-    100% {
-      border-bottom: 1px solid #f9efff;
-    }
-  }
-  
+		0% {
+			border-bottom: 1px solid #19dcea;
+		}
+		50% {
+			border-bottom: 1px solid #33ff2c;
+		}
+		100% {
+			border-bottom: 1px solid #f9efff;
+		}
+	}
+	@keyframes color-change-3x {
+		0% {
+			border-bottom: 1px solid #19dcea;
+		}
+		50% {
+			border-bottom: 1px solid #33ff2c;
+		}
+		100% {
+			border-bottom: 1px solid #f9efff;
+		}
+	}
+	
