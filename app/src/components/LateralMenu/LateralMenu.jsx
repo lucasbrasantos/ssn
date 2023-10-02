@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/AuthContext.jsx'
 import axios from 'axios';
 import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
+import { UserProvider, useUser } from '../../context/UserContext';
 
 
 const LateralMenu = () => {
@@ -14,12 +15,14 @@ const LateralMenu = () => {
 	const navigate = useNavigate();
 	
 	const {setSelectedComponent} = useComponentContext();
-
 	const handleButtonClick = (component) => {
 		setSelectedComponent(component)
 	}
 
 	const {currentUser} = useContext(AuthContext); // curent user logged in
+	const {user} = useUser();
+	
+	/*
 	const [resUser, setResUser] = useState()
 
 	useEffect(() => {
@@ -41,11 +44,15 @@ const LateralMenu = () => {
 	}
 	
 	console.log(resUser);
+	*/
+
+	
+
   return (
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
 			<img src={currentUser.photoURL || "../../../src/assets/Icon.png"} alt="" />
-			{resUser ? resUser.name : currentUser.displayName}
+			{user ? user.name : currentUser.displayName}
 		</div>
 
 		<div className='opcs' onClick={() => handleButtonClick('post')} >
