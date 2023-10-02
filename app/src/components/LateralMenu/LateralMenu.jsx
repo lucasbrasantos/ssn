@@ -6,6 +6,7 @@ import { useComponentContext } from '../../context/ComponentContext';
 import { AuthContext } from '../../context/AuthContext.jsx'
 import axios from 'axios';
 import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 
 
 const LateralMenu = () => {
@@ -22,19 +23,22 @@ const LateralMenu = () => {
 	const [resUser, setResUser] = useState()
 
 	useEffect(() => {
-		
-		axios.get('http://localhost:3000/user_uid', {
-		  params: {
-			uid: currentUser.uid,
-		  },
-		})
-		.then( async(res) => {
-			setResUser(res.data[0])
-		})
-		.catch((err) => {
-		  	console.error(err);
-		});
+		fetchData();		
 	}, []);
+
+	const fetchData = async() => {
+		await axios.get('http://localhost:3000/user_uid', {
+			params: {
+			  uid: currentUser.uid,
+			},
+		  })
+		  .then( async(res) => {
+			  setResUser(res.data[0])
+		  })
+		  .catch((err) => {
+				console.error(err);
+		  });
+	}
 	
 	console.log(resUser);
   return (
@@ -60,7 +64,7 @@ const LateralMenu = () => {
 		</div>
 
 		<div className='opcs' onClick={ () => {
-		  navigate('login')
+		  signOut(auth)
 		} }>
 			<img src="../../../src/assets/icons/fluent-mdl2_chrome-back.png" alt="" />
 			sair
