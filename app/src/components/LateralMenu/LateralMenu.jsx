@@ -7,7 +7,8 @@ import { AuthContext } from '../../context/AuthContext.jsx'
 import axios from 'axios';
 import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
-import { UserProvider, useUser } from '../../context/UserContext';
+import { getUser } from '../../context/UserHook';
+
 
 
 const LateralMenu = () => {
@@ -20,10 +21,10 @@ const LateralMenu = () => {
 	}
 
 	const {currentUser} = useContext(AuthContext); // curent user logged in
-	const {user} = useUser();
+
+	///////////////////
 	
-	/*
-	const [resUser, setResUser] = useState()
+	const [user, setUser] = useState()
 
 	useEffect(() => {
 		fetchData();		
@@ -35,16 +36,17 @@ const LateralMenu = () => {
 			  uid: currentUser.uid,
 			},
 		  })
-		  .then( async(res) => {
-			  setResUser(res.data[0])
+		  .then((res) => {
+			  setUser(res.data[0])
 		  })
 		  .catch((err) => {
 				console.error(err);
 		  });
 	}
 	
-	console.log(resUser);
-	*/
+	// console.log(user);
+
+	///////////////////
 
 	
 
