@@ -8,6 +8,7 @@ import Home from './pages/Home'
 
 import { ComponentProvider } from './context/ComponentContext.jsx'
 import { AuthContext } from './context/AuthContext.jsx';
+import { UserProvider } from './context/UserContext.jsx';
 
 import './styles/main.scss';
 import NotFound from './pages/NotFound';
@@ -32,11 +33,14 @@ const App = () => {
                 <Route path="/">
                     
                     <Route index element={ 
-                        <ProtectedRoute>
-                            <ComponentProvider>
-                                <Home/> 
-                            </ComponentProvider>
-                         </ProtectedRoute>
+
+                        <UserProvider>
+                            <ProtectedRoute>
+                                <ComponentProvider>
+                                    <Home/> 
+                                </ComponentProvider>
+                            </ProtectedRoute>
+                        </UserProvider>
                     } />
 
                     <Route path="Register" element={<Register/>} />
