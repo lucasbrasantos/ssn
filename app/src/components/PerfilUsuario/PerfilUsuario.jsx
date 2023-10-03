@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { getUser } from '../../context/UserHook';
 import axios from 'axios';
 
-const Post = () => {
+const PerfilUsuario = () => {
 
 	const {currentUser} = useContext(AuthContext);
 	
@@ -75,4 +75,4 @@ const Post = () => {
 	)
 }
 
-export default Post
+export default PerfilUsuario

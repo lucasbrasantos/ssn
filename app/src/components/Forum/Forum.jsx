@@ -7,24 +7,28 @@ import './style.scss'
 const Forum = () => {
 
 	
-	const [data, setData] = useState([])
+	const [forum, setForum] = useState([])
 	const [interests, setInterests] = useState([])
 	const [users, setUsers] = useState([])
 
-	useEffect(() => {
-		axios.get('http://localhost:3000/forum')
-		.then(res => setData(res.data))
+	const fetchData = async() => {
+		await axios.get('http://localhost:3000/forum')
+		.then(res => setForum(res.data))
 		.catch(err => console.log(err))
 
-		axios.get('http://localhost:3000/interests')
+		await axios.get('http://localhost:3000/interests')
 		.then(res => setInterests(res.data))
 		.catch(err => console.log(err))
 
-		axios.get('http://localhost:3000/users')
+		await axios.get('http://localhost:3000/users')
 		.then(res => setUsers(res.data))
 		.catch(err => console.log(err))
 		
-	}, [])
+	}
+
+	useEffect(() => {
+		fetchData()
+	}, []);
 
 	function findTag(tag){
 
@@ -50,9 +54,9 @@ const Forum = () => {
 
 
 			{
-				(data && data.length > 0) ?
+				(forum && forum.length > 0) ?
 
-				data.map(e => {
+				forum.map(e => {
 					return <ForumBlock
 					title={e.title}
 					username={findUsers(e.userid)}

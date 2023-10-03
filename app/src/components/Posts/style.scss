@@ -1,0 +1,12 @@
+
+@use '../../styles/abstracts/mixins' as *;
+@use '../../styles/abstracts/variables' as *;
+
+
+#PostsContainer{
+    margin: 35px auto;
+    display: flex;
+    flex-direction: column;
+    // background-color: white;
+
+}

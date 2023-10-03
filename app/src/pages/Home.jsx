@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar/Navbar';
 import LateralMenu from '../components/LateralMenu/LateralMenu'
 import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
-import Post from '../components/Post/Post';
 import CreatePost from '../components/CreatePost/CreatePost';
 import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
 import Search from '../components/search/Search';
@@ -15,11 +14,12 @@ import Forum from '../components/Forum/Forum';
 import ChatAll from '../components/Chat/ChatAll';
 import ChatRecent from '../components/Chat/ChatRecent';
 import Ranking from '../components/Ranking/Ranking';
+import Posts from '../components/Posts/Posts';
 
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
-	post: Post,
+	posts: Posts,
 	createPost: CreatePost,
 	search: Search,
 	forum: Forum,

@@ -21,7 +21,7 @@ const Navbar = () => {
 		<span className='logo'>Logo</span>
 
 		<div className="col1">
-			<span onClick={() => handleButtonClick('post')} ><img src="../../../src/assets/icons/fluent-mdl2_home.png" alt="" /></span>
+			<span onClick={() => handleButtonClick('posts')} ><img src="../../../src/assets/icons/fluent-mdl2_home.png" alt="" /></span>
 			<span onClick={() => handleButtonClick('createPost')} ><img src="../../../src/assets/icons/Vector.png" alt="" /></span>
 		</div>
 
