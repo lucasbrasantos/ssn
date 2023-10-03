@@ -15,6 +15,7 @@ const Search = () => {
                 <option value="5">Honda</option>
                 <option value="6">Jaguar</option>
                 <option value="7">Land Rover</option>
+                <option value="koenigsegg">Koenigsegg</option>
                 <option value="8">Mercedes</option>
                 <option value="9">Mini</option>
                 <option value="10">Nissan</option>

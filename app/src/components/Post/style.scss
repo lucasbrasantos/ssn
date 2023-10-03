@@ -20,7 +20,8 @@
         width: 100%;
         height: 15%;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 0 30px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.20);
         color: white;
 
@@ -51,8 +52,10 @@
         height: 77%;
         background-color: #232123;
         overflow: hidden;
+        aspect-ratio: 3/4;
 
         img{
+            aspect-ratio: 3/4;
             width: 100%;
             height: 100%;
         }

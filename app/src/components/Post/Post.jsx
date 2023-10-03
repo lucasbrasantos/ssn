@@ -7,7 +7,7 @@ const Post = (props) => {
 
 		<div className='postTop'>
 			<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
-				<img className="postAvatar" src="../../../src/assets/Profile-Avatar-PNG.png" alt="" />
+				<img className="postAvatar" src={props.user_photo_url || "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 				<p>{props.username || 'username'}</p>
 			</div>
 			<button className='followBtn'>Seguir</button>
