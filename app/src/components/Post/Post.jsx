@@ -16,7 +16,11 @@ const Post = (props) => {
 		<div className='postImg'>
 			<img src={props.photo_url  || "../../../src/assets/sampleImg.png"} alt="" />
 		</div>
-		<div className='postBottom'>{props.title}</div>
+		<div className='postBottom'>
+			<p id='postTitle'>
+				{props.title}
+			</p>
+		</div>
 		
 	</div>
   )
