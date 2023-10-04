@@ -33,7 +33,7 @@ const Posts = () => {
 	
 	
 
-	const sortedPosts = posts.sort((a, b) => new Date(a.timeposted) - new Date(b.timeposted)); // sort posts by timestamp newest to oldest
+	const sortedPosts = posts.sort((a, b) => new Date(b.timeposted) - new Date(a.timeposted)); // sort posts by timestamp newest to oldest
 	const postWithUsers = sortedPosts.map((post) => { // e => element = each post in sorted posts
 		const user = users.find(user => user.userid === post.userid)
 
@@ -42,9 +42,9 @@ const Posts = () => {
 		}
 	})
 
-	console.log(postWithUsers);
 	
-	// console.log(sortedPosts);
+	// console.log(postWithUsers);
+	console.log(sortedPosts);
 	// console.log(users);
 	// console.log(interests);
 
@@ -55,7 +55,7 @@ const Posts = () => {
 				
 				postWithUsers.length > 0 ? postWithUsers.map((e) => {
 					
-					console.log(e);
+					
 					
 					return(
 						<Post
@@ -67,7 +67,9 @@ const Posts = () => {
 							title={e.title}
 						/>
 					)
-				}) : (<p>loading...</p>)
+				}) : (
+				<p style={{color:'white'}} >loading...</p>
+				)
 
 			}
 			
