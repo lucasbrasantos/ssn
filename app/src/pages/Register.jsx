@@ -73,7 +73,7 @@ const Register = () => {
             }); 
 
 
-            navigate('/?usercreated');
+            navigate('/');
             // ..
         })
         .catch((error) => {
