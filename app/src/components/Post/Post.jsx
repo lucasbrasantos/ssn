@@ -3,6 +3,14 @@ import './style.scss'
 
 const Post = (props) => {
   return (
+	/*
+	<div className="comments">
+		<div className="comment">
+			
+		</div>
+	</div>
+	*/
+	
     <div className='postContainer'>
 
 		<div className='postTop'>
@@ -34,6 +42,8 @@ const Post = (props) => {
 		</div>
 		
 	</div>
+	
+	
   )
 }
 

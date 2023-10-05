@@ -99,3 +99,19 @@
         font-size: 1.4rem;
     }
 }
+
+.comments {
+    width: 544px;
+    height: 700px;
+    background-color: #232123;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+
+    .comment {
+        margin-top: 15px;
+        background-color: greenyellow;
+        
+
+    }
+}
