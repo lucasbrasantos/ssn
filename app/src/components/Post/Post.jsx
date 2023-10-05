@@ -14,12 +14,23 @@ const Post = (props) => {
 		</div>
 		
 		<div className='postImg'>
+		<p id='postTitle'>
+				{props.title}
+			</p>
 			<img src={props.photo_url  || "../../../src/assets/sampleImg.png"} alt="" />
 		</div>
 		<div className='postBottom'>
-			<p id='postTitle'>
-				{props.title}
-			</p>
+			<div className='btn1'>
+				<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
+				{props.likes > 0 &&
+					<p className='statusbtn'>{props.likes}</p>
+				}
+				<img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" />
+				<img style={{marginBottom:"6px"}} src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
+			</div>
+			<div style={{marginRight:"25px"}}>
+			<img src="../../../src/assets/icons/fluent-mdl2_more-vertical.png" alt="" />
+			</div>
 		</div>
 		
 	</div>

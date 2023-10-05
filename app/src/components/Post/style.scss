@@ -65,8 +65,30 @@
     .postBottom{
         height: 8%;
         width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
         background-color: #2D2D30;
         border-top: 1px solid rgba(255, 255, 255, 0.21);
+
+        .btn1 {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            //gap:21px;
+
+            img {
+                margin-left: 21px;
+            }
+
+            .statusbtn{
+                color: white;
+                font-size: 20px;
+                margin-left: 5px;
+            }
+        }
+
     }
 
     #postTitle{
