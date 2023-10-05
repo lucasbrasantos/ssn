@@ -3,7 +3,6 @@ import './style.scss'
 import PostPerfil from '../PostPerfil/PostPerfil'
 
 import { AuthContext } from '../../context/AuthContext';
-import { getUser } from '../../context/UserHook';
 import axios from 'axios';
 
 const PerfilUsuario = () => {
