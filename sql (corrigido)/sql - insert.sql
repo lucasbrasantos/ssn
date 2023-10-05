@@ -68,16 +68,16 @@ insert into user_interests value (2,          1);
 
 -- (                     pk_postid,	title,								photourl,											  	timeposted,					likes,	userid,	interest,	moderador_status)
 insert into posts value (1, 		'Assistindo o Jogo ao Vivo!',		'http://dummyimage.com/191x100.png/5fa2dd/ffffff', 		'2022/8/6 22:48:53', 		314,	1,		1, 			0);
-insert into posts value (2, 		'Olha essa cestaaaa',				'http://dummyimage.com/179x100.png/ff4444/ffffff', 		'2023/5/6 06:30:57', 		785,	2,		2, 			0);
+insert into posts value (2, 		'Olha essa cestaaaa',				'http://dummyimage.com/179x100.png/ff4444/ffffff', 		'2022/5/6 06:30:57', 		785,	2,		2, 			0);
 insert into posts value (3, 		'Volei?', 							'http://dummyimage.com/170x100.png/ff4444/ffffff', 		'2023/5/5 11:18:15', 		21,		3,		3, 			1);
-insert into posts value (4, 		'999kg no supino', 					'http://dummyimage.com/210x100.png/dddddd/000000', 		'2076/6/4 18:03:27', 		789,	4,		4, 			0);
+insert into posts value (4, 		'999kg no supino', 					'http://dummyimage.com/210x100.png/dddddd/000000', 		'2016/6/4 18:03:27', 		789,	4,		4, 			0);
 insert into posts value (5, 		'Trilhazinha hoje?', 				'http://dummyimage.com/210x100.png/5fa2dd/ffffff', 		'2022/8/17 23:18:48', 		4500,	1,		5, 			0);
-insert into posts value (6, 		'Olha esse gol', 					'http://dummyimage.com/232x100.png/ff4444/ffffff', 		'2107/10/20 17:20:38', 		2677,	6,		1, 			0);
+insert into posts value (6, 		'Olha esse gol', 					'http://dummyimage.com/232x100.png/ff4444/ffffff', 		'1947/10/20 17:20:38', 		2677,	6,		1, 			0);
 insert into posts value (7, 		'Leblom Jamal', 					'http://dummyimage.com/232x100.png/dddddd/000000', 		'2023/5/31 20:36:25', 		1000,	7,		2, 			0);
 insert into posts value (8, 		'Volei hoje? a quadra ta aberta',	'http://dummyimage.com/179x100.png/cc0000/ffffff', 		'2076/6/4 04:19:50', 		13,		8,		3, 			3);
-insert into posts value (9, 		'Ta pago', 							'http://dummyimage.com/213x100.png/cc0000/ffffff', 		'2043/2/18 20:31:56', 		460,	9,		4, 			0);
-insert into posts value (10, 		'23km hoje', 						'http://dummyimage.com/100x100.png/dddddd/000000', 		'2115/5/29 04:12:27', 		780,	10,		5, 			0);
-insert into posts value (11, 		'$%¨#%$#&*@', 						'xxxxxxxxx', 											'2115/5/30 04:12:27', 		0,	1,		2, 			2);
+insert into posts value (9, 		'Ta pago', 							'http://dummyimage.com/213x100.png/cc0000/ffffff', 		'1943/2/18 20:31:56', 		460,	9,		4, 			0);
+insert into posts value (10, 		'23km hoje', 						'http://dummyimage.com/100x100.png/dddddd/000000', 		'1715/5/29 04:12:27', 		780,	10,		5, 			0);
+insert into posts value (11, 		'$%¨#%$#&*@', 						'xxxxxxxxx', 											'2015/5/30 04:12:27', 		0,	1,		2, 			2);
 
 --  //////////////////
 
@@ -125,15 +125,15 @@ insert into forum value   (10,			  10,			 'Voleibol para cadeirantes.',						'Vo
 -- // forum_interactions -= 10 inserts
 
 -- (						pk_interaction / fk_userid / fk_forumid		content,																																											photourl,											likes,	created_at,			  moderador_status)
-insert into forum_interactions value   (1,		1,		 1,				 'Uma dica importante é treinar regularmente e focar no aprimoramento das técnicas de passe e finalização.',																		'http://dummyimage.com/101x100.png/cc0000/ffffff',  '265',	'2058/8/11 18:53:05', 	'2');
-insert into forum_interactions value   (2,		2,		 2,				 'Foi um jogo emocionante! O time visitante mostrou muita garra, mas a equipe da casa conseguiu se destacar nos momentos decisivos.', 												'http://dummyimage.com/125x100.png/cc0000/ffffff',  '124', 	'2115/12/22 09:27:18', 	'0');
-insert into forum_interactions value   (3,		3,		 3,				 'Para melhorar no vôlei, é fundamental praticar o saque, a recepção e os fundamentos de ataque. Além disso, trabalhe em equipe e tenha uma boa comunicação em quadra.', 			'http://dummyimage.com/184x100.png/ff4444/ffffff',  '31', 	'2118/8/2 01:20:31', 	'3');
-insert into forum_interactions value   (4,		4,		 4,				 'Além de um treinamento consistente, é importante ter uma dieta balanceada com consumo adequado de proteínas. Consulte um nutricionista para obter orientações personalizadas.', 	'http://dummyimage.com/114x100.png/cc0000/ffffff',  '512', 	'2046/1/22 10:09:33', 	'0');
-insert into forum_interactions value   (5,		1,		 5,				 'Ajustar corretamente as marchas da bicicleta é essencial para um pedal suave. Certifique-se de alinhar as engrenagens e fazer os ajustes necessários para evitar trancos.', 		'http://dummyimage.com/249x100.png/cc0000/ffffff',  '714', 	'2053/5/21 00:22:48', 	'0');
-insert into forum_interactions value   (6,		6,		 6,				 'Alguém sabe qual material é mais adequado para a fabricação de bolas de futebol? Estou pensando em produzir algumas para um projeto escolar', 									'http://dummyimage.com/151x100.png/5fa2dd/ffffff',  '303', 	'2061/9/3 04:56:29', 	'2');
-insert into forum_interactions value   (7,		7,		 7,				 'Acredito que o Lakers tem uma equipe forte e vai dar trabalho nesta temporada. Quais são suas previsões para o desempenho da equipe?', 											'http://dummyimage.com/132x100.png/dddddd/000000',  '439', 	'2044/4/27 16:43:14', 	'3');
+insert into forum_interactions value   (1,		1,		 1,				 'Uma dica importante é treinar regularmente e focar no aprimoramento das técnicas de passe e finalização.',																		'http://dummyimage.com/101x100.png/cc0000/ffffff',  '265',	'2018/8/11 18:53:05', 	'2');
+insert into forum_interactions value   (2,		2,		 2,				 'Foi um jogo emocionante! O time visitante mostrou muita garra, mas a equipe da casa conseguiu se destacar nos momentos decisivos.', 												'http://dummyimage.com/125x100.png/cc0000/ffffff',  '124', 	'1315/12/22 09:27:18', 	'0');
+insert into forum_interactions value   (3,		3,		 3,				 'Para melhorar no vôlei, é fundamental praticar o saque, a recepção e os fundamentos de ataque. Além disso, trabalhe em equipe e tenha uma boa comunicação em quadra.', 			'http://dummyimage.com/184x100.png/ff4444/ffffff',  '31', 	'2018/8/2 01:20:31', 	'3');
+insert into forum_interactions value   (4,		4,		 4,				 'Além de um treinamento consistente, é importante ter uma dieta balanceada com consumo adequado de proteínas. Consulte um nutricionista para obter orientações personalizadas.', 	'http://dummyimage.com/114x100.png/cc0000/ffffff',  '512', 	'1843/1/22 10:09:33', 	'0');
+insert into forum_interactions value   (5,		1,		 5,				 'Ajustar corretamente as marchas da bicicleta é essencial para um pedal suave. Certifique-se de alinhar as engrenagens e fazer os ajustes necessários para evitar trancos.', 		'http://dummyimage.com/249x100.png/cc0000/ffffff',  '714', 	'2023/5/21 00:22:48', 	'0');
+insert into forum_interactions value   (6,		6,		 6,				 'Alguém sabe qual material é mais adequado para a fabricação de bolas de futebol? Estou pensando em produzir algumas para um projeto escolar', 									'http://dummyimage.com/151x100.png/5fa2dd/ffffff',  '303', 	'2011/9/3 04:56:29', 	'2');
+insert into forum_interactions value   (7,		7,		 7,				 'Acredito que o Lakers tem uma equipe forte e vai dar trabalho nesta temporada. Quais são suas previsões para o desempenho da equipe?', 											'http://dummyimage.com/132x100.png/dddddd/000000',  '439', 	'1924/4/27 16:43:14', 	'3');
 insert into forum_interactions value   (8,		8,		 8,		 		 'Praticar natação é ótimo para manter a saúde em dia, mas é importante consultar um médico para verificar se há alguma restrição específica para diabéticos tipo 3', 				'http://dummyimage.com/109x100.png/cc0000/ffffff',  '603', 	'2027/10/24 23:51:43', 	'0');
-insert into forum_interactions value   (9,		9,		 9,				 'O Bruninho é um jogador incrível! Suas jogadas são sempre precisas e estratégicas. Qual foi a jogada mais memorável que você já viu dele?', 										'http://dummyimage.com/171x100.png/ff4444/ffffff',  '22', 	'2103/2/25 14:46:53', 	'3');
+insert into forum_interactions value   (9,		9,		 9,				 'O Bruninho é um jogador incrível! Suas jogadas são sempre precisas e estratégicas. Qual foi a jogada mais memorável que você já viu dele?', 										'http://dummyimage.com/171x100.png/ff4444/ffffff',  '22', 	'2003/2/25 14:46:53', 	'3');
 
 --  //////////////////
 
@@ -162,14 +162,14 @@ insert into friends value 	(10, 1);
 -- // chats -= 10 inserts
 
 -- (					  chatid  message,								pk_time_stamp,	fk_userid_senderid / fk_userid_receiverid)
-insert into chats value (1,      'bora um fut?',						    '2028/1/18 13:54:58', 	1, 			2);
+insert into chats value (1,      'bora um fut?',						    '2021/1/18 13:54:58', 	1, 			2);
 insert into chats value (2,      '14:20',							        '2016/1/22 12:09:17', 	2, 			3);
-insert into chats value (3,      'Volei as 14:40?', 				    	'2027/9/23 10:14:39', 	3, 			4);
+insert into chats value (3,      'Volei as 14:40?', 				    	'2022/9/23 10:14:39', 	3, 			4);
 insert into chats value (4,      'Bora!', 						    	    '2014/7/13 02:11:00', 	4, 			1);
 insert into chats value (5,      'Tmj irmão!', 					    	    '2023/2/13 03:22:04', 	1, 			6);
 insert into chats value (6,      'Obrigado', 				    		    '2013/2/23 17:35:42', 	6, 			7);
 insert into chats value (7,      'Jogou dms ontem!',					    '2008/8/11 07:40:38', 	7, 			8);
 insert into chats value (8,      'Depois ou vou lá', 					    '2010/12/14 14:15:27', 	8, 			9);
-insert into chats value (9,      'Hoje vai ser top!',					    '2025/6/18 05:01:48', 	9, 			10);
+insert into chats value (9,      'Hoje vai ser top!',					    '2023/6/18 05:01:48', 	9, 			10);
 insert into chats value (10,     'Faz tempao que eu não jogo um fut',   	'2006/6/18 11:53:28', 	10,			 1);
 
