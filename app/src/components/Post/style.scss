@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     border: 2px solid #707070;
-    margin: 35px auto;
+    border-bottom: none;
+    margin: 0px auto; //35px
 
 
     .postTop{
@@ -104,14 +105,37 @@
     width: 544px;
     height: 700px;
     background-color: #232123;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
+    color: white;
+    border: 2px solid #707070;
+    border-top: none;
 
-    .comment {
+    .commentBox {
         margin-top: 15px;
-        background-color: greenyellow;
-        
+        padding: 14px;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
 
+        .cmtBtn{
+            margin: 25px 5px 0px 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            img{
+                width: 24px;
+            }
+
+            button{
+                border: none;
+                background-color: transparent;
+                color: white;
+                font-weight: 800;
+            }
+        }
     }
 }
