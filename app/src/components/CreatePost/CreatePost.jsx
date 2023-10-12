@@ -4,12 +4,33 @@ import axios from 'axios'
 import { storage } from '../../firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { AuthContext } from '../../context/AuthContext'
+import { useComponentContext } from '../../context/ComponentContext'
+
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 function CreatePost() {
 
-	const [interests, setInterests] = useState([])
+	const {setSelectedComponent} = useComponentContext();
+
+	const handleButtonClick = (component) => {
+		setSelectedComponent(component)
+	}
+
+	// ------------------ //
+	
+	const [uploadProgress, setUploadProgress] = useState(0)
+	
+	
+	// ------------------ //
+
+	
 	const [img, setImg] = useState(null)
+	const [imgPreview, setImgPreview] = useState(null)
+	
+	const [interests, setInterests] = useState([])
 	
 	const {currentUser} = useContext(AuthContext);
 	const [user, setUser] = useState()	
@@ -70,40 +91,58 @@ function CreatePost() {
 		const uploadTask = uploadBytesResumable(storageRef, img);
 
 		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				// Listener for monitoring the upload progress.
+				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log(`Upload is ${progress}% done`);
+				setUploadProgress(progress)
+
+				if (progress === 100) {
+					// Upload is 100% complete
+					getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
+						console.log('File is available at: ', downloadURL);
+	
+	
+						await axios.post('http://localhost:3000/posts', {
+							title: title,
+							photourl: downloadURL,
+							timeposted: dateNow(),
+							likes: 0,
+							userid: user.userid,
+							tag: getInterestsId(tag).interestsid,
+							moderator_status: 0,						
+						})
+						.then((res) => {
+							console.log(res);
+			
+						})
+						.catch((error) => {
+							console.log(error);
+							
+						}); 
+	
+						setImg(null)
+						handleButtonClick('posts')
+	
+	
+					})
+				}
+			},
 			(error) => {
 				console.log(error);
-			},
-			() => {
-				getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
-					console.log('File is available at: ', downloadURL);
-
-
-					await axios.post('http://localhost:3000/posts', {
-						title: title,
-						photourl: downloadURL,
-						timeposted: dateNow(),
-						likes: 0,
-						userid: user.userid,
-						tag: getInterestsId(tag).interestsid,
-						moderator_status: 0,						
-					})
-					.then((res) => {
-						console.log(res);
-		
-					})
-					.catch((error) => {
-						console.log(error);
-						
-					}); 
-
-
-				})
 			}
 		)
-
-		setImg(null)	
 		
 	}
+
+	const handleImageChange = (e) => {
+		if (e.target.files && e.target.files[0]) {
+			const image = e.target.files[0];
+			setImg(image);
+			setImgPreview(URL.createObjectURL(image))			
+		}
+	};
 
 		
 	return (
@@ -112,8 +151,17 @@ function CreatePost() {
 			<form action='' onSubmit={handleSubmit}>
 			<div className="addArquivo">
 					<label htmlFor="file">Adicionar Foto</label>
-					<input type="file" id="file" onChange={(e) => {setImg(e.target.files[0])} }/>
+					<input type="file"accept='image/*' id="file" onChange={(e) => handleImageChange(e) }/>
+					{
+						img && (
+							<img src={imgPreview} alt="Selected" className='imgPreview' />
+						)
+					}
 			</div>
+			
+			<Box sx={{ width: '100%', margin:'30px 0' }}>
+				<LinearProgress variant="determinate" value={uploadProgress} />
+			</Box>
 
 			<div className="inputs">
 					<label htmlFor="user">Titulo:</label>
@@ -127,7 +175,7 @@ function CreatePost() {
 					}
 
 					<label id='tagsLabel' htmlFor="tags">tags:</label>
-					<select name="tags" id="tags">
+					<select name="tags" id="tags">					
 						{
 							interests.map((e, i) => {
 								
@@ -138,7 +186,9 @@ function CreatePost() {
 						}
 					</select>
 
+					
 					<button type='submit' >Postar</button>
+
 			</div>
 			</form>
 		</div>
