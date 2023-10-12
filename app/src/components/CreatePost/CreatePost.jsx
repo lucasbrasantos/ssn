@@ -85,8 +85,8 @@ function CreatePost() {
 
 		const storageRef = ref(storage, `${user.userid}_${user.firebase}/${title}_${img.name}`)
 		
-		console.log(img);
-		console.log(storageRef);
+		// console.log(img);
+		// console.log(storageRef);
 		
 		const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -141,6 +141,7 @@ function CreatePost() {
 			const image = e.target.files[0];
 			setImg(image);
 			setImgPreview(URL.createObjectURL(image))			
+			// console.log(image);
 		}
 	};
 

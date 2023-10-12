@@ -84,10 +84,10 @@ const Post = (props) => {
 					<button className='followBtn'>Seguir</button>
 				</div>
 				
-				<div className='postImg'>
-				<p id='postTitle'>
+					<p id='postTitle'>
 						{post.title}
 					</p>
+				<div className='postImg'>
 					<img src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" />
 				</div>
 				<div className='postBottom'>
