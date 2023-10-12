@@ -34,6 +34,8 @@ function CreatePost() {
 	
 	const {currentUser} = useContext(AuthContext);
 	const [user, setUser] = useState()	
+	
+	const [points, setPoints] = useState(user ? user.points : 0)	
 
 
 	useEffect(() => {
@@ -100,6 +102,8 @@ function CreatePost() {
 
 				if (progress === 100) {
 					// Upload is 100% complete
+					setPoints(points + 5)
+					
 					getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
 						console.log('File is available at: ', downloadURL);
 	
@@ -140,7 +144,7 @@ function CreatePost() {
 		if (e.target.files && e.target.files[0]) {
 			const image = e.target.files[0];
 			setImg(image);
-			setImgPreview(URL.createObjectURL(image))			
+			setImgPreview(URL.createObjectURL(image))
 			// console.log(image);
 		}
 	};
