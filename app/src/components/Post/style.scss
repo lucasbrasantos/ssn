@@ -2,16 +2,19 @@
 @use '../../styles/abstracts/mixins' as *;
 @use '../../styles/abstracts/variables' as *;
 
-
+.postAll{
+    margin-bottom: 35px;
+}
 .postContainer{
+    position: relative;
     width: 544px;
     height: 700px;
     background-color: white;
     display: flex;
     flex-direction: column;
     border: 2px solid #707070;
-    border-bottom: none;
     margin: 0px auto; //35px
+
 
 
     .postTop{
@@ -64,6 +67,8 @@
 
 
     .postBottom{
+        position: absolute;
+        bottom: 0;
         height: 8%;
         width: 100%;
         display: flex;
@@ -81,6 +86,10 @@
 
             img {
                 margin-left: 21px;
+            }
+
+            #commentsIcon{
+                cursor: pointer;
             }
 
             .statusbtn{
@@ -102,16 +111,25 @@
 }
 
 .comments {
+    
     width: 544px;
-    height: 700px;
+    height: auto;
+    max-height: 500px;
     background-color: #232123;
     margin-bottom: 35px;
     display: flex;
+    // display: none;
     flex-direction: column;
     overflow: scroll;
     color: white;
     border: 2px solid #707070;
     border-top: none;
+
+    .commentUserAvatar{
+        width: 40px;
+        aspect-ratio: 1/1;
+        border-radius: 100%;
+    }
 
     .commentBox {
         margin-top: 15px;
@@ -131,6 +149,7 @@
             }
 
             button{
+                margin-left: 20px;
                 border: none;
                 background-color: transparent;
                 color: white;
