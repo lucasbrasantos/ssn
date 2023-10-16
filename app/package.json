@@ -22,7 +22,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fluentui/font-icons-mdl2": "^8.5.23",
+    "@mui/material": "^5.14.13",
     "axios": "^1.5.0",
     "firebase": "^10.4.0",
     "localforage": "^1.10.0",
