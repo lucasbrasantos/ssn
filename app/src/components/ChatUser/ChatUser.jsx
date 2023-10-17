@@ -16,6 +16,22 @@ const ChatUser = () => {
                 <div className="receivedMsg">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae sit iure voluptatum quisquam magnam quia, vel nostrum, id modi asperiores inventore vero temporibus nihil laboriosam corrupti blanditiis doloremque placeat dicta!</p>    
                 </div>  
+                <div className='sentMsg'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum libero odio maiores neque eum, eligendi culpa necessitatibus iusto veniam et dignissimos impedit magnam quae, ducimus quo! Unde quae natus a?</p>    
+                </div> 
+                <div className='sentMsg'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum libero odio maiores neque eum, eligendi culpa necessitatibus iusto veniam et dignissimos impedit magnam quae, ducimus quo! Unde quae natus a?</p>    
+                </div> 
+                <div className="receivedMsg">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae sit iure voluptatum quisquam magnam quia, vel nostrum, id modi asperiores inventore vero temporibus nihil laboriosam corrupti blanditiis doloremque placeat dicta!</p>    
+                </div>
+                <div className="receivedMsg">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae sit iure voluptatum quisquam magnam quia, vel nostrum, id modi asperiores inventore vero temporibus nihil laboriosam corrupti blanditiis doloremque placeat dicta!</p>    
+                </div>
+                <div className="receivedMsg">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae sit iure voluptatum quisquam magnam quia, vel nostrum, id modi asperiores inventore vero temporibus nihil laboriosam corrupti blanditiis doloremque placeat dicta!</p>    
+                </div>
+                
             </div>
 
             <div className="bottomChat">

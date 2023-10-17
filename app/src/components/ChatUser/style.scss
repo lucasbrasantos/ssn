@@ -1,15 +1,17 @@
 @use '../../styles/abstracts/variables' as *;
 
 .chatDiv {
-    width: 660px;
+    width: 40%;
     height: 80vh;
-    //background: linear-gradient(180deg, #2F2F2F 0%, #2D2D30 100%);
+    background: linear-gradient(180deg, #2F2F2F 0%, #2D2D30 100%);
     background-color: aqua;
     margin: 35px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 30px;
+    border: solid 1px #707070;
 
     .topChat {
         width: 100%;
@@ -19,9 +21,10 @@
         align-items: center;
         gap: 15px;
         padding: 20px;
-        background-color: aquamarine;
+        background-color: transparent;
         font-size: 24px;
         border-bottom: solid 1px #707070;
+        color: white;
     }
 
     .msgChat {
@@ -29,6 +32,7 @@
         height: 83%;
         display: flex;
         flex-direction: column;
+        overflow: scroll;
 
         .sentMsg {
             width: 342px;   
@@ -54,12 +58,13 @@
     .bottomChat {
         height: 10%;
         width: 100%;
-        background-color: aquamarine;
+        background-color: transparent;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 12px;
+        border-top: solid 1px #707070;
 
         input {
             width: 80%;
