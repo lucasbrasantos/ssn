@@ -12,6 +12,7 @@ const PostPerfil = (props) => {
 				<div className='icons'>
 					<p><img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{p ? p.likes : 0}</p>
 					<p><img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" />{p ? p.comments.length : 0}</p>
+					<p><img src="../../../src/assets/icons/fluent-mdl2_emoji-2.svg" alt="" />{p ? p.comments.length : 0}</p>
 				</div>
 			</div>
 		</div>
