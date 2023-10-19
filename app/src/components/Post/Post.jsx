@@ -116,6 +116,7 @@ const Post = (props) => {
 					</p>
 				<div className='postImg'>
 					<img src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" />
+					{/* <video src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" /> */}
 				</div>
 				<div className='postBottom'>
 					<div className='btn1'>
