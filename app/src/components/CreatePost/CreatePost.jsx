@@ -170,7 +170,7 @@ function CreatePost() {
 
 			<div className="inputs">
 					<label htmlFor="user">Titulo:</label>
-					<input name='user' id='tirulo' type="text" placeholder="Adicione um Titulo..." maxlength="64" />
+					<input name='user' id='tirulo' type="text" placeholder="Adicione um Titulo..." maxLength="64" />
 
 					{
 						/*
