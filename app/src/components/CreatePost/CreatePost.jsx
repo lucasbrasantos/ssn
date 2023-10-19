@@ -164,13 +164,13 @@ function CreatePost() {
 					}
 			</div>
 			
-			<Box sx={{ width: '100%', margin:'30px 0' }}>
+			<Box sx={{ width: '100%', margin:'16px 0 50px 0' }}>
 				<LinearProgress variant="determinate" value={uploadProgress} />
 			</Box>
 
 			<div className="inputs">
 					<label htmlFor="user">Titulo:</label>
-					<input name='user' id='tirulo' type="text" placeholder="Adicione um Titulo..."/>
+					<input name='user' id='tirulo' type="text" placeholder="Adicione um Titulo..." maxlength="64" />
 
 					{
 						/*
