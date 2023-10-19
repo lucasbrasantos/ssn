@@ -10,8 +10,8 @@ const Search = () => {
 	const {currentUser} = useContext(AuthContext);
 	
 	const a = undefined;
-	const [selectedInterest, setSelectedInterests] = useState('all');
-	const [filteredPosts, setFilteredPosts] = useState([]);
+	const [filteredPosts, setFilteredPosts] = useState();
+	const [selectedInterest, setSelectedInterest] = useState('all');
 
 	///////////////////
 	
@@ -64,18 +64,17 @@ const Search = () => {
 	
 
 	const handleChange = (selectedValue) => {
-		
-		setSelectedInterests(selectedValue)
-		console.log(selectedValue);
+		//console.log(selectedValue);
+		setSelectedInterest(selectedValue)
 
-		if(selectedInterest === 'all'){
+		if(selectedValue === 'all'){
 			setFilteredPosts(data)
 		}else{
-			setFilteredPosts({users: data.user, posts: data.posts.filter(post => post.interest.interestsid === parseInt(selectedInterest))})
+			setFilteredPosts({users: data.user, posts: data.posts.filter(post => post.interest.interestsid === parseInt(selectedValue))})
 		}
 		
+		console.log(interests.find(e => e.interestsid === parseInt(selectedValue)));
 
-		// console.log(filteredPosts);
 		// console.log(data);
 		// console.log('id: ' + selectedInterest);
 	}
@@ -83,7 +82,7 @@ const Search = () => {
 	return (
 		<div className='searchBox'>
 			<div className='filtro' style={{width:'100%'}}>
-				<select value={selectedInterest} onChange={(e) => {handleChange(e.target.value)}}>
+				<select onChange={(e) => {handleChange(e.target.value)}}>
 					
 					<option value='all'>tudo</option>
 					{
@@ -110,15 +109,18 @@ const Search = () => {
 							key={key}
 						/>
 
-					)) : filteredPosts && data ? filteredPosts.posts.map((e, key) => (
+					)) : filteredPosts && data ? filteredPosts.posts.map((e, key) => {	
 
-						<PostPerfil
+						return(
 
-							data={e}
-							key={key}
-						/>
+							<PostPerfil
 
-					)) : (
+								data={e}
+								key={key}
+							/>
+
+						)
+					}) : (
 
 						<Box sx={{ position:'absolute', transform:'translateX(-13px)', display: 'flex', width:'100%', alignItems:'center', justifyContent:'center' }}>
 							<CircularProgress />
