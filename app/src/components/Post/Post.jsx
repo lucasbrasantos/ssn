@@ -1,9 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import axios from 'axios'
+import { AuthContext } from '../../context/AuthContext';
 
 const Post = (props) => {
 	
+	const {currentUser} = useContext(AuthContext);
+	const [currentUserAPI, setCurrentUserAPI] = useState();
+
+	useEffect(() => {
+		fetchData();					
+	}, []);
+
+	const fetchData = async() => {
+
+		await axios.get('http://localhost:3000/user_uid', {
+			params: {
+			  uid: currentUser.uid,
+			},
+		  	})
+		.then((res) => { setCurrentUserAPI(res.data[0]) })
+		.catch((err) => { console.error(err); });		
+	}
+
+
 	const post = props.postData.post
 	const user = props.postData.user
 	const comment = props.postData.comment
@@ -81,7 +101,14 @@ const Post = (props) => {
 						<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 						<p>{user ? user.username : 'usuario'}</p>
 					</div>
-					<button className='followBtn'>Seguir</button>
+					
+					{
+						currentUserAPI && user && currentUserAPI.userid !== user.userid ? (
+							<button className='followBtn'>Seguir</button>
+						) : <></>
+
+					}
+
 				</div>
 				
 					<p id='postTitle'>
