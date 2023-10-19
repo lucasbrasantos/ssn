@@ -57,7 +57,7 @@ const LateralMenu = () => {
 			{user ? user.name : currentUser.displayName}
 		</div>
 
-		<div className='opcs' onClick={() => handleButtonClick('post')} >
+		<div className='opcs' onClick={() => handleButtonClick('addFriend')} >
 			<img src="../../../src/assets/icons/fluent-mdl2_add-friend.png" alt="" />
 			add amigo
 		</div>
