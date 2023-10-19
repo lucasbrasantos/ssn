@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
 import { useComponentContext } from '../../context/ComponentContext';
 
 
 import './style.scss'
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
   
@@ -14,6 +16,32 @@ const Navbar = () => {
 		setSelectedComponent(component)
 	}
 
+
+	/////////////////////////////
+	
+	const {currentUser} = useContext(AuthContext); // curent user logged in
+	const [currentUserAPI, setCurrentUserAPI] = useState()
+
+	useEffect(() => {
+		fetchData();		
+	}, []);
+
+	const fetchData = async() => {
+		await axios.get('http://localhost:3000/user_uid', {
+			params: {
+			  uid: currentUser.uid,
+			},
+		  })
+		  .then((res) => {
+			  setCurrentUserAPI(res.data[0])
+		  })
+		  .catch((err) => {
+				console.error(err);
+		  });
+	}
+
+	
+	/////////////////////////////
 
 	return (
 
@@ -35,7 +63,7 @@ const Navbar = () => {
 			<span onClick={() => handleButtonClick('chatAll')} ><img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" /></span>
 		</div>
 
-		<img className="navbarAvatar" src="../../../src/assets/Profile-Avatar-PNG.png" alt="" />
+		<img className="navbarAvatar" src={currentUserAPI ? currentUserAPI.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 	</nav>
 	)
 }
