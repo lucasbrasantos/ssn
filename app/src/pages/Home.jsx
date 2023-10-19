@@ -6,6 +6,7 @@ import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
 import CreatePost from '../components/CreatePost/CreatePost';
 import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
+import addFriend from '../components/addFriend/addFriend'
 import Search from '../components/search/Search';
 
 
@@ -20,6 +21,7 @@ import Posts from '../components/Posts/Posts';
 
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
+	addFriend: addFriend,
 	posts: Posts,
 	createPost: CreatePost,
 	search: Search,
