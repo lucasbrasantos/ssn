@@ -62,17 +62,38 @@ const PerfilUsuario = () => {
 			<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
 				<img className='avatarUser' src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 
-					<div>
-						<p>{user && user.name}</p>	
-						<p>{user && user.info}</p>			
-					</div>
-					</div>
-					<div>
-						<p>N Seguidores</p>
-						<p>Rank Usuario</p>
-					</div>
-
+				<div>
+					<p>{user && user.name}</p>	
+					<p>{user && user.info}</p>			
 				</div>
+				</div>
+				<div>
+					<p>N Seguidores</p>
+					<p>Rank Usuario</p>
+				</div>
+
+			</div>
+			<div className='PerfilBtns'>
+				{true ?
+					<div>
+						<button>
+							Editar perfil
+						</button>
+						<button>
+							???????
+						</button>
+					</div>
+					:
+					<div>
+						<button>
+							Follow
+						</button>
+						<button>
+							Mensagem
+						</button>
+					</div>
+				}
+			</div>
 			<div className='posts'>
 					<div className='grid'>
 					
