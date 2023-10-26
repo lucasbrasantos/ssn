@@ -8,6 +8,8 @@ const addFriend = () => {
                 <img src="../../../src/assets/icons/fluent-mdl2_Search.png" alt="" />
             </div>
             <div className="fList">
+
+            
                 <div className="friendS">
                     <div className='infosF1'>
                         <img className='fAvatar' src="../../../src/assets/Icon.png" alt="" />
@@ -75,7 +77,7 @@ const addFriend = () => {
                     </div>
                 </div>
 
-
+                
             </div>
         </div>
     )

@@ -80,7 +80,7 @@ const PerfilUsuario = () => {
 							Editar perfil
 						</button>
 						<button>
-							???????
+							Compartilhar Perfil
 						</button>
 					</div>
 					:

@@ -36,7 +36,7 @@ const ChatUser = () => {
 
             <div className="bottomChat">
                 <input type="text" />
-                <img src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
+                <img src="../../../src/assets/icons/fluent-mdl2_send.svg" alt="" />
             </div>
         </div>
     )
