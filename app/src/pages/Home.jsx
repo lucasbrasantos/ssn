@@ -27,7 +27,8 @@ const components = { // name for the button click // <component name>
 	search: Search,
 	forum: Forum,
 	chatAll: ChatAll,
-	chatRecent: ChatUser, //ChatRecent
+	chatRecent: ChatRecent,
+	ChatUser: ChatUser,
 	ranking: Ranking,
 }
 

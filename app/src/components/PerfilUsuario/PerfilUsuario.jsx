@@ -75,7 +75,7 @@ const PerfilUsuario = () => {
 			</div>
 			<div className='PerfilBtns'>
 				{true ?
-					<div>
+					<div className='BtnsU'>
 						<button>
 							Editar perfil
 						</button>
@@ -84,7 +84,7 @@ const PerfilUsuario = () => {
 						</button>
 					</div>
 					:
-					<div>
+					<div className='BtnsU'>
 						<button>
 							Follow
 						</button>

@@ -46,6 +46,11 @@
         //background-color: #707070;
         border-bottom: 1px solid rgba(255, 255, 255, 0.20);
 
+        .BtnsU {
+            display: flex;
+            flex-direction: row;
+        }
+
         button {
             width: 184px;
             height: 44px;
