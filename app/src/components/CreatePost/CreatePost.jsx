@@ -90,6 +90,13 @@ function CreatePost() {
 		// console.log(img);
 		// console.log(storageRef);
 		
+		uploadFileAndHandleError(storageRef, title, tag);
+		
+	}
+
+	const uploadFileAndHandleError = async(storageRef, title, tag) => {
+		
+		
 		const uploadTask = uploadBytesResumable(storageRef, img);
 
 		uploadTask.on(
@@ -102,6 +109,7 @@ function CreatePost() {
 
 				if (progress === 100) {
 					// Upload is 100% complete
+					console.log('aeaeae');
 					setPoints(points + 5)
 					
 					getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
@@ -130,14 +138,25 @@ function CreatePost() {
 						handleButtonClick('posts')
 	
 	
+					}).catch((error) => {
+						
+						console.log(error);
+						console.log(error.code);
+
+						if (error.code == 'storage/object-not-found') {
+							console.log("Retrying...");
+							uploadFileAndHandleError(storageRef, title, tag); // rerun the function
+						}
+
 					})
+
 				}
 			},
 			(error) => {
 				console.log(error);
 			}
 		)
-		
+
 	}
 
 	const handleImageChange = (e) => {
