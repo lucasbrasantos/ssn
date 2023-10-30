@@ -3,8 +3,9 @@ import {useNavigate} from 'react-router-dom'
 import Swal from 'sweetalert2';
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 import axios from 'axios';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 
@@ -24,6 +25,7 @@ const Register = () => {
         const senha = e.target[3].value;
         
         const basePhotoUrl = 'https://dummyimage.com/200x200.png/5fa2dd/ffffff'
+        
         const dateNow = () => {
             let date = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
@@ -35,13 +37,13 @@ const Register = () => {
         } 
 
         await createUserWithEmailAndPassword(auth, email, senha)
-        .then((userCredential) => {
+        .then( async(userCredential) => {
             // Signed in 
             const user = userCredential.user;
             const userUid = user.uid
                        
             
-            updateProfile(auth.currentUser, {
+            await updateProfile(auth.currentUser, {
                 displayName: name, photoURL: basePhotoUrl
             }).then(res => {
                 console.log('success');
@@ -49,6 +51,15 @@ const Register = () => {
             }).catch(err => {
                 console.log(err);
             })
+
+            await setDoc(doc(db, "users", user.uid), {
+                uid: user.uid,
+                displayName: name,
+                email,
+                photoURL: basePhotoUrl
+            });
+
+            await setDoc(doc(db, "userChats", user.uid), {});
             
             console.log(user); // log user after profile is updated
 
