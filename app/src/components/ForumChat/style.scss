@@ -1,0 +1,174 @@
+@use '../../styles/abstracts/variables' as *;
+
+.ForumChatDiv {
+    width: 40%;
+    height: 80vh;
+    background: linear-gradient(180deg, #2F2F2F 0%, #2D2D30 100%);
+    margin: 35px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    border: solid 1px #707070;
+    
+    .ForumChatTop {
+        width: 100%;
+        height: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border-bottom: solid 1px #707070;
+        color: white;
+
+        .FT1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 50%;
+            border-bottom: solid 1px #707070;
+            padding: 25px;
+            gap: 15px;
+
+            img {
+                width: 35px;
+            }
+        }
+
+        .FT2 {
+            width: 100%;
+            height: 50%;
+
+            .friendS {
+                width: 100%;
+                height: 100%;
+                background-color: linear-gradient(180deg, #232123 0%, #232123 78.65%, #222127 100%);
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+                color: white;
+                //border-top: 1px solid var(--stroke, #707070);
+                border-bottom: 1px solid var(--stroke, #707070);
+    
+                .infosF1 {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 5%;
+                    gap: 10px;
+    
+                    .fAvatar {
+                        height: 40px;
+                    }
+
+                    p:first-child{
+                        font-size: 19px;
+                    }
+
+                    p:last-child{
+                        font-size: 12px;
+                    }
+                }
+                
+                .infosF2{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 15px;
+                    align-items: center;
+                    justify-content: flex-end;
+                    margin-right: 5%;
+
+                    p{
+                        background-color: #3C6CBE;
+                        padding: 8px 12px;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .ForumChat{
+        height: 75%;
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        padding: 20px 0 40px 0;
+
+        .Fmsg {
+            width: 607px;
+            height: 177px;
+            border-radius: 28px;
+            border: 1px solid #707070;            
+            background: #232123;
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            color: white;
+
+            .FMD1 {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: 15%;
+                justify-content: space-between;
+                padding: 15px 0px;
+                align-items: center;
+
+                img:first-child {
+                    width: 60px;
+                }
+
+                img:last-child {
+                    width: 40px;
+                }
+            }
+
+            .FMD2 {
+                display: flex; 
+                flex-direction: column;
+                height: 100%;
+                width: 20%;
+                padding-top: 25px;
+                gap: 5px;
+            }
+
+            .FMD3 {
+                display: flex;
+                height: 100%;
+                width: 65%;
+                padding-top: 25px;
+            }
+        }
+    }
+
+    .ForumBottomChat {
+        height: 10%;
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        border-top: solid 1px #707070;
+
+        input {
+            width: 80%;
+            border: none;
+            border-radius: 30px;
+            border: 1px solid var(--stroke, #707070);
+            background: #232123;
+            color: white;
+            padding: 10px 16px;
+            font-size: 18px;
+        }
+    }
+}
