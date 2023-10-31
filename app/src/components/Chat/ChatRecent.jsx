@@ -13,6 +13,8 @@ const ChatRecent = () => {
 		setSelectedComponent(component)
 	}
 
+
+    
     
     return (
         <div id='ChatRecent' className='chat'>

@@ -63,7 +63,8 @@ const PerfilUsuario = () => {
 				<img className='avatarUser' src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 
 				<div>
-					<p>{user && user.name}</p>	
+					<p>{user && user.username}</p>
+					<p style={{fontSize:'.8rem', marginTop:'5px'}}>{user && user.name}</p>
 					<p>{user && user.info}</p>			
 				</div>
 				</div>

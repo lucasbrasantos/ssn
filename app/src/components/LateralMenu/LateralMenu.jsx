@@ -54,7 +54,7 @@ const LateralMenu = () => {
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
 			<img src={currentUser.photoURL || "../../../src/assets/Icon.png"} alt="" />
-			{user ? user.name : currentUser.displayName}
+			{user ? user.username : currentUser.displayName}
 		</div>
 
 		<div className='opcs' onClick={() => handleButtonClick('addFriend')} >
