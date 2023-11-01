@@ -7,7 +7,6 @@ import { AuthContext } from '../../context/AuthContext.jsx'
 import axios from 'axios';
 import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
-import { getUser } from '../../context/UserHook';
 
 
 
