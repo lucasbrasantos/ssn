@@ -70,6 +70,7 @@ const Chat = (props) => {
 			displayName: user.username,
 			photoURL: user.photourl
 		});
+		
 		handleButtonClick('ChatUser')
 	}
 

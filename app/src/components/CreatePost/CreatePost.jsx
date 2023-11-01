@@ -85,7 +85,7 @@ function CreatePost() {
         const title = e.target[1].value;
         const tag = e.target[2].value;
 
-		const storageRef = ref(storage, `${user.userid}_${user.firebase}/${title}_${img.name}`)
+		const storageRef = ref(storage, `${user.userid}_${user.firebase}/posts/${title}_${img.name}`)
 		
 		// console.log(img);
 		// console.log(storageRef);

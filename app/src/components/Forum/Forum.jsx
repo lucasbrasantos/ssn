@@ -38,8 +38,8 @@ const Forum = () => {
 
 	function findUsers(userid){
 
-		const matchingUser = users.find((e) => e.userid === userid);
-		return matchingUser && `${matchingUser.name} | ${matchingUser.username}`
+		const matchingUser = users?.find((e) => e.userid === userid);
+		return matchingUser && matchingUser
 	}
 
 	
@@ -54,20 +54,23 @@ const Forum = () => {
 
 
 			{
-				(forum && forum.length > 0) ?
+				(forum && users.length > 0 && forum.length > 0) ?
 
-				forum.map(e => {
-					return <ForumBlock
-					title={e.title}
-					username={findUsers(e.userid)}
-					created_at={e.created_at}
-					description={e.description}
-					tag={findTag(e.tag)}
-					likes={e.likes}
-					/>
-				}) : (
-					<p className='noData'>nada aqui</p>
-				)
+					forum.map((e, key) => {
+
+						return <ForumBlock
+						key={key}
+						data={e}
+						title={e.title}
+						user={findUsers(e.userid)}
+						created_at={e.created_at}
+						description={e.description}
+						tag={findTag(e.tag)}
+						likes={e.likes}
+						/>
+					}) : (
+						<p className='noData'>nada aqui</p>
+					)
 			}
 
 
