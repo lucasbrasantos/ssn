@@ -98,6 +98,15 @@
                 font-size: 20px;
                 margin-left: 5px;
             }
+
+            .likeIcon{
+                cursor: pointer;
+                transition: .2s;
+                
+                &:hover{
+                    transform: translateY(-2px);
+                }
+            }
         }
 
     }

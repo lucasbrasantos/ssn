@@ -41,9 +41,9 @@ const ChatRecent = () => {
         <div id='ChatRecent' className='chat'>
             
             <div className="toggleChat toggleChatTop">
-                <h1 onClick={() => handleButtonClick('chatAll')}>Todos</h1>
+                <p onClick={() => handleButtonClick('chatAll')}>Todos</p>
 				<hr />
-				<p onClick={() => handleButtonClick('chatRecent')}>Recentes</p>
+				<h1 onClick={() => handleButtonClick('chatRecent')}>Recentes</h1>
             </div>
 
             {

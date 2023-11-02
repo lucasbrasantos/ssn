@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 const Post = (props) => {
 	
 	const {currentUser} = useContext(AuthContext);
-	const [currentUserAPI, setCurrentUserAPI] = useState();
+	const [currentUserAPI, setCurrentUserAPI] = useState();	
 
 	useEffect(() => {
 		fetchData();					
@@ -24,10 +24,10 @@ const Post = (props) => {
 	}
 
 
-	const post = props.postData.post
-	const user = props.postData.user
-	const comment = props.postData.comment
-
+	const [post, setPost] = useState(props.postData.post)
+	const [user, setUser] = useState(props.postData.user)
+	const [comment, setComment] = useState(props.postData.comment)
+	
 	// console.log(post);
 	// console.log(user);
 	
@@ -41,6 +41,54 @@ const Post = (props) => {
 		// console.log(isCommentsOpen);
 	}
 
+	const likePost = () => {
+
+		const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+		const postId = post.postid;
+
+		if (!likedPosts.includes(postId)) { // if current post is NOT liked
+			
+			setPost({ ...post, likes: post.likes + 1 });
+			likedPosts.push(postId); //this post has been liked
+			localStorage.setItem('likedPosts', JSON.stringify(likedPosts)); // add post to localStorage 
+
+			handlePostLikeUpdate(postId, 1); // Add 1 like
+			
+		}else{
+
+			setPost({ ...post, likes: post.likes - 1 });
+			likedPosts.splice(likedPosts.indexOf(postId), 1);
+			localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+
+			handlePostLikeUpdate(postId, -1); // Remove 1 like
+		}
+
+		console.log(post);
+	}
+
+	const handlePostLikeUpdate = (postId, like) => {
+
+		axios.patch(`http://localhost:3000/like_post/${postId}`, {
+			likes: post.likes + like
+		}).then(res => {
+			console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
+
+		const likeIcon = document.getElementById(`likeIcon_${postId}`);
+		if (likeIcon) {
+			if (like === 1) {
+				likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
+			} else {
+				likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
+			}
+		}
+
+	};
+
+
+
 	function formatDateToYYYYMMDD(dateString) {
 		const date = new Date(dateString);
 		const year = date.getFullYear();
@@ -50,6 +98,8 @@ const Post = (props) => {
   		const minutes = date.getMinutes().toString().padStart(2, '0');
 		return `${year}/${month}/${day} ${hours}:${minutes}`;
 	}
+
+	
 
 	/*
 	const [_users, set_Users] = useState([])
@@ -120,7 +170,7 @@ const Post = (props) => {
 				</div>
 				<div className='postBottom'>
 					<div className='btn1'>
-						<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
+						<img onClick={() => likePost()} id={`likeIcon_${post.postid}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
 						{post.likes > 0 &&
 							<p className='statusbtn'>{post.likes}</p>
 						}
@@ -188,6 +238,7 @@ const Post = (props) => {
 											{comment ? comment.comment : 'comment'}
 										</p>
 
+										{/* 										
 										<div className='cmtBtn'>
 											<div style={{ display:'flex', flexDirection:'row', gap:'5px'}}>
 												<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
@@ -196,7 +247,9 @@ const Post = (props) => {
 												}
 											</div>
 											<button>Responder</button>
-										</div>
+										</div> 
+										*/}
+
 									</div>
 								</div>
 							) : (
