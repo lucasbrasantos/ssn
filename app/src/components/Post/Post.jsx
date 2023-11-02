@@ -24,9 +24,9 @@ const Post = (props) => {
 	}
 
 
-	const [post, setPost] = useState(props.postData.post)
-	const [user, setUser] = useState(props.postData.user)
-	const [comment, setComment] = useState(props.postData.comment)
+	const [post, setPost] = useState(props.postData?.post)
+	const [user, setUser] = useState(props.postData?.user)
+	const [comment, setComment] = useState(props.postData?.comment)
 	
 	// console.log(props);
 	

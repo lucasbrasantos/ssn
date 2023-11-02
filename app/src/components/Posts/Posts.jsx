@@ -73,7 +73,6 @@ const Posts = () => {
 					return(
 						<Post
 							postData={data}
-
 							key={key}
 						/>
 					)
