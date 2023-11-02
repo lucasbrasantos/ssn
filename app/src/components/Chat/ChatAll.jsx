@@ -78,7 +78,12 @@ const ChatAll = () => {
 
 	return (
 		<div id='ChatAll' className='chat'>
-			<h1>todos</h1>
+
+			<div className="toggleChat toggleChatTop">
+                <h1 onClick={() => handleButtonClick('chatAll')}>Todos</h1>
+				<hr />
+				<p onClick={() => handleButtonClick('chatRecent')}>Recentes</p>
+            </div>
 
 			<div className="chats">
 
@@ -101,11 +106,6 @@ const ChatAll = () => {
 			</div>
 			
 
-			<div className="toggleChat">
-                <p onClick={() => handleButtonClick('chatAll')}>Todos</p>
-				<hr />
-				<p onClick={() => handleButtonClick('chatRecent')}>Recentes</p>
-            </div>
 		</div>
 	)
 }

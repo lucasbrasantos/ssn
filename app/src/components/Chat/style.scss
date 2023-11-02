@@ -2,10 +2,10 @@
 
 
 
-.chat  {
+.chat{
 
     width: 657px;
-    min-height: 80vh;
+    max-height: 90vh;
     border-radius: 30px;
     background: clr(dark, base);
     margin: 35px auto;
@@ -14,26 +14,34 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    padding: 10px 0;
 
     .chats{
-        margin-bottom: 80px;
+        margin: 10px 0;
+        overflow: auto;
     }
 
     h1{
         color: clr(text);
         text-transform: capitalize;
+        text-align: center;
+        cursor: pointer;
+        width: 50%;
+        user-select: none;
+        margin-top: 5px;
+    }
+
+    .toggleChatTop{
+        border-bottom: 1px solid clr(dark, 400);
     }
 
 
     .toggleChat{
-        position: absolute;
-        bottom: 0;
+        
         width: 100%;
+        min-height: 3rem;
         display: flex;
         justify-content: space-evenly;
-        // padding: 10px 0;
-        border-top: 1px solid clr(dark, 400);
+
 
         p{
             color: clr(text);
