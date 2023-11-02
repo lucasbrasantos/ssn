@@ -28,8 +28,8 @@ const Post = (props) => {
 	const [user, setUser] = useState(props.postData.user)
 	const [comment, setComment] = useState(props.postData.comment)
 	
-	// console.log(post);
-	// console.log(user);
+	// console.log(props);
+	
 	
 
 
@@ -41,10 +41,12 @@ const Post = (props) => {
 		// console.log(isCommentsOpen);
 	}
 
-	const likePost = () => {
+	//////////
 
-		const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
-		const postId = post.postid;
+	const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+	const postId = post.postid;
+
+	const likePost = () => {
 
 		if (!likedPosts.includes(postId)) { // if current post is NOT liked
 			
@@ -76,17 +78,16 @@ const Post = (props) => {
 			console.log(err);
 		})
 
-		const likeIcon = document.getElementById(`likeIcon_${postId}`);
-		if (likeIcon) {
-			if (like === 1) {
-				likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
-			} else {
-				likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
-			}
-		}
-
 	};
-
+	
+	const likeIcon = document.getElementById(`likeIcon_${post.postid}`);
+	if (likeIcon) {
+		if (likedPosts.includes(postId)) {
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
+		} else {
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
+		}
+	}
 
 
 	function formatDateToYYYYMMDD(dateString) {
@@ -175,6 +176,9 @@ const Post = (props) => {
 							<p className='statusbtn'>{post.likes}</p>
 						}
 						<img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" id='commentsIcon' onClick={() => toggleComment()} />
+						{comment !== null && (Array.isArray(comment)) ?
+							<p className='statusbtn'>{comment.length}</p> : ''
+						}
 						<img style={{marginBottom:"6px"}} src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
 					</div>
 					<div style={{marginRight:"25px"}}>
