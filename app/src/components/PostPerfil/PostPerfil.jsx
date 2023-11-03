@@ -1,12 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './style.scss'
+import { SelectedPostContext } from '../../context/SelectedPostContext'
+import { useComponentContext } from '../../context/ComponentContext'
 
 const PostPerfil = (props) => {
 	
 	const p = props.data
 	
+	const {setSelectedComponent} = useComponentContext();
+	const {dispatch} = useContext(SelectedPostContext)
+
+	const handleChangeComponent = (component) => {
+		setSelectedComponent(component)
+	}
+
+	const handlePostPerfilClick = () => {		
+
+		handleSelect({
+			postId: p.postid,
+		})
+
+		handleChangeComponent('posts');
+	}
+
+	const handleSelect = (u) => {
+		dispatch({type: 'SELECT_POST', payload:u})
+	}
+	
 	return (
-		<div className='post'>
+		<div className='post' onClick={() => {
+			handlePostPerfilClick()
+		}}>
 			<img className='postPhotoURL' src={p ? p.photourl : "../../../src/assets/sampleImg.png"} alt="" />
 			<div className='status' >
 				<div className='icons'>

@@ -2,13 +2,12 @@
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 
-export const ForumContext = createContext();
+export const SelectedPostContext = createContext()
 
-export const ForumContextProvider = ({children}) => {
+export const SelectedPostContextProvider = ({children}) => {
 
     const INITIAL_STATE = {
-        userForumId:"null",
-        forumBlock:{}
+        postId: null,
     }
     
     const forumReducer = (state,action) => {
@@ -16,12 +15,18 @@ export const ForumContextProvider = ({children}) => {
         // console.log(action);
         switch (action.type) {           
             
-            case "CHANGE_FORUM":
+            case "SELECT_POST":
                 
                 return{
 
-                    userForumId: action.payload.userForumId,
-                    forumBlock: action.payload.forumBlock,
+                    postId: action.payload.postId,
+                };
+
+            case "CLEAR_POST":
+                
+                return{
+
+                    postId: null,
                 };
                 
         
@@ -35,9 +40,9 @@ export const ForumContextProvider = ({children}) => {
     console.log(state);
     return(
     
-        <ForumContext.Provider value={{ data:state, dispatch}}>
+        <SelectedPostContext.Provider value={{ data:state, dispatch}}>
             {children}
-        </ForumContext.Provider>
+        </SelectedPostContext.Provider>
 
     );
 

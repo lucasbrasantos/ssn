@@ -1,9 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './style.scss'
 import Post from '../Post/Post.jsx'
 import axios from 'axios'
+import { useContext } from 'react'
+import { SelectedPostContext } from '../../context/SelectedPostContext.jsx'
 
 const Posts = () => {
+
+	const {data} = useContext(SelectedPostContext);
+	const {dispatch} = useContext(SelectedPostContext);
+	
+	// console.log(data);
+	const postsRefs = useRef({}); // ref for posts
+	
+	const scrollToSelectedPost = (postId) => {
+		if (postId && postsRefs.current[postId]) {
+			postsRefs.current[postId].scrollIntoView({ behavior: 'smooth' });
+			dispatch({ type: 'CLEAR_POST' });
+		}
+	};
+	
+	
+	useEffect(() => {
+		if (data && data.postId) {
+		  setTimeout(() => {
+			scrollToSelectedPost(data.postId);
+		  }, 500); // Adjust the delay to wait for the initial render
+		}
+	  }, [data]);
+
+
+	///////////
 
 	const [users, setUsers] = useState([])
 	const [posts, setPosts] = useState([])
@@ -67,14 +94,14 @@ const Posts = () => {
 			
 			{
 				
-				sortedData.length > 0 ? sortedData.map((data, key) => {
-					
-		
+				sortedData.length > 0 ? sortedData.map((data) => {
+				
 					return(
-						<Post
-							postData={data}
-							key={key}
-						/>
+						<div ref={(el) => (postsRefs.current[data.post.postid] = el)} key={data.post.postid} >
+							<Post
+								postData={data}
+							/>
+						</div>
 					)
 				}) : (
 				<p style={{color:'white'}} >loading...</p>
