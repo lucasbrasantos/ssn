@@ -120,9 +120,9 @@ const ForumChat = () => {
                 
                 <div className="friendS">
                     <div className='infosF1'>
-                        <img className='fAvatar' src="../../../src/assets/Icon.png" alt="" />
+                        <img className='fAvatar' src={data.forumBlock.user.photourl || "../../../src/assets/Icon.png"} alt="" />
                         <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                            <p>{data.forumBlock.user.username}</p>
+                            <p>{`${data.forumBlock.user.username} | ${data.forumBlock.user.name}`}</p>
                             <p>{formatDateToYYYYMMDD(data.forumBlock.created_at)}</p>
                         </div>
                     </div>
