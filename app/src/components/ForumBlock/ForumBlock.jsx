@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext';
 import { ForumContext } from '../../context/ForumContext';
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import axios from 'axios';
 
 
 const ForumBlock = (props) => {
@@ -11,8 +12,8 @@ const ForumBlock = (props) => {
 	const {setSelectedComponent} = useComponentContext();
 	const {dispatch} = useContext(ForumContext)
 	
-	const forumId = props.data.forumid;
-
+	const forumId = props.data.forumid;	
+	
 	const handleForumClick = async() => {
 		
 		const userForumId = `${props.user.firebase}_${forumId}`; // firebase uid + forum id
@@ -66,6 +67,79 @@ const ForumBlock = (props) => {
 		
 	}
 
+	//////////
+
+
+	const [forumLikes, setForumLikes] = useState(props?.likes);
+
+	const getLikesFromAPI = async () => {
+		try {
+			const res = await axios.get(`http://localhost:3000/forum_likes/${forumId}`);
+			// console.log(res);
+			setForumLikes(res.data[0].likes); // Update the like count from the API
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	
+	useEffect(() => {
+		getLikesFromAPI(); // Fetch the initial like count when component mounts
+	}, []);
+
+
+	const likedForuns = JSON.parse(localStorage.getItem('likedForuns')) || [];
+
+	const likeForum = async(event) => { // like icon click
+		event.stopPropagation()
+		
+		try {
+			const res = await axios.get(`http://localhost:3000/forum_likes/${forumId}`);
+			const recentLikes = res.data[0].likes;
+		
+			let updatedLikes = recentLikes;
+			if (!likedForuns.includes(forumId)) { // if current post is NOT liked
+				updatedLikes = recentLikes + 1;
+				
+				likedForuns.push(forumId); //this post has been liked
+				localStorage.setItem('likedForuns', JSON.stringify(likedForuns)); // add post to localStorage 
+				
+			}else{
+				updatedLikes = recentLikes - 1;
+
+				likedForuns.splice(likedForuns.indexOf(forumId), 1);
+				localStorage.setItem('likedForuns', JSON.stringify(likedForuns));
+			}
+			
+			setForumLikes(updatedLikes);
+			handleForumtLikeUpdate(forumId, updatedLikes)
+		}
+		catch (error) {
+			console.error("Error updating likes:", error);
+		}
+	}
+
+	const handleForumtLikeUpdate = (forumId, updatedLikes) => {
+
+		axios.patch(`http://localhost:3000/like_forum/${forumId}`, {
+			likes: updatedLikes
+		}).then(res => {
+			console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
+
+	};
+	
+	const likeIcon = document.getElementById(`likeIcon_${forumId}`);
+	if (likeIcon) {
+		if (likedForuns.includes(forumId)) {
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
+		} else {
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
+		}
+	}
+
+	
 	return (
 		<div id='Forum' onClick={() => handleForumClick()}>
 			
@@ -85,7 +159,7 @@ const ForumBlock = (props) => {
 			</div>
 
 			<div className="tag">{props.tag}</div>
-			<span className='likes' ><img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{props.likes}</span>
+			<span className='likes' ><img onClick={(e) => likeForum(e)} id={`likeIcon_${forumId}`} src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{forumLikes}</span>
 		</div>
 	)
 }

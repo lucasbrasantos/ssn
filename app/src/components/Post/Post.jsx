@@ -24,15 +24,20 @@ const Post = (props) => {
 	}
 
 
-	const [post, setPost] = useState(props.postData?.post)
-	const [user, setUser] = useState(props.postData?.user)
-	const [comment, setComment] = useState(props.postData?.comment)
+	const [post, setPost] = useState(props.postData.post);
+	const [user, setUser] = useState(props.postData?.user);
+	const [comment, setComment] = useState(props.postData?.comment);
+
+	useEffect(() => {
+		if (props.postData) {
+			setUser(props.postData.user);
+			setComment(props.postData.comment);
+		}
+	}, [props.postData]);
 	
 	// console.log(props);
+	// console.log(props.postData);
 	
-	
-
-
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false)
 	
 	const toggleComment = () => {
@@ -43,35 +48,61 @@ const Post = (props) => {
 
 	//////////
 
-	const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+	const [postLikes, setPostLikes] = useState(post.likes);
 	const postId = post.postid;
 
-	const likePost = () => {
-
-		if (!likedPosts.includes(postId)) { // if current post is NOT liked
-			
-			setPost({ ...post, likes: post.likes + 1 });
-			likedPosts.push(postId); //this post has been liked
-			localStorage.setItem('likedPosts', JSON.stringify(likedPosts)); // add post to localStorage 
-
-			handlePostLikeUpdate(postId, 1); // Add 1 like
-			
-		}else{
-
-			setPost({ ...post, likes: post.likes - 1 });
-			likedPosts.splice(likedPosts.indexOf(postId), 1);
-			localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-
-			handlePostLikeUpdate(postId, -1); // Remove 1 like
+	const getLikesFromAPI = async () => {
+		try {
+			const res = await axios.get(`http://localhost:3000/post_likes/${postId}`);
+			// console.log(res);
+			setPostLikes(res.data[0].likes); // Update the like count from the API
+		} catch (error) {
+			console.error(error);
 		}
+	};
+	
+	useEffect(() => {
+		getLikesFromAPI(); // Fetch the initial like count when component mounts
+	}, []);
 
-		console.log(post);
+
+	const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+	const likePost = async(event) => {
+		event.stopPropagation()
+
+		try {
+			const res = await axios.get(`http://localhost:3000/post_likes/${postId}`);
+			const recentLikes = res.data[0].likes;
+		
+			let updatedLikes = recentLikes;
+		
+			if (!likedPosts.includes(postId)) { // if current post is NOT liked				
+				updatedLikes = recentLikes + 1;
+				
+				likedPosts.push(postId); //this post has been liked
+				localStorage.setItem('likedPosts', JSON.stringify(likedPosts)); // add post to localStorage 				
+			}else{
+				updatedLikes = recentLikes - 1;
+
+				likedPosts.splice(likedPosts.indexOf(postId), 1);
+				localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+			}
+
+			setPostLikes(updatedLikes);
+			handlePostLikeUpdate(postId, updatedLikes)
+
+		} catch (error) {
+			console.warn("-- error --");
+			console.error("Error updating likes:", error);
+		}
+	
 	}
 
-	const handlePostLikeUpdate = (postId, like) => {
+	const handlePostLikeUpdate = (postId, updatedLikes) => {
 
 		axios.patch(`http://localhost:3000/like_post/${postId}`, {
-			likes: post.likes + like
+			likes: updatedLikes
 		}).then(res => {
 			console.log(res);
 		}).catch(err => {
@@ -144,49 +175,55 @@ const Post = (props) => {
 */
 
 	return (
+		
 		<div className='postAll'>
-			<div className='postContainer' id='postContainer'>
+			
+			{post && user ? (
+				<div className='postContainer' id='postContainer'>
 
-				<div className='postTop'>
-					<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
-						<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
-						<p>{user ? user.username : 'usuario'}</p>
+					<div className='postTop'>
+						<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
+							<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
+							<p>{user?.username || 'usuario'}</p>
+						</div>
+						
+						{
+							currentUserAPI && user && currentUserAPI.userid !== user.userid ? (
+								<button className='followBtn'>Seguir</button>
+							) : <></>
+
+						}
+
 					</div>
 					
-					{
-						currentUserAPI && user && currentUserAPI.userid !== user.userid ? (
-							<button className='followBtn'>Seguir</button>
-						) : <></>
-
-					}
-
-				</div>
-				
-					<p id='postTitle'>
-						{post.title}
-					</p>
-				<div className='postImg'>
-					<img src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" />
-					{/* <video src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" /> */}
-				</div>
-				<div className='postBottom'>
-					<div className='btn1'>
-						<img onClick={() => likePost()} id={`likeIcon_${post.postid}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
-						{post.likes > 0 &&
-							<p className='statusbtn'>{post.likes}</p>
-						}
-						<img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" id='commentsIcon' onClick={() => toggleComment()} />
-						{comment !== null && (Array.isArray(comment)) ?
-							<p className='statusbtn'>{comment.length}</p> : ''
-						}
-						<img style={{marginBottom:"6px"}} src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
+						<p id='postTitle'>
+							{post.title}
+						</p>
+					<div className='postImg'>
+						<img src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" />
+						{/* <video src={post.photourl  || "../../../src/assets/sampleImg.png"} alt="" /> */}
 					</div>
-					<div style={{marginRight:"25px"}}>
-					<img src="../../../src/assets/icons/fluent-mdl2_more-vertical.png" alt="" />
+					<div className='postBottom'>
+						<div className='btn1'>
+							<img onClick={(e) => likePost(e)} id={`likeIcon_${post.postid}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
+							<p className='statusbtn'>{postLikes}</p>
+							<img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" id='commentsIcon' onClick={() => toggleComment()} />
+							{
+								comment !== null && (Array.isArray(comment)) ?
+									<p className='statusbtn'>{comment.length}</p> :
+								comment !== null && !Array.isArray(comment) ?
+									<p className='statusbtn'>1</p> : ''
+								
+							}
+							<img style={{marginBottom:"6px"}} src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
+						</div>
+						<div style={{marginRight:"25px"}}>
+						<img src="../../../src/assets/icons/fluent-mdl2_more-vertical.png" alt="" />
+						</div>
 					</div>
+					
 				</div>
-				
-			</div>
+			) : <p style={{color:'white'}}>Loading...</p>}
 			
 			{
 				isCommentsOpen && (
@@ -268,6 +305,7 @@ const Post = (props) => {
 			}
 
 		</div>
+		
 	)
 }
 
