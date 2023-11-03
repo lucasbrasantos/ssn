@@ -12,6 +12,8 @@ import { AuthContext } from './context/AuthContext.jsx';
 import './styles/main.scss';
 import NotFound from './pages/NotFound';
 import { ForumContextProvider } from './context/ForumContext';
+import { SelectedPostContextProvider } from './context/SelectedPostContext.jsx';
+import { SelectedUserContextProvider } from './context/SelectedUserContext.jsx';
 
 
 const App = () => {
@@ -35,11 +37,15 @@ const App = () => {
                     <Route index element={ 
 
                             <ProtectedRoute>
-                                <ForumContextProvider>
-                                    <ComponentProvider>
-                                        <Home/> 
-                                    </ComponentProvider>
-                                </ForumContextProvider>
+                                <SelectedUserContextProvider>
+                                    <ForumContextProvider>
+                                        <SelectedPostContextProvider>
+                                            <ComponentProvider>
+                                                <Home/> 
+                                            </ComponentProvider>
+                                        </SelectedPostContextProvider>
+                                    </ForumContextProvider>
+                                </SelectedUserContextProvider>
                             </ProtectedRoute>
                     } />
 

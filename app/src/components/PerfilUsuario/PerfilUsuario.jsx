@@ -4,6 +4,7 @@ import PostPerfil from '../PostPerfil/PostPerfil'
 
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
+import { SelectedUserContext } from '../../context/SelectedUserContext';
 
 const PerfilUsuario = () => {
 
@@ -15,6 +16,8 @@ const PerfilUsuario = () => {
 	const [posts, setPosts] = useState([])
 	const [comments, setComments] = useState([])	
 
+	const {data} = useContext(SelectedUserContext)
+	console.log(data);
 
 	useEffect(() => {
 		fetchData();					
@@ -45,7 +48,7 @@ const PerfilUsuario = () => {
 	const sortedPosts = user ? posts.sort((a, b) => new Date(b.timeposted) - new Date(a.timeposted)) : null; // sort posts by timestamp newest to oldest
 	const filteredPosts = user ? sortedPosts.filter((p) => p.userid === user.userid) : null;
 		
-	const data = user ? {
+	const post_data = user ? {
 		user: user,
 		posts: filteredPosts.map((post) => {
 			const postComments = comments.filter((c) => c.postid === post.postid)
@@ -53,7 +56,7 @@ const PerfilUsuario = () => {
 		}), 
 	} : null
 
-	console.log(data);
+	console.log(post_data);
 	
 	
 	return (
@@ -100,7 +103,7 @@ const PerfilUsuario = () => {
 					
 					{
 					
-						data && data.posts.map((e, key) => (
+						post_data && post_data.posts.map((e, key) => (
 
 							<PostPerfil
 								data={e}

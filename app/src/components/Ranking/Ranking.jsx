@@ -37,13 +37,20 @@ const Ranking = () => {
 			
 			
 			{
-				data.slice().sort((a,b) => b.points- a.points).map((e, i) => (
-					<RankUser
-					name={e.name}
-					points={e.points}
-					ranking={i+1}
-					/>
-				))
+				data.slice().sort((a,b) => b.points- a.points).map((e, i) => {
+				
+					// console.log(e.userid);
+
+					return(
+						<RankUser
+							name={e.name}
+							points={e.points}
+							ranking={i+1}
+							key={e.userid}
+							userid={e.userid}
+						/>
+					)}
+				)
 
 				
 

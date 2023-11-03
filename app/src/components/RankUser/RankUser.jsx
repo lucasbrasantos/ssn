@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 
 import './style.scss';
+import { SelectedUserContext } from '../../context/SelectedUserContext';
 
 const RankUser = (props) => {
+
+    const {dispatch} = useContext(SelectedUserContext)
+    const userId = props.userid;
+
+    const handleUserClick = () => {
+
+        handleSelect({
+            userId: userId
+        })
+    }
+
+    const handleSelect = (u) => {
+
+        dispatch({type:"SELECT_USER", payload:u})
+    }
+
     return (
-        <div id='RankUser'>
+        <div id='RankUser' onClick={() => handleUserClick()}>
             <p className='RankPosition'>{props.ranking}º</p>
             <img src="../../../src/assets/icons/fluent-mdl2_trophy.png" alt="" className='Trophy'/>
             <img src="../../../src/assets/IconDark.png" alt="" />
