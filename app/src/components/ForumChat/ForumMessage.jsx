@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { db } from '../../firebase';
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { ForumContext } from '../../context/ForumContext';
 
 
-const ForumMessage = ({message}) => {
+const ForumMessage = ({userForumId, message}) => {
 
-	console.log(message);
+	// console.log(message);
+	// console.log(userForumId);
 	
 	function formatDateToYYYYMMDD(dateString) {
 		const date = new Date(dateString);
@@ -19,11 +23,21 @@ const ForumMessage = ({message}) => {
 	// console.log(newFormatedDate);
 	// console.log(message.date.toDate());
 
+	const ref = useRef();
+    
+    useEffect(() => {
+
+    	ref.current?.scrollIntoView({ behavior: "smooth" });
+
+    }, [message]);
+
+	///////////
+
 	return (
-		<div className="Fmsg">
+		<div className="Fmsg" ref={ref}>
 			<div className="FMD1">
 				<img className='fAvatar' src={message.senderPhotoUrl || "../../../src/assets/Icon.png"} alt="" />
-				<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
+				<div><img onClick={() => updateLikesCount(userForumId, message.id, message.likes)} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{message.likes}</div>
 			</div>
 			<div className="FMD2">
 				<p>{message.senderUsername}</p>

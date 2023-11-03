@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
 import './style.scss'
-import { useComponentContext } from '../../context/ComponentContext.jsx';
 import RankUser from '../RankUser/RankUser';
 import axios from 'axios'
 
 const Ranking = () => {
 
-	const {setSelectedComponent} = useComponentContext();
-
-	const handleButtonClick = (component) => {
-		setSelectedComponent(component)
-	}
 
 	const [data, setData] = useState([]);
 

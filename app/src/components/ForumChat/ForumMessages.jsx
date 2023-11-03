@@ -9,9 +9,8 @@ import ForumMessage from './ForumMessage';
 
 const ForumMessages = () => {
 
-	const [messages, setMessages] = useState([])
-	
 	const {data} = useContext(ForumContext);
+	const [messages, setMessages] = useState([])
 	
 	useEffect( () => {
 	
@@ -26,7 +25,7 @@ const ForumMessages = () => {
 	
 	}, [data.userForumId])
 
-	console.log(messages);
+	// console.log(messages);
 
 	return (
 		<div className="ForumChat">
@@ -35,7 +34,7 @@ const ForumMessages = () => {
 				// messages map
 				messages.map((m, key) => {
 
-					return <ForumMessage message={m} key={key} />
+					return <ForumMessage userForumId={data.userForumId} message={m} key={key} />
 
 				})
 

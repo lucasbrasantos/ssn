@@ -30,7 +30,7 @@ const components = { // name for the button click // <component name>
 	forumChat: ForumChat,
 	chatAll: ChatAll,
 	chatRecent: ChatRecent,
-	ChatUser: ChatUser,
+	chatUser: ChatUser,
 	ranking: Ranking,
 }
 

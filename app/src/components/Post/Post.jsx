@@ -184,7 +184,7 @@ const Post = (props) => {
 					<div className='postTop'>
 						<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
 							<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
-							<p>{user?.username || 'usuario'}</p>
+							<p>{`${user?.name} | ${user?.username}` || 'usuario'}</p>
 						</div>
 						
 						{

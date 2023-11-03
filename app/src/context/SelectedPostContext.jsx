@@ -10,7 +10,7 @@ export const SelectedPostContextProvider = ({children}) => {
         postId: null,
     }
     
-    const forumReducer = (state,action) => {
+    const postReducer = (state,action) => {
         // console.log(state);
         // console.log(action);
         switch (action.type) {           
@@ -36,7 +36,7 @@ export const SelectedPostContextProvider = ({children}) => {
         
     }
 
-    const [state, dispatch] = useReducer(forumReducer, INITIAL_STATE);
+    const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
     console.log(state);
     return(
     

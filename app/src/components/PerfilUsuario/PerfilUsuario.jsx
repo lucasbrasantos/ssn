@@ -17,7 +17,9 @@ const PerfilUsuario = () => {
 	const [comments, setComments] = useState([])	
 
 	const {data} = useContext(SelectedUserContext)
-	console.log(data);
+	const {dispatch} = useContext(SelectedUserContext)
+
+	// console.log(data.userId);
 
 	useEffect(() => {
 		fetchData();					
@@ -32,13 +34,26 @@ const PerfilUsuario = () => {
 		.then(res => setComments(res.data))
 		.catch(err => console.log(err))
 
-		await axios.get('http://localhost:3000/user_uid', {
-			params: {
-			  uid: currentUser.uid,
-			},
-		  	})
-		.then((res) => { setUser(res.data[0]) })
-		.catch((err) => { console.error(err); });		
+		if (!data.userId) {
+		
+			await axios.get('http://localhost:3000/user_uid', {
+				params: {
+				uid: currentUser.uid,
+			}})
+			.then((res) => { setUser(res.data[0]) })
+			.catch((err) => { console.error(err); });
+			
+		}else{
+
+			await axios.get('http://localhost:3000/user_id', {
+				params: {
+				id: data.userId,
+			}})
+			.then((res) => { setUser(res.data[0]) })
+			.catch((err) => { console.error(err); });
+			
+			dispatch({ type: 'CLEAR_USER' });
+		}
 	}
 	
 	// console.log(user);
@@ -66,9 +81,9 @@ const PerfilUsuario = () => {
 				<img className='avatarUser' src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 
 				<div>
-					<p>{user && user.username}</p>
-					<p style={{fontSize:'.8rem', marginTop:'5px'}}>{user && user.name}</p>
-					<p>{user && user.info}</p>			
+					<p>{user && user.name}</p>
+					<p style={{fontSize:'.8rem', marginTop:'5px'}}>{user && user.username}</p>
+					<p>{user && user.info}</p>
 				</div>
 				</div>
 				<div>

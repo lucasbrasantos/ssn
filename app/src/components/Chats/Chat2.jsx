@@ -33,7 +33,7 @@ const Chat2 = (props) => {
 			photoURL: user.photoURL
 		});
 		
-		handleButtonClick('ChatUser')
+		handleButtonClick('chatUser')
 	}
 
 

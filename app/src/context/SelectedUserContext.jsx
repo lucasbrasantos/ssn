@@ -10,7 +10,7 @@ export const SelectedUserContextProvider = ({children}) => {
         userId: null,
     }
     
-    const forumReducer = (state,action) => {
+    const userReducer = (state,action) => {
         // console.log(state);
         // console.log(action);
         switch (action.type) {           
@@ -36,7 +36,7 @@ export const SelectedUserContextProvider = ({children}) => {
         
     }
 
-    const [state, dispatch] = useReducer(forumReducer, INITIAL_STATE);
+    const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
     console.log(state);
     return(
     

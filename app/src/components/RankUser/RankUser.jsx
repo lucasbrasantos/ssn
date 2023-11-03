@@ -3,17 +3,26 @@ import React, { useContext } from 'react'
 
 import './style.scss';
 import { SelectedUserContext } from '../../context/SelectedUserContext';
+import { useComponentContext } from '../../context/ComponentContext';
 
 const RankUser = (props) => {
 
-    const {dispatch} = useContext(SelectedUserContext)
+    const {setSelectedComponent} = useComponentContext();
+
+	const handleButtonClick = (component) => {
+		setSelectedComponent(component)
+	}
+
     const userId = props.userid;
+    
+    const {dispatch} = useContext(SelectedUserContext)
 
     const handleUserClick = () => {
 
         handleSelect({
             userId: userId
         })
+        handleButtonClick('userProfile')
     }
 
     const handleSelect = (u) => {
