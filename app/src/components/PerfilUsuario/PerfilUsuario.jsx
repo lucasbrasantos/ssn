@@ -5,6 +5,7 @@ import PostPerfil from '../PostPerfil/PostPerfil'
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { SelectedUserContext } from '../../context/SelectedUserContext';
+import { useComponentContext } from '../../context/ComponentContext';
 
 const PerfilUsuario = () => {
 
@@ -20,6 +21,12 @@ const PerfilUsuario = () => {
 	const {dispatch} = useContext(SelectedUserContext)
 
 	// console.log(data.userId);
+
+	const {setSelectedComponent} = useComponentContext();
+
+	const handleButtonClick = (component) => {
+		setSelectedComponent(component)
+	}
 
 	useEffect(() => {
 		fetchData();					
@@ -93,9 +100,9 @@ const PerfilUsuario = () => {
 
 			</div>
 			<div className='PerfilBtns'>
-				{true ?
+				{user && user.userId !== currentUser.uid ?
 					<div className='BtnsU'>
-						<button>
+						<button onClick={() => handleButtonClick('edtPerfilU')} >
 							Editar perfil
 						</button>
 						<button>
