@@ -1,8 +1,58 @@
 
 .EdtUD {
-    width: 30%;
-    height: 60%;
+    height: 751px;
+    // width: 657px;
+    min-width: 35%;
+    margin-top: 35px;
+    background-color: #2D2D30;
     display: flex;
     flex-direction: column;
+    border: 2px solid #707070;
+    margin: 35px auto;
 
+    .FormEdtU {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+
+        .EdtAvatarUser {
+            height: 120px;
+            aspect-ratio: 1/1;
+            box-shadow: 0px 0px 6px 2px rgba(109, 109, 109, 0.25);
+            border-radius: 67px;
+            border: 1px solid #707070;
+        }
+
+        .inputEdtU {
+            width: 90%;
+            height: 64px;
+            border-radius: 30px;
+            border: none;
+            border: 1px solid var(--stroke, #707070);
+            background: #232123;
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .inputEdtU:last-child {
+             min-height: 200px;
+            resize: none;
+        }
+
+        .BtnSaveEdtU {
+            width: 184px;
+            height: 44px;
+            color: white;
+            margin: 0px 45px;
+            border: none;
+            background: rgba(44, 44, 46, 0.99);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+        }
+    }
 }
