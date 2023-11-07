@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../../firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { ForumContext } from '../../context/ForumContext';
 import ForumMessage from './ForumMessage';
 
@@ -14,8 +14,9 @@ const ForumMessages = () => {
 	
 	useEffect( () => {
 	
-		const unSub = onSnapshot(doc(db, "forumChats", data.userForumId), (doc) => {
-			doc.exists() && setMessages(doc.data().messages)
+		const unSub = onSnapshot(query(collection(db, "forumChats", data.userForumId, "messages"), orderBy("date")), (doc) => {
+			const messages = doc.docs.map((doc => doc.data()))
+			setMessages(messages);
 		})
 
 		return() => {
@@ -24,17 +25,16 @@ const ForumMessages = () => {
 
 	
 	}, [data.userForumId])
-
-	// console.log(messages);
+	
 
 	return (
 		<div className="ForumChat">
 
 			{
 				// messages map
-				messages.map((m, key) => {
+				messages && Object.keys(messages).length > 0 && Object.entries(messages).map((m, key) => {
 
-					return <ForumMessage userForumId={data.userForumId} message={m} key={key} />
+					return <ForumMessage userForumId={data.userForumId} m={m} key={key} />
 
 				})
 

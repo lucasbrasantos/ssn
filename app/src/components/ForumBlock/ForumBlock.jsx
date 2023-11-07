@@ -25,7 +25,7 @@ const ForumBlock = (props) => {
 				
 				await setDoc(doc(db, "foruns", userForumId), {});  // depois de createForum.jsx mudar para "forumChats" tirar esse
 
-				await setDoc(doc(db, "forumChats", userForumId), { messages: [] });
+				await setDoc(doc(db, "forumChats", userForumId), {});		
 				
 
 				await updateDoc(doc(db, "foruns", userForumId), {

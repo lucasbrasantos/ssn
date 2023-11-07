@@ -3,7 +3,7 @@ import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext';
 import { ForumContext } from '../../context/ForumContext';
 import { AuthContext } from '../../context/AuthContext';
-import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { Timestamp, arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { v4 as uuid } from "uuid";
 import ForumMessages from './ForumMessages';
@@ -86,9 +86,25 @@ const ForumChat = () => {
         */
         else{
             console.log(currentUser);
+			const messageId = uuid();  // id da mensagem
+
+
+			await setDoc(doc(db, "forumChats", data.userForumId, "messages", messageId), {
+				id: messageId, // id da mensagem
+				text,
+				likes: 0,
+				senderId: currentUser.uid,
+				senderUsername: currentUser.displayName,
+				// senderName: data.forumBlock.user.name,
+                senderPhotoUrl: currentUser.photoURL,
+				date:Timestamp.now(),
+			});
+
+			/*
 			await updateDoc(doc(db, "forumChats", data.userForumId), {
-				messages: arrayUnion({
-					id: uuid(), // id da mensagem
+				
+				[`messages.${messageId}`]: {
+					id: messageId, // id da mensagem
 					text,
 					likes: 0,
 					senderId: currentUser.uid,
@@ -96,9 +112,10 @@ const ForumChat = () => {
 					// senderName: data.forumBlock.user.name,
                     senderPhotoUrl: currentUser.photoURL,
 					date:Timestamp.now(),
-				}),
+				},
 				
 			});
+			*/
 		}
 
 		setText("");
