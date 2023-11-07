@@ -1,12 +1,13 @@
 
 .EdtUD {
     height: 751px;
-    // width: 657px;
     min-width: 35%;
     margin-top: 35px;
     background-color: #2D2D30;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 2px solid #707070;
     margin: 35px auto;
 
@@ -19,6 +20,16 @@
         gap: 20px;
         align-items: center;
         justify-content: center;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            margin-bottom: 20px;
+        }
 
         .EdtAvatarUser {
             height: 120px;
@@ -41,18 +52,19 @@
         }
 
         .inputEdtU:last-child {
-             min-height: 200px;
+            height: 200px;
             resize: none;
         }
+    }
 
-        .BtnSaveEdtU {
-            width: 184px;
-            height: 44px;
-            color: white;
-            margin: 0px 45px;
-            border: none;
-            background: rgba(44, 44, 46, 0.99);
-            border: 1px solid rgba(255, 255, 255, 0.20);
-        }
+    .BtnSaveEdtU {
+        width: 184px;
+        height: 44px;
+        color: white;
+        border: none;
+        background: rgba(44, 44, 46, 0.99);
+        border: 1px solid rgba(255, 255, 255, 0.20);
+        margin-bottom: 40PX;
+        cursor: pointer;
     }
 }
