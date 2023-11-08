@@ -100,6 +100,7 @@ const Posts = () => {
 						<div ref={(el) => (postsRefs.current[data.post.postid] = el)} key={data.post.postid} >
 							<Post
 								postData={data}
+								postId={data.post.postid}
 							/>
 						</div>
 					)

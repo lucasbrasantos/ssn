@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
+import { doc, getDoc, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
-const Post = (props) => {
-	
+const Post = ({postData, postId}) => {
+
 	const {currentUser} = useContext(AuthContext);
 	const [currentUserAPI, setCurrentUserAPI] = useState();	
 
@@ -24,16 +26,16 @@ const Post = (props) => {
 	}
 
 
-	const [post, setPost] = useState(props.postData.post);
-	const [user, setUser] = useState(props.postData?.user);
-	const [comment, setComment] = useState(props.postData?.comment);
+	const [post, setPost] = useState(postData.post);
+	const [user, setUser] = useState(postData?.user);
+	const [comment, setComment] = useState(postData?.comment);
 
 	useEffect(() => {
-		if (props.postData) {
-			setUser(props.postData.user);
-			setComment(props.postData.comment);
+		if (postData) {
+			setUser(postData.user);
+			setComment(postData.comment);
 		}
-	}, [props.postData]);
+	}, [postData]);
 	
 	// console.log(props);
 	// console.log(props.postData);
@@ -48,9 +50,20 @@ const Post = (props) => {
 
 	//////////
 
-	const [postLikes, setPostLikes] = useState(post.likes);
-	const postId = post.postid;
+	// const [postLikes, setPostLikes] = useState(post.likes);
+	
+	function formatDateToYYYYMMDD(dateString) {
+		const date = new Date(dateString);
+		const year = date.getFullYear();
+		const month = (date.getMonth() + 1).toString().padStart(2, '0');
+		const day = date.getDate().toString().padStart(2, '0');
+		const hours = date.getHours().toString().padStart(2, '0');
+  		const minutes = date.getMinutes().toString().padStart(2, '0');
+		return `${year}/${month}/${day} ${hours}:${minutes}`;
+	}
 
+
+	/*
 	const getLikesFromAPI = async () => {
 		try {
 			const res = await axios.get(`http://localhost:3000/post_likes/${postId}`);
@@ -119,60 +132,137 @@ const Post = (props) => {
 			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
 		}
 	}
+	*/
 
+		//////////////
+	
+	const [postLikes, setPostLikes] = useState(post?.likes);
+	const [liked, setLiked] = useState(false)
+	
+	
+	useEffect( () => {
+		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'posts');
 
-	function formatDateToYYYYMMDD(dateString) {
-		const date = new Date(dateString);
-		const year = date.getFullYear();
-		const month = (date.getMonth() + 1).toString().padStart(2, '0');
-		const day = date.getDate().toString().padStart(2, '0');
-		const hours = date.getHours().toString().padStart(2, '0');
-  		const minutes = date.getMinutes().toString().padStart(2, '0');
-		return `${year}/${month}/${day} ${hours}:${minutes}`;
-	}
+		const unSub = onSnapshot(query(likesCollectionRef), (doc) => {
+			const _liked = doc.data()['_'+ postId]?.liked
+			setLiked(_liked);
+			changeLikeIcon(_liked);
+		})
+
+		return() => {
+			unSub();
+		}
 
 	
+	}, [postId])
+	
+	useEffect( () => {
 
-	/*
-	const [_users, set_Users] = useState([])
-	const [_comment, set_Comment] = useState([])
-	const [_posts, set_Posts] = useState([])
+		const combinedId = `_id${postId}_usr${user?.userid}`;
+		const postDocRef = doc(db, "posts", combinedId);
 
-	useEffect(() => {
-		fetchData()
-	}, [])
+		const unSub = onSnapshot(query(postDocRef), (doc) => {
+			
+			if (doc.exists()) {
+				const _likes = doc.data()[combinedId]?.postInfo.likes
+				setPostLikes(_likes);
+			}
+		})
 
-	const fetchData = async() => {
-		await axios.get('http://localhost:3000/posts')
-		.then(res => set_Posts(res.data))
-		.catch(err => console.log(err))
+		return() => {
+			unSub();
+		}
 
-		await axios.get('http://localhost:3000/comment')
-		.then(res => set_Comment(res.data))
-		.catch(err => console.log(err))
+	
+	}, [user?.userid, postId])
+	
+
+	const updateLikesCount = async(event, postId, postLikes) => {
+		event.stopPropagation()
+
+		// console.log(postId);
+		// console.log(postLikes);
+		
+		const combinedId = `_id${postId}_usr${user.userid}`;
+
+		const postDocRef = doc(db, "posts", combinedId);
+		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'posts');
+		
+		
+		const res = await getDoc(likesCollectionRef);
+		const res2 = await getDoc(postDocRef);
+		
+		// console.log(res.data());
+		// console.log(res2);
 
 		
-		await axios.get('http://localhost:3000/users')
-		.then(res => set_Users(res.data))
-		.catch(err => console.log(err))
+		const likesDocData = res.data();
+
 		
+		if (!res2.exists()) { // se nao existir o documento
+			
+			await setDoc(postDocRef, {}); // criar
+		}
+
+		if (!res.exists()) { // se nao existir o documento
+			
+			await setDoc(likesCollectionRef, {}); // criar
+		}
+
+		
+		
+		if (!likesDocData || !likesDocData['_'+postId]) {
+			
+			await updateDoc(likesCollectionRef, {
+				['_'+postId]: {
+					liked: true,
+				},
+			});
+	
+			await updateDoc(postDocRef, {
+				[combinedId+'.postInfo.likes']: postLikes+1,
+			});
+			setPostLikes(postLikes+1)
+
+		}else{ // senao ele ja foi criado e ja foi curtido...
+
+			let vigia = likesDocData['_'+postId].liked // inical value = true
+
+			await updateDoc(likesCollectionRef, {
+				['_'+postId]: {
+					liked: !vigia,
+				},
+			});
+	
+			
+			await updateDoc(postDocRef, {
+				[combinedId+'.postInfo.likes']: !vigia ? postLikes+1 : postLikes-1,
+			});
+
+			!vigia ? setPostLikes(postLikes+1) : setPostLikes(postLikes-1);
+			
+
+			changeLikeIcon(!vigia)
+			
+		}
 		
 	}
 
-	const dataWithComments  = posts.map((post) => { // e => element = each post in sorted posts
-		const user = users.find(user => user.userid === comment.userid)
-		const comments = _users.find(user => user.userid === comment.userid)
-
-		return{
-			post,
-			comments: comments,
-			user: user,
+	const changeLikeIcon = (isLiked) => {
+		const likeIcon = document.getElementById(`likeIcon_${post.postid}`)
+		if (isLiked) {
+			// console.log('tá curtido');
+			
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
+		}else{
+			// console.log('não tá curtido');
+			
+			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
 		}
-	})
+	}
 
-	console.log(commentWithUsers);
 
-*/
+
 
 	return (
 		
@@ -205,7 +295,7 @@ const Post = (props) => {
 					</div>
 					<div className='postBottom'>
 						<div className='btn1'>
-							<img onClick={(e) => likePost(e)} id={`likeIcon_${post.postid}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
+							<img onClick={(e) => updateLikesCount(e, postId, postLikes)} id={`likeIcon_${post.postid}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
 							<p className='statusbtn'>{postLikes}</p>
 							<img src="../../../src/assets/icons/fluent-mdl2_message.png" alt="" id='commentsIcon' onClick={() => toggleComment()} />
 							{
