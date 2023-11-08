@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { db } from '../../firebase';
-import { addDoc, arrayUnion, collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, getDoc, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
 import { ForumContext } from '../../context/ForumContext';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -44,16 +44,37 @@ const ForumMessage = ({userForumId, m}) => {
 
 	///////////	
 
+	const [liked, setLiked] = useState(false)
+	
+	
+	useEffect( () => {
+		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'forumMessages');
+
+
+		const unSub = onSnapshot(query(likesCollectionRef), (doc) => {
+			const _liked = doc.data()[userForumId][message.id].liked
+			setLiked(_liked);
+			changeLikeIcon(_liked);
+		})
+
+		return() => {
+			unSub();
+		}
+
+	
+	}, [userForumId, message.id])
+
+
 	const updateLikesCount = async(userForumId, messageId, messageLikes) => {
 		
+		const messageCombinedId = `${userForumId}.${messageId}`;
 		const messageDocRef = doc(db, 'forumChats', userForumId, 'messages', messageId);
 		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'forumMessages');
 		
-		const messageCombinedId = `${userForumId}.${messageId}`;
 		
 		const res = await getDoc(likesCollectionRef);
 		
-		console.log(res.data());
+		// console.log(res.data());
 
 		const likesDocData = res.data();
 
@@ -91,7 +112,8 @@ const ForumMessage = ({userForumId, m}) => {
 				likes: !vigia ? messageLikes+1 : messageLikes-1,
 			});
 
-			changeLikeIcon(!likesDocData[userForumId][messageId].liked)
+			changeLikeIcon(!vigia);
+			// changeLikeIcon(!liked)
 			
 		}
 		
