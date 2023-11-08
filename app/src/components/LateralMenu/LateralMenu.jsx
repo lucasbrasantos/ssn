@@ -61,9 +61,9 @@ const LateralMenu = () => {
 			add amigo
 		</div>
 
-		<div className='opcs'>
+		<div className='opcs' onClick={() => handleButtonClick('configs')} >
 			<img src="../../../src/assets/icons/fluent-mdl2_settings.png" alt="" />
-			acessibilidade
+			configuraçoes
 		</div>
 
 		<div className='opcs'>

@@ -6,7 +6,8 @@ import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 
 import CreatePost from '../components/CreatePost/CreatePost';
 import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
-import addFriend from '../components/addFriend/addFriend'
+import addFriend from '../components/addFriend/addFriend';
+import Configs from '../components/Configs/Configs';
 import Search from '../components/search/Search';
 
 
@@ -24,6 +25,7 @@ import EdtPerfilU from '../components/EdtPerfilU/EdtPerfilU';
 const components = { // name for the button click // <component name>
 	userProfile: PerfilUsuario,
 	addFriend: addFriend,
+	configs: Configs, 
 	posts: Posts,
 	createPost: CreatePost,
 	search: Search,
