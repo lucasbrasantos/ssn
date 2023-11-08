@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ForumBlock from '../ForumBlock/ForumBlock.jsx'
+import {useNavigate} from 'react-router-dom'
+import { useComponentContext } from '../../context/ComponentContext';
 
 import './style.scss'
 
 const Forum = () => {
+
+	const navigate = useNavigate();
+	
+	const {setSelectedComponent} = useComponentContext();
+	const handleButtonClick = (component) => {
+		setSelectedComponent(component)
+	}
 
 	
 	const [forum, setForum] = useState([])
@@ -48,8 +57,8 @@ const Forum = () => {
 		<div id='ForumPage'>
 			<h1 className='pageTitle'>forum</h1>
 			
-			<span className='searchSpan'>
-				<input name='search' className='search' type="text" placeholder='Pesquisar...' />
+			<span className='searchSpan' onClick={() => handleButtonClick('createForum')}>
+				<input name='search' className='search' type="text" placeholder='Pesquisar...'/>
 			</span>
 
 

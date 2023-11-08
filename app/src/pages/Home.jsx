@@ -13,6 +13,7 @@ import Search from '../components/search/Search';
 
 import { ComponentProvider, useComponentContext } from '../context/ComponentContext';
 import Forum from '../components/Forum/Forum';
+import CreateForum from '../components/CreateForum/CreateForum';
 import ForumChat from '../components/ForumChat/ForumChat';
 import ChatAll from '../components/Chat/ChatAll';
 import ChatRecent from '../components/Chat/ChatRecent';
@@ -30,6 +31,7 @@ const components = { // name for the button click // <component name>
 	createPost: CreatePost,
 	search: Search,
 	forum: Forum,
+	createForum: CreateForum,
 	forumChat: ForumChat,
 	chatAll: ChatAll,
 	chatRecent: ChatRecent,
