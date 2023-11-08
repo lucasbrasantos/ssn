@@ -2,17 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import { useComponentContext } from '../../context/ComponentContext';
 import { ForumContext } from '../../context/ForumContext';
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const ForumBlock = (props) => {
 	 
 	const {setSelectedComponent} = useComponentContext();
 	const {dispatch} = useContext(ForumContext)
+	const {currentUser} = useContext(AuthContext);
 	
 	const forumId = props.data.forumid;	
+	const [userForumId_, setUserForumId_] = useState(`${props.user.firebase}_${forumId}`)
 	
 	const handleForumClick = async() => {
 		
@@ -20,8 +23,9 @@ const ForumBlock = (props) => {
 
 		try {
 			const res = await getDoc(doc(db, "forumChats", userForumId)); 
+			const res2 = await getDoc(doc(db, "foruns", userForumId)); 
 
-			if (!res.exists()) { // se nao existir
+			if (!res.exists() && !res2.exists()) { // se nao existir
 				
 				await setDoc(doc(db, "foruns", userForumId), {});  // depois de createForum.jsx mudar para "forumChats" tirar esse
 
@@ -67,74 +71,111 @@ const ForumBlock = (props) => {
 		
 	}
 
-	//////////
-
-
-	const [forumLikes, setForumLikes] = useState(props?.likes);
-
-	const getLikesFromAPI = async () => {
-		try {
-			const res = await axios.get(`http://localhost:3000/forum_likes/${forumId}`);
-			// console.log(res);
-			setForumLikes(res.data[0].likes); // Update the like count from the API
-		} catch (error) {
-			console.error(error);
-		}
-	};
 	
-	useEffect(() => {
-		getLikesFromAPI(); // Fetch the initial like count when component mounts
-	}, []);
+	//////////////
+	
+	const [forumLikes, setForumLikes] = useState(props?.likes);
+	const [liked, setLiked] = useState(false)
+	
+	
+	useEffect( () => {
+		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'forumBlock');
 
-
-	const likedForuns = JSON.parse(localStorage.getItem('likedForuns')) || [];
-
-	const likeForum = async(event) => { // like icon click
-		event.stopPropagation()
-		
-		try {
-			const res = await axios.get(`http://localhost:3000/forum_likes/${forumId}`);
-			const recentLikes = res.data[0].likes;
-		
-			let updatedLikes = recentLikes;
-			if (!likedForuns.includes(forumId)) { // if current post is NOT liked
-				updatedLikes = recentLikes + 1;
-				
-				likedForuns.push(forumId); //this post has been liked
-				localStorage.setItem('likedForuns', JSON.stringify(likedForuns)); // add post to localStorage 
-				
-			}else{
-				updatedLikes = recentLikes - 1;
-
-				likedForuns.splice(likedForuns.indexOf(forumId), 1);
-				localStorage.setItem('likedForuns', JSON.stringify(likedForuns));
-			}
-			
-			setForumLikes(updatedLikes);
-			handleForumtLikeUpdate(forumId, updatedLikes)
-		}
-		catch (error) {
-			console.error("Error updating likes:", error);
-		}
-	}
-
-	const handleForumtLikeUpdate = (forumId, updatedLikes) => {
-
-		axios.patch(`http://localhost:3000/like_forum/${forumId}`, {
-			likes: updatedLikes
-		}).then(res => {
-			console.log(res);
-		}).catch(err => {
-			console.log(err);
+		const unSub = onSnapshot(query(likesCollectionRef), (doc) => {
+			const _liked = doc.data()[userForumId_]?.liked
+			setLiked(_liked);
+			changeLikeIcon(_liked);
 		})
 
-	};
+		return() => {
+			unSub();
+		}
+
 	
-	const likeIcon = document.getElementById(`likeIcon_${forumId}`);
-	if (likeIcon) {
-		if (likedForuns.includes(forumId)) {
+	}, [userForumId_])
+
+	useEffect( () => {
+		const forumDocRef = doc(db, 'foruns', userForumId_);
+
+		const unSub = onSnapshot(query(forumDocRef), (doc) => {
+			const _likes = doc.data()[userForumId_]?.forumInfo.likes
+			setForumLikes(_likes);
+		})
+
+		return() => {
+			unSub();
+		}
+
+	
+	}, [userForumId_])
+	
+
+	const updateLikesCount = async(event, userForumId, forumId, forumLikes) => {
+		event.stopPropagation()
+
+		const forumDocRef = doc(db, 'foruns', userForumId);
+		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'forumBlock');
+		
+		
+		const res = await getDoc(likesCollectionRef);
+		
+		console.log(res.data());
+
+		const likesDocData = res.data();
+
+		if (!res.exists()) { // se nao existir o documento
+			// If the user's 'likes' document doesn't exist, create it and add the likes
+			await setDoc(likesCollectionRef, {}); // criar
+		}
+
+		
+
+		if (!likesDocData || !likesDocData[userForumId]) {
+			
+			await updateDoc(likesCollectionRef, {
+				[userForumId]: {
+					liked: true,
+				},
+			});
+	
+			await updateDoc(forumDocRef, {
+				[userForumId+'.forumInfo.likes']: forumLikes+1,
+			});
+			setForumLikes(forumLikes+1)
+
+		}else{ // senao ele ja foi criado e ja foi curtido...
+
+			let vigia = likesDocData[userForumId].liked // inical value = true
+
+			await updateDoc(likesCollectionRef, {
+				[userForumId]: {
+					liked: !vigia,
+				},
+			});
+	
+			
+			await updateDoc(forumDocRef, {
+				[userForumId+'.forumInfo.likes']: !vigia ? forumLikes+1 : forumLikes-1,
+			});
+
+			!vigia ? setForumLikes(forumLikes+1) : setForumLikes(forumLikes-1);
+			
+
+			changeLikeIcon(!vigia)
+			
+		}
+		
+	}
+
+	const changeLikeIcon = (isLiked) => {
+		const likeIcon = document.getElementById(`likeIcon_${forumId}`)
+		if (isLiked) {
+			console.log('tá curtido');
+			
 			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
-		} else {
+		}else{
+			console.log('não tá curtido');
+			
 			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
 		}
 	}
@@ -159,7 +200,7 @@ const ForumBlock = (props) => {
 			</div>
 
 			<div className="tag">{props.tag}</div>
-			<span className='likes' ><img onClick={(e) => likeForum(e)} id={`likeIcon_${forumId}`} src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{forumLikes}</span>
+			<span className='likes' ><img onClick={(e) => updateLikesCount(e, userForumId_, forumId, forumLikes)} id={`likeIcon_${forumId}`} src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{forumLikes}</span>
 		</div>
 	)
 }
