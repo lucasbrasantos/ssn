@@ -45,37 +45,56 @@
         width: 60%;
         position: relative;
 
-
-        &::after{
-            content: '';
-            background-image: url('../../../src/assets/icons/Vector.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 32px;
-            aspect-ratio: 1/1;
+        img{
             position: absolute;
-            top: 50%;
-            right: 7px;
-            transform: translate(0, -50%);
-            cursor: pointer;
+            top: -3px;
+            right: 0;
+            // transform: translateY(-50%);
             z-index: 4;
-        }
-        &::before{
-            content: '';
-            position: absolute;
-
-            background: clr(dark, 200);
-            height: 48px;
-            aspect-ratio: 1/1;
+            border: 8px solid clr(dark, 200);
+            background: clr(dark);
             border-radius: 100%;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-
-            top: 50%;
-            right: 0px;
-            transform: translate(0, -50%);
+            transition: .2s;
             cursor: pointer;
-            z-index: 3;
+            box-shadow: 0 0 7px rgba(0, 0, 0, 50%);
+
+            &:hover{
+                transform: scale(1.05);
+                box-shadow: none;
+            }
         }
+        
+        // &::after{
+        //     content: '';
+        //     background-image: url('../../../src/assets/icons/Vector.png');
+        //     background-repeat: no-repeat;
+        //     background-size: cover;
+        //     height: 32px;
+        //     aspect-ratio: 1/1;
+        //     position: absolute;
+        //     top: 50%;
+        //     right: 7px;
+        //     transform: translate(0, -50%);
+        //     cursor: pointer;
+        //     z-index: 4;
+        // }
+        // &::before{
+        //     content: '';
+        //     position: absolute;
+
+        //     background: clr(dark, 200);
+        //     height: 48px;
+        //     aspect-ratio: 1/1;
+        //     border-radius: 100%;
+        //     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+
+        //     top: 50%;
+        //     right: 0px;
+        //     transform: translate(0, -50%);
+        //     cursor: pointer;
+        //     z-index: 3;
+        // }
+        
     }
     
 }

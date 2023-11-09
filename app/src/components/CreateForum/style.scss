@@ -20,7 +20,7 @@
         padding: 20px;
         gap: 20px;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
 
         .LImg {
             display: flex;
@@ -72,21 +72,23 @@
             font-size: 18px;
         }
 
-        .inputCF:last-child {
+        textarea.inputCF {
             height: 200px;
             resize: none;
         }
+
+        .BtnCF {
+            width: 184px;
+            height: 44px;
+            color: white;
+            border: none;
+            background: rgba(44, 44, 46, 0.99);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            margin-bottom: 40PX;
+            cursor: pointer;
+        }
     }
 
-    .BtnCF {
-        width: 184px;
-        height: 44px;
-        color: white;
-        border: none;
-        background: rgba(44, 44, 46, 0.99);
-        border: 1px solid rgba(255, 255, 255, 0.20);
-        margin-bottom: 40PX;
-        cursor: pointer;
-    }
+    
 
 }
