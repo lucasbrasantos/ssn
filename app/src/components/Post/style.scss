@@ -1,13 +1,13 @@
-
 @use '../../styles/abstracts/mixins' as *;
 @use '../../styles/abstracts/variables' as *;
 
-.postAll{
+.postAll {
     width: 75%;
     margin: 0 auto;
     margin-bottom: 45px;
 }
-.postContainer{
+
+.postContainer {
     position: relative;
     // width: 544px;
     width: 100%;
@@ -19,7 +19,7 @@
 
 
 
-    .postTop{
+    .postTop {
         display: flex;
         flex-direction: row;
         background-color: #2D2D30;
@@ -32,7 +32,7 @@
         color: white;
 
 
-        .followBtn{
+        .followBtn {
             width: 134px;
             height: 44px;
             color: white;
@@ -43,8 +43,8 @@
             box-shadow: 4px 2px 5px rgba(72, 171, 242, 0.21);
         }
 
-        
-        .postAvatar{
+
+        .postAvatar {
             aspect-ratio: 1/1;
             width: 60px;
             box-shadow: 0px 0px 6px 2px rgba(109, 109, 109, 0.25);
@@ -53,13 +53,13 @@
         }
     }
 
-    .postImg{
+    .postImg {
         height: 100%;
         background-color: #232123;
         overflow: hidden;
-        
 
-        img{
+
+        img {
             aspect-ratio: 3/4;
             width: 100%;
             height: calc(100% - 55px);
@@ -67,7 +67,7 @@
     }
 
 
-    .postBottom{
+    .postBottom {
         position: absolute;
         bottom: 0;
         height: 55px;
@@ -89,21 +89,21 @@
                 margin-left: 21px;
             }
 
-            #commentsIcon{
+            #commentsIcon {
                 cursor: pointer;
             }
 
-            .statusbtn{
+            .statusbtn {
                 color: white;
                 font-size: 20px;
                 margin-left: 5px;
             }
 
-            .likeIcon{
+            .likeIcon {
                 cursor: pointer;
                 transition: .2s;
-                
-                &:hover{
+
+                &:hover {
                     transform: translateY(-2px);
                 }
             }
@@ -111,7 +111,7 @@
 
     }
 
-    #postTitle{
+    #postTitle {
         background: clr(dark);
         color: clr(text);
         text-align: center;
@@ -119,12 +119,12 @@
         text-transform: uppercase;
         font-size: 1.4rem;
         overflow-wrap: break-word;
-        
+
     }
 }
 
 .comments {
-    
+
     width: 100%;
     height: auto;
     max-height: 500px;
@@ -138,7 +138,7 @@
     border: 2px solid #707070;
     border-top: none;
 
-    .commentUserAvatar{
+    .commentUserAvatar {
         width: 40px;
         aspect-ratio: 1/1;
         border-radius: 100%;
@@ -151,17 +151,17 @@
         flex-direction: row;
         gap: 15px;
 
-        .cmtBtn{
+        .cmtBtn {
             margin: 25px 5px 0px 5px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
-            img{
+            img {
                 width: 24px;
             }
 
-            button{
+            button {
                 margin-left: 20px;
                 border: none;
                 background-color: transparent;
@@ -169,5 +169,17 @@
                 font-weight: 800;
             }
         }
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .postAll {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .postAll {
+        width: 55%;
     }
 }
