@@ -19,9 +19,14 @@ const EdtPerfilU = () => {
                 <textarea className='inputEdtU' placeholder='Bio' cols="30" rows="10"></textarea>
             </form>
 
-            <button className='BtnSaveEdtU'>
-                Salvar
-            </button>
+            <div style={{display:'flex', justifyContent:'center', width:'100%', gap:'10%'}}>
+                <button className='BtnSaveEdtU'>
+                    Salvar
+                </button>
+                <button className='BtnSaveEdtU'>
+                    Cancelar
+                </button>
+            </div>
 
         </div>
     )
