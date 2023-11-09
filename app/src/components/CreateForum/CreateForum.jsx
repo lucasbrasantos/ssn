@@ -133,9 +133,15 @@ const CreateForum = () => {
 				<input className='inputCF' type="text" placeholder='Titulo do Forum' value={forumDetails.title} onChange={(e) => setForumDetails({ ...forumDetails, title: e.target.value })}/>
 				<textarea className='inputCF' placeholder='Forum Descrição' cols="30" rows="10" onChange={(e) => setForumDetails({ ...forumDetails, description: e.target.value })}></textarea>
 
-				<button className='BtnCF' type='submit'>
-					Criar
-				</button>
+				<div style={{display:'flex', justifyContent:'center', width:'100%', gap:'10%'}}>
+					<button className='BtnCF' type='submit'>
+						Criar
+					</button>
+					<button className='BtnCF'>
+						Cancelar
+					</button>
+				</div>
+
 			</form>
 
 			
