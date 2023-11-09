@@ -145,10 +145,11 @@ const EdtPerfilU = () => {
                     <img className='EdtAvatarUser' src={imgPreview ? imgPreview : user?.photourl } alt="" />
                     <span>Edit Avatar</span>
                 </label>
-                    { imgPreview && (
+                    {					
+						imgPreview && (
 
-                        <span onClick={() => setImgPreview(null)} style={{background:'red', position:'absolute', top:'20%', left:'58%', cursor:'pointer', padding:'4px 8px', color:'white'}}>X</span>
-                    )
+							<span onClick={() => setImgPreview(null)} style={{background:'red', position:'absolute', top:'20%', left:'58%', cursor:'pointer', padding:'4px 8px', color:'white'}}>X</span>
+						)
                     }
 
                 

@@ -4,6 +4,8 @@ import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
 import { doc, getDoc, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { useComponentContext } from '../../context/ComponentContext';
+import { SelectedUserContext } from '../../context/SelectedUserContext';
 
 const Post = ({postData, postId}) => {
 
@@ -61,80 +63,6 @@ const Post = ({postData, postId}) => {
   		const minutes = date.getMinutes().toString().padStart(2, '0');
 		return `${year}/${month}/${day} ${hours}:${minutes}`;
 	}
-
-
-	/*
-	const getLikesFromAPI = async () => {
-		try {
-			const res = await axios.get(`http://localhost:3000/post_likes/${postId}`);
-			// console.log(res);
-			setPostLikes(res.data[0].likes); // Update the like count from the API
-		} catch (error) {
-			console.error(error);
-		}
-	};
-	
-	useEffect(() => {
-		getLikesFromAPI(); // Fetch the initial like count when component mounts
-	}, []);
-
-
-	const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
-
-	const likePost = async(event) => {
-		event.stopPropagation()
-
-		try {
-			const res = await axios.get(`http://localhost:3000/post_likes/${postId}`);
-			const recentLikes = res.data[0].likes;
-		
-			let updatedLikes = recentLikes;
-		
-			if (!likedPosts.includes(postId)) { // if current post is NOT liked				
-				updatedLikes = recentLikes + 1;
-				
-				likedPosts.push(postId); //this post has been liked
-				localStorage.setItem('likedPosts', JSON.stringify(likedPosts)); // add post to localStorage 				
-			}else{
-				updatedLikes = recentLikes - 1;
-
-				likedPosts.splice(likedPosts.indexOf(postId), 1);
-				localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-			}
-
-			setPostLikes(updatedLikes);
-			handlePostLikeUpdate(postId, updatedLikes)
-
-		} catch (error) {
-			console.warn("-- error --");
-			console.error("Error updating likes:", error);
-		}
-	
-	}
-
-	const handlePostLikeUpdate = (postId, updatedLikes) => {
-
-		axios.patch(`http://localhost:3000/like_post/${postId}`, {
-			likes: updatedLikes
-		}).then(res => {
-			console.log(res);
-		}).catch(err => {
-			console.log(err);
-		})
-
-	};
-	
-	const likeIcon = document.getElementById(`likeIcon_${post.postid}`);
-	if (likeIcon) {
-		if (likedPosts.includes(postId)) {
-			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart_red.svg';
-		} else {
-			likeIcon.src = '../../../src/assets/icons/fluent-mdl2_heart.svg';
-		}
-	}
-	*/
-
-		//////////////
 	
 	const [postLikes, setPostLikes] = useState(post?.likes);
 	const [liked, setLiked] = useState(false)
@@ -262,6 +190,24 @@ const Post = ({postData, postId}) => {
 	}
 
 
+	//////////////
+
+	const {setSelectedComponent} = useComponentContext();
+	const {dispatch} = useContext(SelectedUserContext)
+
+	const handleChangeComponent = (component) => {
+		setSelectedComponent(component)
+	}
+
+	const handleUserClick = () => {
+
+		dispatch({type:"SELECT_USER", payload:{
+			userId: user && user.userid
+		}})
+
+        handleChangeComponent('userProfile')
+    }
+
 
 
 	return (
@@ -272,7 +218,7 @@ const Post = ({postData, postId}) => {
 				<div className='postContainer' id='postContainer'>
 
 					<div className='postTop'>
-						<div style={{display:'flex', flexDirection:'row', alignItems:'center', gap:'10px'}}>
+						<div className='userPostInfo' onClick={() => handleUserClick(user?.userid)} style={{display:'flex', cursor:'pointer', flexDirection:'row', alignItems:'center', gap:'10px'}}>
 							<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 							<p>{`${user?.name} | ${user?.username}` || 'usuario'}</p>
 						</div>
