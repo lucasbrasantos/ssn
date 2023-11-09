@@ -175,7 +175,7 @@ function CreatePost() {
 			<form action='' onSubmit={handleSubmit}>
 			<div className="addArquivo">
 					<label htmlFor="file">Adicionar Foto</label>
-					<input type="file"accept='image/*' id="file" onChange={(e) => handleImageChange(e) }/>
+					<input type="file" accept='image/*' id="file" onChange={(e) => handleImageChange(e) }/>
 					{
 						img && (
 							<img src={imgPreview} alt="Selected" className='imgPreview' />

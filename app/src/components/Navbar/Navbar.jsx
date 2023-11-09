@@ -46,7 +46,7 @@ const Navbar = () => {
 	return (
 
 	<nav className='navbar' id='navbar'>
-		<span className='logo'>Logo</span>
+		<span className='logo'><img className='logoImg' src="../../../src/assets/DESIGN/logos/g9347.png" alt="" /></span>
 
 		<div className="col1">
 			<span onClick={() => handleButtonClick('posts')} ><img src="../../../src/assets/icons/fluent-mdl2_home.png" alt="" /></span>

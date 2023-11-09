@@ -29,7 +29,8 @@
         background: rgba($black, 60%);
         border: 1px solid #707070;
         // background: rgba(31, 32, 36, 0.87);
-        
+
+          
         
         form{
             @include center();
@@ -151,9 +152,17 @@
 
         }
 
-        img{
-            height: 100%;
-            aspect-ratio: 1/1;
+        .formWrapperImg{
+            // height: 355px;
+            width: 555px;
+            // aspect-ratio: 1/1;
+            margin-left: 40px;
+        }
+
+        .eae{
+            margin: 87px 0;
+            margin-left: 0;
+            margin-right: 40px;
         }
     }
 }

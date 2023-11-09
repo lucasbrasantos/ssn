@@ -142,7 +142,8 @@ const Register = () => {
                 <div id="ball2"></div>
                 
             
-                <img src="../../src/assets/sampleImg.png" alt="test img" />
+                {/* <img className='formWrapperImg' src="../../src/assets/sampleImg.png" alt="test img" /> */}
+                <img className='formWrapperImg' src="../../src/assets/DESIGN/logos/g2296.png" alt="test img" />
 
                 <form action="" onSubmit={handleSubmit}>
                     <h1>registro</h1>

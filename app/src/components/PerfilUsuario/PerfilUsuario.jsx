@@ -80,6 +80,18 @@ const PerfilUsuario = () => {
 
 	console.log(post_data);
 	
+	////////////////////////
+
+	const handleChangeEdtPerfil = () => {
+	  
+
+		// console.log(user.userid);
+		// dispatch({ type: 'SELECT_USER', payload:{userId: user.userid} });
+		
+		handleButtonClick('edtPerfilU');
+	}
+
+	
 	
 	return (
 		<div className='postContainerPerfil'>
@@ -102,7 +114,7 @@ const PerfilUsuario = () => {
 			<div className='PerfilBtns'>
 				{user && user.userId !== currentUser.uid ?
 					<div className='BtnsU'>
-						<button onClick={() => handleButtonClick('edtPerfilU')} >
+						<button onClick={() => handleChangeEdtPerfil()} >
 							Editar perfil
 						</button>
 						<button>

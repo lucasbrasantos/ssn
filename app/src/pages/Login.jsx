@@ -115,7 +115,8 @@ const Login = () => {
                     </div>
                 </form>
 
-                <img src="../../src/assets/sampleImg.png" alt="test img" />
+                {/* <img src="../../src/assets/sampleImg.png" alt="test img" /> */}
+                <img className='formWrapperImg eae' src="../../src/assets/DESIGN/logos/g2296.png" alt="test img" />
             </div>
 
             
