@@ -1,6 +1,8 @@
+
+import React from 'react';
 import './style.scss'
 
-const addFriend = () => {
+const AddFriend = () => {
     return(
         <div className="addFBox">
             <div className="fSearch">
@@ -83,4 +85,4 @@ const addFriend = () => {
     )
 }
 
-export default addFriend;
+export default AddFriend;
