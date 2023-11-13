@@ -14,7 +14,16 @@
     flex-direction: column;
     color: white;
     background: linear-gradient(180deg, #232123 0%, #232123 78.65%, #222127 100%);
-
+    overflow: hidden;
+    
+    .friendsContainer{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: scroll;
+        box-shadow: inset 0 4px 8px -2px rgba(0, 0, 0, 50%), inset 0 -8px 12px -8px rgba(0, 0, 0, 40%);
+    }
 
     h1{
         margin: 25px;
@@ -29,5 +38,21 @@
         display: flex;
         align-items: center;
         padding: 30px;
+        cursor: pointer;
+
+        &:hover{
+            transition: .3s;
+            transform: translate(5px);
+            -webkit-animation: color-change-3x 4s linear infinite alternate both;
+        animation: color-change-3x 4s linear infinite alternate both;
+    }
+        
+
+        .friendsPhotoUrl{
+            height: 50px;
+            aspect-ratio: 1/1;
+            border-radius: 100%;
+            margin-right: 20px;
+        }
     }
 }
