@@ -39,6 +39,7 @@ const EdtPerfilU = () => {
         const username = e.target[2].value;
         const description = e.target[3].value;
 
+		
         const storageRef = ref(storage, `${user.userid}_${user.firebase}/profilePics/_${img.name}`)
         
         

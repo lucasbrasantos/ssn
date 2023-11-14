@@ -28,10 +28,16 @@ const FriendsMenu = () => {
 			
 		})
 		.catch((err) => { console.error(err); });	
+
 	}
 
-	if (currentUserAPI) {
-		axios.get(`http://localhost:3000/friendsUsrId/${currentUserAPI && currentUserAPI.userid}` )
+	if (currentUserAPI && friends.length < 1) {
+		axios.get(`http://localhost:3000/friendsUsrId`, {
+			params:{
+				id: currentUserAPI && currentUserAPI.userid,
+				queryType: 'isFriend'
+			}
+		}, )
 			.then((res) => { setFriends(res.data) })
 			.catch((err) => { console.error(err); });
 	}

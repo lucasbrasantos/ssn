@@ -11,6 +11,7 @@
     justify-content: center;
     border-radius: 40px;
     max-width: 600px;
+    overflow: hidden;
 
     .fSearch {
         width: 100%;
@@ -38,14 +39,18 @@
     .fList {
         width: 100%;
         height: 90%;
+        padding: 10px 0 20px 0;
+        // gap: 20px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         //padding-top: 15px;
+        overflow: scroll;
+        box-shadow: inset 0 4px 15px -2px rgba(0, 0, 0, 20%), inset 0 -8px 12px -8px rgba(0, 0, 0, 40%);
         
         .friendS {
             width: 100%;
-            height: 12%;
+            height: 80px;
             background-color: linear-gradient(180deg, #232123 0%, #232123 78.65%, #222127 100%);
             display: flex;
             flex-direction: row;
@@ -54,6 +59,7 @@
             gap: 15px;
             color: white;
             //border-top: 1px solid var(--stroke, #707070);
+            padding: 20px 0;
             border-bottom: 1px solid var(--stroke, #707070);
 
             .infosF1 {
@@ -65,7 +71,9 @@
                 gap: 10px;
 
                 .fAvatar {
-                    height: 60px;
+                    height: 55px;
+                    aspect-ratio: 1/1;
+                    border-radius: 100%;
                 }
             }
             
