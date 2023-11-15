@@ -152,6 +152,14 @@ const Post = ({postData, postId}) => {
 			});
 			setPostLikes(postLikes+1)
 
+			axios.patch(`http://localhost:3000/like_post/${postId}`, {
+				likes: postLikes + 1
+			}).then(res => {
+				console.log(res);
+			}).catch(err => {
+				console.log(err);
+			})
+
 		}else{ // senao ele ja foi criado e ja foi curtido...
 
 			let vigia = likesDocData['_'+postId].liked // inical value = true
@@ -166,6 +174,14 @@ const Post = ({postData, postId}) => {
 			await updateDoc(postDocRef, {
 				[combinedId+'.postInfo.likes']: !vigia ? postLikes+1 : postLikes-1,
 			});
+
+			axios.patch(`http://localhost:3000/like_post/${postId}`, {
+				likes: !vigia ? postLikes + 1 : postLikes - 1
+			}).then(res => {
+				console.log(res);
+			}).catch(err => {
+				console.log(err);
+			})
 
 			!vigia ? setPostLikes(postLikes+1) : setPostLikes(postLikes-1);
 			
