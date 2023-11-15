@@ -33,7 +33,7 @@ const Ranking = () => {
 			{
 				data.slice().sort((a,b) => b.points- a.points).map((e, i) => {
 				
-					// console.log(e.userid);
+					// console.log(e);
 
 					return(
 						<RankUser
@@ -42,6 +42,7 @@ const Ranking = () => {
 							ranking={i+1}
 							key={e.userid}
 							userid={e.userid}
+							photourl={e.photourl}
 						/>
 					)}
 				)

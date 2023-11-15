@@ -10,6 +10,11 @@ import { useComponentContext } from '../../context/ComponentContext';
 const PerfilUsuario = () => {
 
 	const {currentUser} = useContext(AuthContext);
+	const [currentUserAPI, setCurrentUserAPI] = useState({});	
+	const [currentUserFriends, setCurrentUserFriends] = useState([])
+	
+	const [currentUserRanking, setCurrentUserRanking] = useState({});	
+	const [friends, setFriends] = useState([])
 	
 	///////////////////
 	
@@ -33,6 +38,64 @@ const PerfilUsuario = () => {
 	}, []);
 
 	const fetchData = async() => {
+
+		const fetchUserInfo = async(res) => {
+			await axios.get('http://localhost:3000/friendsUsrId', {
+				params:{
+					id: res.data[0].userid,
+					queryType: 'isFriend'
+				}
+			}, )
+			.then((res) => {
+				setFriends(res.data)
+				
+			})
+			.catch((err) => { console.error(err); });
+	
+			await axios.get('http://localhost:3000/user_ranking', {
+				params: {
+					id: res.data[0].userid,
+				},
+			})
+			.then((res) => {
+				setCurrentUserRanking(res.data[0])
+			})
+			.catch((err) => { console.error(err)  });
+
+
+
+		}
+
+		if (data.userId) { // se clicar perfil de outro usuario diferente do usuario atual
+			
+			await axios.get('http://localhost:3000/user_id', {
+				params: {
+				id: data.userId,
+			}})
+			.then((res) => {
+				setUser(res.data[0])
+
+				fetchUserInfo(res)
+
+			})
+			.catch((err) => { console.error(err); });
+
+			dispatch({ type: 'CLEAR_USER' });
+
+		}else{ // pegar info do currentUser
+			
+			await axios.get('http://localhost:3000/user_uid', {
+				params: {
+				uid: currentUser.uid,
+			}})
+			.then((res) => {
+				setUser(res.data[0]);
+
+				fetchUserInfo(res)
+			})
+			.catch((err) => { console.error(err); });
+		}
+		
 		await axios.get('http://localhost:3000/posts')
 		.then(res => setPosts(res.data))
 		.catch(err => console.log(err))
@@ -41,29 +104,30 @@ const PerfilUsuario = () => {
 		.then(res => setComments(res.data))
 		.catch(err => console.log(err))
 
-		if (!data.userId) {
 		
-			await axios.get('http://localhost:3000/user_uid', {
-				params: {
-				uid: currentUser.uid,
-			}})
-			.then((res) => { setUser(res.data[0]) })
-			.catch((err) => { console.error(err); });
-			
-		}else{
-
-			await axios.get('http://localhost:3000/user_id', {
-				params: {
-				id: data.userId,
-			}})
-			.then((res) => { setUser(res.data[0]) })
-			.catch((err) => { console.error(err); });
-			
-			dispatch({ type: 'CLEAR_USER' });
-		}
+		const resUserAPI = await axios.get('http://localhost:3000/user_uid', {
+			params: {
+			uid: currentUser.uid,
+		}})
+		setCurrentUserAPI(resUserAPI.data[0]);
+		
+		await axios.get('http://localhost:3000/friendsUsrId', {
+			params:{
+				id: resUserAPI.data[0].userid,
+				queryType: 'isFriend'
+			}
+		}, )
+		.then((res) => {
+			setCurrentUserFriends(res.data)			
+		})
+		.catch((err) => { console.error(err); });
 	}
 	
-	// console.log(user);
+	
+	// console.log(data);
+	// console.log(currentUserRanking);
+	// console.log(friends);
+	console.log(currentUserFriends);
 
 	///////////////////
 
@@ -78,7 +142,7 @@ const PerfilUsuario = () => {
 		}), 
 	} : null
 
-	console.log(post_data);
+	// console.log(post_data);
 	
 	////////////////////////
 
@@ -91,7 +155,9 @@ const PerfilUsuario = () => {
 		handleButtonClick('edtPerfilU');
 	}
 
-	
+	/////////
+
+	const findCurrentUserFriends = currentUserAPI && user && currentUserFriends.some(friend => friend.useridfriend == user.userid)
 	
 	return (
 		<div className='postContainerPerfil'>
@@ -106,13 +172,20 @@ const PerfilUsuario = () => {
 				</div>
 				</div>
 				<div>
-					<p>N Seguidores</p>
-					<p>Rank Usuario</p>
+					<p>N º amigos: {friends ? friends.length : 0}</p>
+					<p>Rank Usuario: {currentUserRanking ? currentUserRanking.user_ranking : 0}º
+					{
+						currentUserRanking?.user_ranking == 1 ? <span> - 🥇</span> :
+						currentUserRanking?.user_ranking == 2 ? <span> - 🥈</span> :
+						currentUserRanking?.user_ranking == 3 ? <span> - 🥉</span> :
+						currentUserRanking?.user_ranking < 10 && <span> - 🏆</span>
+					}
+					</p>
 				</div>
 
 			</div>
 			<div className='PerfilBtns'>
-				{user && user.userId !== currentUser.uid ?
+				{user && user.firebase == currentUser.uid ?
 					<div className='BtnsU'>
 						<button onClick={() => handleChangeEdtPerfil()} >
 							Editar perfil
@@ -123,9 +196,14 @@ const PerfilUsuario = () => {
 					</div>
 					:
 					<div className='BtnsU'>
-						<button>
-							Follow
-						</button>
+						{
+
+							!findCurrentUserFriends && (
+								<button>
+									Adicionar como amigo
+								</button>
+							)
+						}
 						<button>
 							Mensagem
 						</button>

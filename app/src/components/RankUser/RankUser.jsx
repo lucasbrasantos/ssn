@@ -34,7 +34,7 @@ const RankUser = (props) => {
         <div id='RankUser' onClick={() => handleUserClick()}>
             <p className='RankPosition'>{props.ranking}º</p>
             <img src="../../../src/assets/icons/fluent-mdl2_trophy.png" alt="" className='Trophy'/>
-            <img src="../../../src/assets/IconDark.png" alt="" />
+            <img className='rankingUserIcon' src={props.photourl || "../../../src/assets/IconDark.png"} alt="" />
             <div className="box">
                 <p className='username'>{props.name}</p>
                 {/* <p className='userInfo'>info usuario</p> */}

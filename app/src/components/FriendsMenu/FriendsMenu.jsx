@@ -9,7 +9,7 @@ const FriendsMenu = () => {
 
 
 	const {currentUser} = useContext(AuthContext);
-	const [currentUserAPI, setCurrentUserAPI] = useState();	
+	const [currentUserAPI, setCurrentUserAPI] = useState({});	
 	const [friends, setFriends] = useState([])
 
 	useEffect(() => {
@@ -18,28 +18,28 @@ const FriendsMenu = () => {
 
 	const fetchData = async() => {
 
-		await axios.get('http://localhost:3000/user_uid', {
-			params: {
-			  uid: currentUser.uid,
-			},
-		  	})
-		.then((res) => {
+		try {			
+		
+			const res = await axios.get('http://localhost:3000/user_uid', {
+					params: {
+					uid: currentUser.uid,
+				},
+			})
 			setCurrentUserAPI(res.data[0])
-			
-		})
-		.catch((err) => { console.error(err); });	
 
-	}
 
-	if (currentUserAPI && friends.length < 1) {
-		axios.get(`http://localhost:3000/friendsUsrId`, {
-			params:{
-				id: currentUserAPI && currentUserAPI.userid,
-				queryType: 'isFriend'
-			}
-		}, )
+			await axios.get(`http://localhost:3000/friendsUsrId`, {
+				params:{
+					id: res.data[0].userid,
+					queryType: 'isFriend'
+				}
+			}, )
 			.then((res) => { setFriends(res.data) })
 			.catch((err) => { console.error(err); });
+
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	
 	// console.log(friends);

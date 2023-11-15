@@ -15,14 +15,13 @@
     transition: .2s;
     cursor: pointer;
 
+    
+
     &:hover{
         transform: translateX(10px);
         border-bottom: 1px solid white;
     }
 
-    img{
-        width: 60px;
-    }
 
     .box{
         text-align: center;
@@ -59,5 +58,11 @@
         height: 40px;
         margin: 0 20px 0 20px;
         filter: invert(62%) sepia(78%) saturate(390%) hue-rotate(9deg) brightness(180%) contrast(89%);
+    }
+
+    .rankingUserIcon{
+        height: 55px;
+        border-radius: 100%;
+        aspect-ratio: 1/1;
     }
 }

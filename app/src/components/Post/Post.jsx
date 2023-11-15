@@ -224,10 +224,11 @@ const Post = ({postData, postId}) => {
 						</div>
 						
 						{
+							/*
 							currentUserAPI && user && currentUserAPI.userid !== user.userid ? (
 								<button className='followBtn'>Seguir</button>
 							) : <></>
-
+							*/
 						}
 
 					</div>
