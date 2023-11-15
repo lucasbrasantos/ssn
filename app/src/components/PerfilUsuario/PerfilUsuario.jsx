@@ -198,7 +198,7 @@ const PerfilUsuario = () => {
 					<div className='BtnsU'>
 						{
 
-							!findCurrentUserFriends && (
+							!findCurrentUserFriends && ( // se nao tiver na lista de amigos do currentUser
 								<button>
 									Adicionar como amigo
 								</button>
