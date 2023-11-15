@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Box, LinearProgress } from '@mui/material';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../firebase';
+import Swal from 'sweetalert2';
 
 const EdtPerfilU = () => {
 
@@ -35,16 +36,33 @@ const EdtPerfilU = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         
-        const name = e.target[1].value;
-        const username = e.target[2].value;
-        const description = e.target[3].value;
+        const name = e.target[1].value.trim();
+        const username = e.target[2].value.trim();
+        const description = e.target[3].value.trim();
 
+
+		function isStringNullOrEmptyOrWhitespace(str) {
+			return str === null || str.trim() === '';
+		}
+
+		// Check if the new values are not empty, otherwise, keep the current values
+		const updatedName = !isStringNullOrEmptyOrWhitespace(name) ? name : user && user.name;
+		const updatedUsername = !isStringNullOrEmptyOrWhitespace(username) ? username : user && user.username;
+		const updatedDescription = !isStringNullOrEmptyOrWhitespace(description) ? description : user && user.description;
+
+
+		if (img !== null) {
+			
+			const storageRef = ref(storage, `${user.userid}_${user.firebase}/profilePics/_${img.name}`)
+			uploadFileAndHandleError(storageRef, updatedName, updatedUsername, updatedDescription);
+
+		}else{
+
+			uploadFileAndHandleError(null, updatedName, updatedUsername, updatedDescription);
+
+		}       
+        
 		
-        const storageRef = ref(storage, `${user.userid}_${user.firebase}/profilePics/_${img.name}`)
-        
-        
-        uploadFileAndHandleError(storageRef, name, username, description);
-
     }
 
     function formatDateToYYYYMMDD(dateString) {
@@ -60,66 +78,91 @@ const EdtPerfilU = () => {
 
     const uploadFileAndHandleError = async(storageRef, name, username, description) => {
       
-
-        const uploadTask = uploadBytesResumable(storageRef, img);
-
-		uploadTask.on(
-			'state_changed',
-			(snapshot) => {
-				// Listener for monitoring the upload progress.
-				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				console.log(`Upload is ${progress}% done`);
-				setUploadProgress(progress)
-
-				if (progress === 100) {
-					// Upload is 100% complete
-					console.log('aeaeae');
-					
-					getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
-						console.log('File is available at: ', downloadURL);
-	
-	
-						await axios.patch(`http://localhost:3000/users/${user.userid}`, {
-							username: username,
-                            name: name,
-                            email: user.email,
-                            photourl: downloadURL,
-                            points: user.points,
-                            timecreated: formatDateToYYYYMMDD(user.timecreated),
-                            firebase: user.firebase,
-                            description: description,
-						})
-						.then((res) => {
-							console.log(res);
+		if (storageRef !== null) {
 			
-						})
-						.catch((error) => {
-							console.log(error);
-							
-						}); 
-	
-						setImg(null)
+		
+			const uploadTask = uploadBytesResumable(storageRef, img);
 
-						window.location.reload();	
-	
-					}).catch((error) => {
+			uploadTask.on(
+				'state_changed',
+				(snapshot) => {
+					// Listener for monitoring the upload progress.
+					const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log(`Upload is ${progress}% done`);
+					setUploadProgress(progress)
+
+					if (progress === 100) {
+						// Upload is 100% complete
+						console.log('aeaeae');
 						
-						console.log(error);
-						console.log(error.code);
+						getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
+							console.log('File is available at: ', downloadURL);
+		
+		
+							await axios.patch(`http://localhost:3000/users/${user.userid}`, {
+								username: username,
+								name: name,
+								email: user.email,
+								photourl: downloadURL,
+								points: user.points,
+								timecreated: formatDateToYYYYMMDD(user.timecreated),
+								firebase: user.firebase,
+								description: description,
+							})
+							.then((res) => {
+								console.log(res);
+				
+							})
+							.catch((error) => {
+								console.log(error);
+								
+							}); 
+		
+							setImg(null)
 
-						if (error.code == 'storage/object-not-found') {
-							console.log("Retrying...");
-							uploadFileAndHandleError(storageRef, name, username, description); // rerun the function
-						}
+							window.location.reload();	
+		
+						}).catch((error) => {
+							
+							console.log(error);
+							console.log(error.code);
 
-					})
+							if (error.code == 'storage/object-not-found') {
+								console.log("Retrying...");
+								uploadFileAndHandleError(storageRef, name, username, description); // rerun the function
+							}
 
+						})
+
+					}
+				},
+				(error) => {
+					console.log(error);
 				}
-			},
-			(error) => {
+			)
+		}else{
+
+			await axios.patch(`http://localhost:3000/users/${user.userid}`, {
+				username: username,
+				name: name,
+				email: user.email,
+				photourl: user.photourl,
+				points: user.points,
+				timecreated: formatDateToYYYYMMDD(user.timecreated),
+				firebase: user.firebase,
+				description: description,
+			})
+			.then((res) => {
+				console.log(res);
+
+			})
+			.catch((error) => {
 				console.log(error);
-			}
-		)
+				
+			}); 
+
+			window.location.reload();
+		}
 
 	}
 
