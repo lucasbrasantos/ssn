@@ -14,8 +14,9 @@ const Configs = () => {
 	const handleDeleteBtnClick = () => {
 
 		DeleteUserData({
-			userId: currentUserAPI?.userid,
-			userUid: currentUser.uid,
+			// userId: currentUserAPI?.userid,
+			userId: 3,
+			// userUid: currentUser.uid,
 		})
 
 	}
@@ -44,6 +45,8 @@ const Configs = () => {
 	return(
 		<div className='ConfigDiv'>
 
+			{/* 			
+			
 			<div className="ConfigsOpc">
 				<p>Opção 1</p>
 				<input type="checkbox" defaultChecked />
@@ -69,6 +72,8 @@ const Configs = () => {
 					<span className ="slider round"></span>
 				</label>
 			</div>
+			
+			*/}
 
 
 			<div className="ConfigsOpc" style={{cursor:'pointer'}} onClick={() => { handleDeleteBtnClick() }}>

@@ -30,7 +30,7 @@ const FriendsMenu = () => {
 
 			await axios.get(`http://localhost:3000/friendsUsrId`, {
 				params:{
-					id: res.data[0].userid,
+					id: res.data[0]?.userid,
 					queryType: 'isFriend'
 				}
 			}, )
