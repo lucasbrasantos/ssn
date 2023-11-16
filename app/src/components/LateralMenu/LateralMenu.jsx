@@ -53,29 +53,29 @@ const LateralMenu = () => {
 	<div className='boxMenu'>
 		<div className='opcs opcs-user' onClick={() => handleButtonClick('userProfile')} >
 			<img src={user?.photourl || "../../../src/assets/Icon.png"} alt="" />
-			{user ? user.username : currentUser.displayName}
+			<p>{user ? user.username : currentUser.displayName}</p>
 		</div>
 
 		<div className='opcs' onClick={() => handleButtonClick('addFriend')} >
 			<img src="../../../src/assets/icons/fluent-mdl2_add-friend.png" alt="" />
-			add amigo
+			<p>add amigo</p>
 		</div>
 
 		<div className='opcs' onClick={() => handleButtonClick('configs')} >
 			<img src="../../../src/assets/icons/fluent-mdl2_settings.png" alt="" />
-			configuraçoes
+			<p>configurações</p>
 		</div>
 
 		<div className='opcs'>
 			<img src="../../../src/assets/icons/fluent-mdl2_clear-night.png" alt="" />
-			tema
+			<p>tema</p>
 		</div>
 
 		<div className='opcs' onClick={ () => {
 		  signOut(auth)
 		} }>
 			<img src="../../../src/assets/icons/fluent-mdl2_chrome-back.png" alt="" />
-			sair
+			<p>sair</p>
 		</div>
 	</div>
   )
