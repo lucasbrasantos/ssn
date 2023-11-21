@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import axios from 'axios'
-import { storage } from '../../firebase'
+import { db, storage } from '../../firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { AuthContext } from '../../context/AuthContext'
 import { useComponentContext } from '../../context/ComponentContext'
@@ -9,6 +9,7 @@ import { useComponentContext } from '../../context/ComponentContext'
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
+import { doc, setDoc } from 'firebase/firestore'
 
 
 function CreatePost() {
@@ -125,14 +126,20 @@ function CreatePost() {
 							tag: getInterestsId(tag).interestsid,
 							moderator_status: 0,						
 						})
-						.then((res) => {
+						.then(async(res) => {
 							console.log(res);
+							let id = res.data.split(':')[1]
+
+							await setDoc(doc(db, "postComments", `_${id}`), {});
 			
 						})
 						.catch((error) => {
 							console.log(error);
 							
 						}); 
+
+
+						
 	
 						setImg(null)
 						handleButtonClick('posts')

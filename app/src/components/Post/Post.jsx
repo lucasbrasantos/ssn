@@ -2,10 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
-import { doc, getDoc, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
+import { Timestamp, collection, doc, getDoc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useComponentContext } from '../../context/ComponentContext';
 import { SelectedUserContext } from '../../context/SelectedUserContext';
+import Swal from 'sweetalert2';
+import { v4 as uuid } from "uuid";
+import { CommentContext } from '../../context/CommentContext';
+import PostComments from './PostComments';
 
 const Post = ({postData, postId}) => {
 
@@ -210,6 +214,7 @@ const Post = ({postData, postId}) => {
 
 	const {setSelectedComponent} = useComponentContext();
 	const {dispatch} = useContext(SelectedUserContext)
+	
 
 	const handleChangeComponent = (component) => {
 		setSelectedComponent(component)
@@ -221,9 +226,111 @@ const Post = ({postData, postId}) => {
 			userId: user && user.userid
 		}})
 
-        handleChangeComponent('userProfile')
-    }
+		handleChangeComponent('userProfile')
+	}
 
+
+	//////////////////
+
+	// post comments //
+
+	const [text, setText] = useState('');
+	const {dispatchComment} = useContext(CommentContext)
+
+
+	const handleKey = (e) => {
+		
+		if (e.key === 'Enter') {
+			if (text.trim() === '') {
+				e.preventDefault(); // Prevent default behavior of submitting the form on Enter press
+	
+				Swal.fire({
+					title: 'Erro!',
+					text: "Por favor, escreva algo antes de enviar.",
+					icon: 'error',
+					confirmButtonText: 'Retornar',
+					timer: 2000,
+					timerProgressBar: true,
+				});
+			} else {
+				handleSendComment();
+			}
+		}
+		
+	}
+
+	const handleSendComment = async() => {
+	 
+		
+
+		if (text.trim() == '') {
+			
+			Swal.fire({
+				title: 'Erro!',
+				text: "Por favor, escreva algo antes de enviar.",
+				icon: 'error',
+				confirmButtonText: 'Retornar',
+				timer: 2000,
+				timerProgressBar: true,
+			})
+			
+		}else{
+
+			const messageId = uuid();  // id da mensagem
+			const _postId = `_${postId}`;
+
+			console.log(postId);
+			
+			const res = await getDoc(doc(db, "postComments", _postId)); 
+			
+
+			if (!res.exists()) {
+				
+				await setDoc(doc(db, "postComments", `${_postId}`), {});
+
+				handleSendComment()
+
+			}else{
+
+				
+				await setDoc(doc(db, "postComments", _postId, "messages", messageId), {
+					id: messageId, // id da mensagem
+					text,
+					senderId: currentUser.uid,
+					senderUsername: currentUser.displayName,
+					// senderName: data.forumBlock.user.name,
+					senderPhotoUrl: currentUser.photoURL,
+					date:Timestamp.now(),
+				});
+				
+				setText("");
+
+
+				dispatchComment({type:"CHANGE_COMMENT", payload:{
+					_postId: _postId,
+				}})
+
+			}
+
+		}
+	}
+
+
+
+
+	useEffect( () => {
+	
+		const unSub = onSnapshot(query(collection(db, "postComments", `_${postId}`, "messages"), orderBy("date")), (doc) => {
+			const messages = doc.docs.map((doc => doc.data()))
+			setComment(messages).length;
+		})
+
+		return() => {
+			unSub();
+		}
+
+	
+	}, [postId])
 
 
 	return (
@@ -238,14 +345,6 @@ const Post = ({postData, postId}) => {
 							<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
 							<p>{`${user?.name} | ${user?.username}` || 'usuario'}</p>
 						</div>
-						
-						{
-							/*
-							currentUserAPI && user && currentUserAPI.userid !== user.userid ? (
-								<button className='followBtn'>Seguir</button>
-							) : <></>
-							*/
-						}
 
 					</div>
 					
@@ -279,79 +378,20 @@ const Post = ({postData, postId}) => {
 			) : <p style={{color:'white'}}>Loading...</p>}
 			
 			{
+
 				isCommentsOpen && (
 
-					<div className="comments" id='comments'>
-						{
-														
-							comment !== null && (Array.isArray(comment)) ? ( // if comment is not null and is an array
-								comment.map((c, key) => {
+					<div className='comments'>
 
-									return(
-										<div className="commentBox" key={key}>
-											<div>
-												<img className='commentUserAvatar' src={c ? c.user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="userphoto" />
-											</div>
-											<div style={{marginRight:'47px'}}>
-												<div style={{display:'flex', flexDirection:'row', gap:'20px', marginBottom:'10px'}}>
-													<p>
-														{c ? c.user.username : 'usuario'}
-													</p>
-													<p>{c ? formatDateToYYYYMMDD(c.timecommented) : 'data'}</p>
-												</div>
-												<p>
-													{c ? c.comment : 'comment'}
-												</p>
-												{/*
-												<div className='cmtBtn'>
-													<div style={{ display:'flex', flexDirection:'row', gap:'5px'}}>
-														<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
-														{post.likes > 0 &&
-															<p className='statusbtn'>{post.likes}</p>
-														}
-													</div>
-													<button>Responder</button>
-												</div>
-												*/}
-											</div>
-										</div>
-									)
-								})
-
-							) : comment !== null && !Array.isArray(comment) ? ( // if comment is not null and not array of comments; so its an single comment
-								<div className="commentBox">
-									<div>
-										<img className='commentUserAvatar' src={comment ? comment.user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="userphoto" />
-									</div>
-									<div style={{marginRight:'47px'}}>
-										<div style={{display:'flex', flexDirection:'row', gap:'20px', marginBottom:'10px'}}>
-											<p>{comment ? comment.user.username : 'usuario'}</p>
-											<p>{comment ? formatDateToYYYYMMDD(comment.timecommented) : 'data'}</p>
-										</div>
-										<p>
-											{comment ? comment.comment : 'comment'}
-										</p>
-
-										{/* 										
-										<div className='cmtBtn'>
-											<div style={{ display:'flex', flexDirection:'row', gap:'5px'}}>
-												<img src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />
-												{post.likes > 0 &&
-													<p className='statusbtn'>{post.likes}</p>
-												}
-											</div>
-											<button>Responder</button>
-										</div> 
-										*/}
-
-									</div>
-								</div>
-							) : (
-								<div className="commentBox">
-									<p>no comments</p>
-								</div>
-							)
-						} 
+						<PostComments _postId={`_${postId}`}/>
+					
+						<div className="PostBottomChat">
+							<input id="sendInput" type="text" onKeyDown={handleKey} onChange={(e) => {setText(e.target.value)}} value={text} />
+							<input style={{display:'none'}} type="file" id='file'/>
+				
+				
+							<img src="../../../src/assets/icons/fluent-mdl2_send.svg" alt="" onClick={() => {handleSendComment()}}/>
+						</div>				
 					</div>
 
 				)

@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound';
 import { ForumContextProvider } from './context/ForumContext';
 import { SelectedPostContextProvider } from './context/SelectedPostContext.jsx';
 import { SelectedUserContextProvider } from './context/SelectedUserContext.jsx';
+import { CommentContextProvider } from './context/CommentContext.jsx';
 
 
 const App = () => {
@@ -39,11 +40,13 @@ const App = () => {
                             <ProtectedRoute>
                                 <SelectedUserContextProvider>
                                     <ForumContextProvider>
+                                    <CommentContextProvider>
                                         <SelectedPostContextProvider>
                                             <ComponentProvider>
                                                 <Home/> 
                                             </ComponentProvider>
                                         </SelectedPostContextProvider>
+                                    </CommentContextProvider>
                                     </ForumContextProvider>
                                 </SelectedUserContextProvider>
                             </ProtectedRoute>

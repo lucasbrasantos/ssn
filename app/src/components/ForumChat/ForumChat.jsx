@@ -7,6 +7,7 @@ import { Timestamp, arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from '
 import { db } from '../../firebase';
 import { v4 as uuid } from "uuid";
 import ForumMessages from './ForumMessages';
+import Swal from 'sweetalert2';
 
 const ForumChat = () => {
 
@@ -73,6 +74,7 @@ const ForumChat = () => {
 				timer: 2000,
 				timerProgressBar: true,
 			})
+			
 			
 		}
         /* por enquando img nao
