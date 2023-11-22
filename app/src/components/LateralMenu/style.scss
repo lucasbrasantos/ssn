@@ -29,6 +29,11 @@
 					animation: color-change-3x 4s linear infinite alternate both;
 				}
 
+				&:active{
+					transition: .2s;
+					transform: translate(-5px);
+				}
+
 
 
 				img{

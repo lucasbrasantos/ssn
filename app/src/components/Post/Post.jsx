@@ -220,10 +220,10 @@ const Post = ({postData, postId}) => {
 		setSelectedComponent(component)
 	}
 
-	const handleUserClick = () => {
+	const handleUserClick = (userid) => {
 
 		dispatch({type:"SELECT_USER", payload:{
-			userId: user && user.userid
+			userId: userid
 		}})
 
 		handleChangeComponent('userProfile')
