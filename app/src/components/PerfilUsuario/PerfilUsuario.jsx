@@ -198,15 +198,21 @@ const PerfilUsuario = () => {
 					<div className='BtnsU'>
 						{
 
-							!findCurrentUserFriends && ( // se nao tiver na lista de amigos do currentUser
+							!findCurrentUserFriends ? ( // se nao tiver na lista de amigos do currentUser
 								<button>
 									Adicionar como amigo
+								</button>
+							) : (
+								<button>
+									Remover amigo
 								</button>
 							)
 						}
 						<button>
 							Mensagem
 						</button>
+
+						
 					</div>
 				}
 			</div>

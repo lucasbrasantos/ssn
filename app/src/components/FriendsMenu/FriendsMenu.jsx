@@ -77,24 +77,34 @@ const FriendsMenu = () => {
   
 	return (
 		<div className='boxF'>
-			<h1>Amigos</h1>
-			
-			<div className="friendsContainer">
+			<div className="fContent">
 
-			{
-				friends && friends.map((e, key) => {
+				
+				<div className="friendsTitle">
+					<h1 style={{textAlign:'center'}}>Amigos</h1>
+					<img src="../../../src/assets/icons/fluent-mdl2_people.svg" alt="" />
+				</div>
+				
+				<div className="friendsContainer">
 
-					return(
-						<div key={key} className='friends' onClick={() => {handleUserClick(e)}}>
-							<img className='friendsPhotoUrl' src={e.photourl} alt="" />
-							{e.name}
-						</div>
-					)
-				})
+					{
+						friends && friends.map((e, key) => {
 
-			}
+							return(
+								<div key={key} className='friends' onClick={() => {handleUserClick(e)}}>
+									<img className='friendsPhotoUrl' src={e.photourl} alt="" />
+									<p>{e.name}</p>
+								</div>
+							)
+						})
+
+					}
+				</div>
 			</div>
+
+
 		</div>
+		
 	)
 }
 
