@@ -4,7 +4,7 @@ import './style.scss';
 import {AuthContext} from '../../context/AuthContext.jsx'
 import DeleteUserData from './functions/deleteUserData.js';
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
 
 const Configs = () => {
 
@@ -18,6 +18,49 @@ const Configs = () => {
 			userId: 3,
 			// userUid: currentUser.uid,
 		})
+
+	}
+	
+	const handleCreateTag = async() => {
+
+		const { value } = await Swal.fire({
+			title: "Criar Tag",
+			text: "Escreva sua nova tag abaixo",
+			icon: "warning",
+			input: "text",
+			inputAttributes: {
+				autocapitalize: "off"
+			},
+			inputValidator: (value) => {
+				if (!value) {
+				  return "Você precisa escrevar algo antes!";
+				}
+			},
+			showCancelButton: true,
+		})
+
+		if (value) {
+			const tag = `#${value}`
+			console.log(tag);
+
+			await axios.post('http://localhost:3000/interests', {
+				description: tag,					
+			}).then(res => {
+				console.log(res);
+
+				Swal.fire({
+					title: "Success",
+					text: `tag ${tag} inserida com sucesso`,
+					icon: "success"
+				});
+
+			}).catch(err => {
+				console.log(err);
+			})
+
+		}		
+
+
 
 	}
 
@@ -76,6 +119,10 @@ const Configs = () => {
 			*/}
 
 
+			<div className="ConfigsOpc" style={{cursor:'pointer'}} onClick={() => { handleCreateTag() }}>
+				<p style={{color: 'white'}}>Criar Tag</p>
+				<img style={{height:'24px'}} src="../../../src/assets/icons/Vector.png" alt="" />
+			</div>
 			<div className="ConfigsOpc" style={{cursor:'pointer'}} onClick={() => { handleDeleteBtnClick() }}>
 				<p style={{color: 'rgb(204,29,29)'}}>Excluir Conta</p>
 				<img style={{height:'24px'}} src="https://cdn.icon-icons.com/icons2/1982/PNG/512/trashbin_123015.png" alt="" />
