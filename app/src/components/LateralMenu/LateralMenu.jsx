@@ -66,10 +66,10 @@ const LateralMenu = () => {
 			<p>configurações</p>
 		</div>
 
-		<div className='opcs'>
+		{/* <div className='opcs'>
 			<img src="../../../src/assets/icons/fluent-mdl2_clear-night.png" alt="" />
 			<p>tema</p>
-		</div>
+		</div> */}
 
 		<div className='opcs' onClick={ () => {
 		  signOut(auth)
