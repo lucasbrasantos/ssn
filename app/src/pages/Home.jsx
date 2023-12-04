@@ -24,7 +24,7 @@ import AddFriend from '../components/addFriend/addFriend';
 
 
 const components = { // name for the button click // <component name>
-	nothing: undefined, ///
+	nothing: 'undefined', ///
 	userProfile: PerfilUsuario,
 	addFriend: AddFriend,
 	configs: Configs, 
@@ -44,9 +44,11 @@ const components = { // name for the button click // <component name>
 const Home = () => {
 	
 	const { selectedComponent } = useComponentContext()
-	const ComponentToRender = components[selectedComponent];
+	const { setSelectedComponent } = useComponentContext()
+	
+	const ComponentToRender = components[selectedComponent]
 
-
+	
 	return(
 		
 		<div className='homeContainer'>
@@ -57,7 +59,9 @@ const Home = () => {
 				
 				
 					{
-						ComponentToRender ? <ComponentToRender /> : <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
+						// ComponentToRender ? <ComponentToRender /> :  <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
+						ComponentToRender ? <ComponentToRender /> : setTimeout(() => {setSelectedComponent('posts')}, 450) // aqui esta o component renderizado no centro / na parte principal
+						
 						
 						// e a condição ? = if
 						// se existe o ComponentToRender, renderiza ele, se nao renderiza o <p>

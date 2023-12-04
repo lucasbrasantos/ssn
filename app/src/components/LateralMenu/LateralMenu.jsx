@@ -15,9 +15,23 @@ const LateralMenu = () => {
 	const navigate = useNavigate();
 	
 	const {setSelectedComponent} = useComponentContext();
+	const {selectedComponent} = useComponentContext();
+	
 	const handleButtonClick = (component) => {
-		setSelectedComponent(component)
+		
+		if (selectedComponent == 'userProfile') {
+			setSelectedComponent('nothing')
+			
+			setTimeout(() => {
+				setSelectedComponent(component)
+			}, 100)
+		}else{
+	
+			setSelectedComponent(component)
+		}		
 	}
+
+	
 
 	const {currentUser} = useContext(AuthContext); // curent user logged in
 

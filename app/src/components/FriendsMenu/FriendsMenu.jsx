@@ -65,7 +65,8 @@ const FriendsMenu = () => {
 
 		if (selectedComponent == 'userProfile') {
 			handleChangeComponent('nothing')
-        	setTimeout(() => {
+        	
+			setTimeout(() => {
 				handleChangeComponent('userProfile')
 			}, 100)
 		}else{

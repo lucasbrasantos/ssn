@@ -17,5 +17,6 @@ export const ComponentProvider = ({ children }) => {
 		setSelectedComponent
 	};
 
+
 	return <ComponentContext.Provider value={value}>{children}</ComponentContext.Provider>
 }
