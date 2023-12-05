@@ -125,7 +125,7 @@ const Configs = () => {
 			</div>
 			<div className="ConfigsOpc" style={{cursor:'pointer'}} onClick={() => { handleDeleteBtnClick() }}>
 				<p style={{color: 'rgb(204,29,29)'}}>Excluir Conta</p>
-				<img style={{height:'24px'}} src="https://cdn.icon-icons.com/icons2/1982/PNG/512/trashbin_123015.png" alt="" />
+				<img style={{height:'24px'}} src="../../../src/assets/icons/fluent-mdl2_remove-from-trash.svg" alt="" />
 			</div>
 
 		</div>
