@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { SelectedUserContext } from '../../context/SelectedUserContext';
 import { useComponentContext } from '../../context/ComponentContext';
+import Swal from 'sweetalert2';
 
 const PerfilUsuario = () => {
 
@@ -158,6 +159,37 @@ const PerfilUsuario = () => {
 	/////////
 
 	const findCurrentUserFriends = currentUserAPI && user && currentUserFriends.some(friend => friend.useridfriend == user.userid)
+
+
+	/////////
+
+	const handleRemoveFriend = async() => {
+	
+		console.log(user);
+		console.log(currentUserAPI);
+
+		await axios.delete('http://localhost:3000/friends', {
+			params:{
+				"userid": currentUserAPI.userid,
+				"useridfriend": user.userid,
+			}
+        }) 
+        .then(res => {
+			console.log(res)
+
+			Swal.fire({
+				title: "Sucesso!",
+				text: "Amigo removido com sucesso.",
+				icon: "success",
+				timer: 2500,
+				timerProgressBar: true,
+			}).then(() => window.location.reload())
+		})
+        .catch(err => {
+			console.log(err)
+		})       
+		
+	}
 	
 	return (
 		<div className='postContainerPerfil'>
@@ -203,7 +235,7 @@ const PerfilUsuario = () => {
 									Adicionar como amigo
 								</button>
 							) : (
-								<button>
+								<button onClick={() => handleRemoveFriend()}>
 									Remover amigo
 								</button>
 							)
