@@ -11,13 +11,87 @@ const Configs = () => {
 	const {currentUser} = useContext(AuthContext)
 	const [currentUserAPI, setCurrentUserAPI] = useState({})
 
+	const captchaWords = [
+		'Bicicleta',
+		'Girassol',
+		'Montanha',
+		'Esmeralda',
+		'Radiante',
+		'Cachoeira',
+		'Serenidade',
+		'Maravilha',
+		'Velocidade',
+		'Jubiloso',
+		'Bússola',
+		'Harmonia',
+		'Eclético',
+		'Magnífico',
+		'Deslumbrante',
+		'Aromático',
+		'Resplandecer',
+		'Intrépido',
+		'Exuberante',
+		'Jubilante'
+	]
+	function getRandomWord() {
+		const randomIndex = Math.floor(Math.random() * captchaWords.length);
+		return captchaWords[randomIndex];
+	}
+
 	const handleDeleteBtnClick = () => {
 
-		DeleteUserData({
-			// userId: currentUserAPI?.userid,
-			userId: 3,
-			// userUid: currentUser.uid,
-		})
+		Swal.fire({
+			title: "Deseja excluir sua conta?",
+			text: "Você não poderá reverter isso!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sim, excluir!",
+			cancelButtonText: "Cancelar"
+
+		}).then((result) => {
+			if (result.isConfirmed) {
+
+				let word = getRandomWord();
+
+				Swal.fire({
+					title: "Verificação",
+					html: `Escreva a palavra <b>${word}</b> para continuar`,
+					icon: "warning",
+					input: "text",
+					inputAttributes: {
+						autocapitalize: "off"
+					},
+					inputValidator: (value) => {
+						if (!value) {
+						  return "Você precisa escrevar algo antes!";
+						}else{
+							if (value === word) {
+								
+								DeleteUserData({
+									userId: currentUserAPI?.userid,
+									// userUid: currentUser.uid,
+									// userId: 3,
+								})
+								
+							}else{
+								Swal.fire({
+									title: "Dados errados",
+									text: "Operação cancelada!",
+									icon: "error",
+									timer:2000,
+									timerProgressBar:true,						
+								})
+							}
+						}
+					},
+					showCancelButton: true,
+				})
+				// handleDeletePost()
+			  
+			}
+		});
 
 	}
 	
