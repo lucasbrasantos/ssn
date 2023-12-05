@@ -84,6 +84,9 @@ const ChatAll = () => {
       )
     : [];
 
+
+	// console.log(filteredSearchData);
+
 	return (
 		<div id='ChatAll' className='chat'>
 
@@ -110,7 +113,7 @@ const ChatAll = () => {
 				(filteredSearchData && filteredSearchData.length > 0) ? (
 
 					filteredSearchData.map((e, key) => (
-					  <Chat key={key} data={e} imgUrl={e.photourl} username={e.username} />
+					  <Chat key={e.userid} data={e} imgUrl={e.photourl} username={e.username} />
 					))
 
 				) : (

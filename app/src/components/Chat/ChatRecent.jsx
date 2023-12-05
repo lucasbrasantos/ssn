@@ -38,6 +38,7 @@ const ChatRecent = () => {
 
 	}, [currentUser.uid]);
 
+    // console.log(chats);
 
     const filteredChats = chats
     ? Object.entries(chats)
@@ -66,15 +67,18 @@ const ChatRecent = () => {
 				/>
 			</span>
 
-            {
-
-                filteredChats && filteredChats.length > 0 ? (
-                    filteredChats.map((chat, key) => <Chat2 chat={chat[1]} key={key} />)
-                ) : (
-                    <p className='noData' style={{color:'white', padding:'20px 0'}}>Nenhum usuário encontrado</p>
-                )
-
-            }
+            <div className="chats">
+            
+                {
+                    
+                    filteredChats && filteredChats.length > 0 ? (
+                        filteredChats.map((chat, key) => <Chat2 chat={chat[1]} key={key} />)
+                        ) : (
+                            <p className='noData' style={{color:'white', padding:'20px 0'}}>Nenhum usuário encontrado</p>
+                        )
+                            
+                }
+            </div>
 
             
         </div>

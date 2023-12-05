@@ -37,14 +37,15 @@ const Chat = (props) => {
 					
 					//create a chat in chats collection
 					await setDoc(doc(db, "chats", combinedId), { messages: [] });
-	
+				}
 					//create user chats
 					await updateDoc(doc(db, "userChats", currentUser.uid), {
 	
 						[combinedId+".userInfo"]: {
 							uid: user.firebase,
 							displayName: user.username,
-							photoURL: user.photourl
+							photoURL: user.photourl,
+							userId: user.userid,
 						},
 						[combinedId+".date"]: serverTimestamp()
 					});
@@ -54,12 +55,14 @@ const Chat = (props) => {
 						[combinedId+".userInfo"]: {
 							uid: currentUser.uid,
 							displayName: currentUser.displayName,
-							photoURL: currentUser.photoURL
+							photoURL: currentUser.photoURL,
+							userId: user.userid,
 						},
 						[combinedId+".date"]: serverTimestamp()
 					});
+				
 
-				}
+				
 	
 			} catch (error) {
 				console.log(error);
@@ -68,7 +71,8 @@ const Chat = (props) => {
 		handleSelect({
 			uid: user.firebase,
 			displayName: user.username,
-			photoURL: user.photourl
+			photoURL: user.photourl,
+			userId: user.userid,
 		});
 		
 		handleButtonClick('chatUser')

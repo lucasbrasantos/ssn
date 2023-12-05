@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { SelectedUserContext } from '../../context/SelectedUserContext';
 
 const ChatUser = () => {
 
@@ -23,6 +24,7 @@ const ChatUser = () => {
     const {currentUser} = useContext(AuthContext);
 
 	const [user, setUser] = useState()
+	console.log(data);
 
 	useEffect(() => {
 		fetchData();					
@@ -166,15 +168,33 @@ const ChatUser = () => {
 		)
 	}
 
+	////
 
+	const {dispatch} = useContext(SelectedUserContext)
+	
+
+	const handleChangeComponent = (component) => {
+		setSelectedComponent(component)
+	}
+
+	const handleUserClick = () => {
+
+		dispatch({type:"SELECT_USER", payload:{
+			userId: data.user.userid
+		}})
+
+		handleChangeComponent('userProfile')
+	}
 
 
     return(
         <div className='chatDiv'>
             <div className="topChat">
                 <img className='backHome' src="../../../src/assets/icons/fluent-mdl2_chrome-back.png" alt="" onClick={() => handleButtonClick('chatAll')}/>
-                <img src={data.user?.photoURL} className='userimg' alt="" />
-                <p>{data.user?.displayName}</p>
+                <div style={{display:'flex', alignItems:'center', gap:'0 10px', cursor:'pointer'}} onClick={() => handleUserClick()} >
+					<img src={data.user.photoURL} className='userimg' alt="" />
+					<p>{data.user?.displayName}</p>
+				</div>
             </div>
 
             <Messages />

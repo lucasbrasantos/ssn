@@ -13,6 +13,7 @@ const Chat2 = (props) => {
 	const chatInfo = props.chat && props.chat.userInfo ? props.chat : ''
 	const user = chatInfo?.userInfo
 
+	// console.log(props);
 	// console.log(chatInfo);
 	// console.log(user);
 
@@ -30,7 +31,8 @@ const Chat2 = (props) => {
 		handleSelect({
 			uid: user.uid,
 			displayName: user.displayName,
-			photoURL: user.photoURL
+			photoURL: user.photoURL,
+			userid: user.userId,
 		});
 		
 		handleButtonClick('chatUser')
@@ -44,7 +46,7 @@ const Chat2 = (props) => {
 
 	return (
 		<div id='Chat2' onClick={() => handleChatClick()}>
-			<img src="../../../src/assets/IconDark.png" alt="" />
+			<img src={user?.photoURL || "../../../src/assets/IconDark.png"} alt="" />
 			<div className="box">
 				<p className='username'>{chatInfo.userInfo.displayName}</p>
 				<p className='lastMessage'>{chatInfo.lastMessage?.text}</p>
