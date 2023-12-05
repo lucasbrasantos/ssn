@@ -167,13 +167,13 @@ const PerfilUsuario = () => {
 
 				<div>
 					<p>{user && user.name}</p>
-					<p style={{fontSize:'.8rem', marginTop:'5px'}}>{user && user.username}</p>
+					<p style={{fontSize:'.8rem', marginTop:'5px'}}>@{user && user.username}</p>
 					<p>{user && user.info}</p>
 				</div>
 				</div>
 				<div>
 					<p>N º amigos: {friends ? friends.length : 0}</p>
-					<p>Rank Usuario: {currentUserRanking ? currentUserRanking.user_ranking : 0}10🏆
+					<p>Rank Usuario: {currentUserRanking ? currentUserRanking.user_ranking : 0}
 					{
 						currentUserRanking?.user_ranking == 1 ? <span> - 🥇</span> :
 						currentUserRanking?.user_ranking == 2 ? <span> - 🥈</span> :
