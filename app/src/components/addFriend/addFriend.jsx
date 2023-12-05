@@ -15,6 +15,8 @@ const AddFriend = () => {
 	const [currentUserAPI, setCurrentUserAPI] = useState({});	
 	const [currentUserRanking, setCurrentUserRanking] = useState({});	
 	const [friends, setFriends] = useState([])
+    const [searchTerm, setSearchTerm] = useState('');
+
 
 	useEffect(() => {
 		fetchData();
@@ -72,6 +74,12 @@ const AddFriend = () => {
 
     }
 
+    const filteredFriends = friends
+    ? friends.filter((friend) =>
+        friend.username.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+
 
     /////////
 
@@ -94,39 +102,39 @@ const AddFriend = () => {
     return(
         <div className="addFBox">
             <div className="fSearch">
-                <input type="text" placeholder='Pesquisar...'/>
+                <input type="text" placeholder='Pesquisar...' onChange={(e) => setSearchTerm(e.target.value)}/>
                 <img src="../../../src/assets/icons/fluent-mdl2_Search.png" alt="" />
             </div>
             <div className="fList">
 
             
                 {
+                    (filteredFriends.length > 0) ?
+                        filteredFriends && filteredFriends.map((e, key) => {
+                            if (e.useridfriend == currentUserAPI.userid) {
+                                return;
+                            }
+                            return(
 
-                    friends ? friends.map((e, key) => {
-                        if (e.useridfriend == currentUserAPI.userid) {
-                            return;
-                        }
-                        return(
-
-                            <div className="friendS" key={key}>
-                                <div className='infosF1' onClick={() => handleUserClick(e.useridfriend)} style={{cursor:'pointer'}}>
-                                    <img className='fAvatar' src={e.photourl || "../../../src/assets/Icon.png"} alt="" />
-                                    <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                                        <p>{e.name}</p>
-                                        <p>{e.username}</p>
+                                <div className="friendS" key={key}>
+                                    <div className='infosF1' onClick={() => handleUserClick(e.useridfriend)} style={{cursor:'pointer'}}>
+                                        <img className='fAvatar' src={e.photourl || "../../../src/assets/Icon.png"} alt="" />
+                                        <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
+                                            <p>{e.name}</p>
+                                            <p>{e.username}</p>
+                                        </div>
+                                    </div>
+                                    <div className="infosF2">
+                                        <div style={{display:'flex', flexDirection:'column', gap:'5px', alignItems:'flex-end'}}>
+                                            <p>Nº amigos: {e.num_friends}</p> 
+                                            {/* <p>Ranking: 0</p> */}
+                                        </div>
+                                        <img onClick={() => {handleAddFriend(currentUserAPI.userid, e.useridfriend)}} style={{cursor:'pointer'}} src="../../../src/assets/icons/fluent-mdl2_add-friend.png" alt="" />
                                     </div>
                                 </div>
-                                <div className="infosF2">
-                                    <div style={{display:'flex', flexDirection:'column', gap:'5px', alignItems:'flex-end'}}>
-                                        <p>Nº amigos: {e.num_friends}</p> 
-                                        {/* <p>Ranking: 0</p> */}
-                                    </div>
-                                    <img onClick={() => {handleAddFriend(currentUserAPI.userid, e.useridfriend)}} style={{cursor:'pointer'}} src="../../../src/assets/icons/fluent-mdl2_add-friend.png" alt="" />
-                                </div>
-                            </div>
-                            
-                        )
-                    }) : <p style={{color:'white'}}>nada por enquanto</p>
+                                
+                            )
+                        }) : <p style={{color:'white'}}>Nenhum user encondrado</p>
 
                 }
                 
