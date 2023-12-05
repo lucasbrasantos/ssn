@@ -75,7 +75,7 @@ const Post = ({postData, postId}) => {
 	
 	
 	useEffect( () => {
-		const likesCollectionRef = doc(db, 'users', currentUser.uid, 'likes', 'posts');
+		const likesCollectionRef = currentUser && doc(db, 'users', currentUser.uid, 'likes', 'posts');
 
 		const unSub = onSnapshot(query(likesCollectionRef), (doc) => {
 			const _liked = doc.data()['_'+ postId]?.liked
@@ -421,7 +421,7 @@ const Post = ({postData, postId}) => {
 			  Swal.fire({
 				title: "Post Reportado!",
 				text: "Seu relatório foi enviado com sucesso! Nossos moderadores irão analisar o conteúdo.",
-				icon: "success"
+				icon: "success",
 			  });
 			}
 		  });
