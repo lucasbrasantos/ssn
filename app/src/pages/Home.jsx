@@ -20,7 +20,7 @@ import ChatUser from '../components/ChatUser/ChatUser';
 import Ranking from '../components/Ranking/Ranking';
 import Posts from '../components/Posts/Posts';
 import EdtPerfilU from '../components/EdtPerfilU/EdtPerfilU';
-import AddFriend from '../components/addFriend/addFriend';
+import AddFriend from '../components/addFriend/AddFriend';
 
 
 const components = { // name for the button click // <component name>
@@ -62,7 +62,7 @@ const Home = () => {
 				
 					{
 						// ComponentToRender ? <ComponentToRender /> :  <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
-						selectedComponent == 'search' ? <Search searchTerm={searchTerm} /> : ComponentToRender ? <ComponentToRender /> : setTimeout(() => {setSelectedComponent('posts')}, 600) // aqui esta o component renderizado no centro / na parte principal
+						selectedComponent == 'search' ? <Search searchTerm={searchTerm} /> : ComponentToRender ? <ComponentToRender /> : setTimeout(() => {setSelectedComponent('posts')}, 700) // aqui esta o component renderizado no centro / na parte principal
 						
 						
 						
