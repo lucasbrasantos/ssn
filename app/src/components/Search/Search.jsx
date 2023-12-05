@@ -5,13 +5,15 @@ import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
 import { Box, CircularProgress } from '@mui/material'
 
-const Search = () => {
+const Search = ({searchTerm}) => {
 
 	const {currentUser} = useContext(AuthContext);
 	
 	const a = undefined;
 	const [filteredPosts, setFilteredPosts] = useState();
 	const [selectedInterest, setSelectedInterest] = useState('all');
+	
+
 
 	///////////////////
 	
@@ -66,6 +68,7 @@ const Search = () => {
 	const handleChange = (selectedValue) => {
 		//console.log(selectedValue);
 		setSelectedInterest(selectedValue)
+		
 
 		if(selectedValue === 'all'){
 			setFilteredPosts(data)
@@ -78,6 +81,13 @@ const Search = () => {
 		// console.log(data);
 		// console.log('id: ' + selectedInterest);
 	}
+
+	const filteredSeachPosts = (selectedInterest === 'all' && data ? data.posts : filteredPosts && data ? filteredPosts?.posts : []).filter(
+		(post) =>
+		post.title.toLowerCase().includes(searchTerm.toLowerCase())
+	)
+
+	console.log(searchTerm);
 
 	return (
 		<div className='searchBox'>
@@ -100,6 +110,7 @@ const Search = () => {
 				<div className='searchGrid'>
 					
 				{
+				/*
 					
 					selectedInterest === 'all' && data ? data.posts.map((e, key) => (
 
@@ -126,11 +137,20 @@ const Search = () => {
 							<CircularProgress />
 				  		</Box>
 
-					)
+					)*/
+					
 
+				}
+				{
+					filteredSeachPosts.length === 0 ? (
+						<p style={{position:'absolute',width:'100%',color:'white'}}>Nenhum post encontrado.</p>
+					) : filteredSeachPosts.map((e, key) => (
+						<PostPerfil data={e} key={key} />
+					))
 				}
 
 				</div>
+				
 			</div>
 
 	 	</div>

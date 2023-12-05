@@ -8,7 +8,7 @@ import './style.scss'
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
-const Navbar = () => {
+const Navbar = ({setSearchTerm }) => {
   
 	const {setSelectedComponent} = useComponentContext();
 
@@ -54,7 +54,13 @@ const Navbar = () => {
 		</div>
 
 		<span className='searchSpan'  onClick={() => handleButtonClick('search')}>
-			<input name='search' className='search' type="text" placeholder='Pesquisar...' />
+			<input
+			name='search'
+			className='search'
+			type="text"
+			placeholder='Pesquisar...'
+			onChange={(e) => setSearchTerm(e.target.value)}
+			/>
 		</span>
 
 		<div className="col2">

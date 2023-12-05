@@ -7,7 +7,7 @@ import FriendsMenu from '../components/FriendsMenu/FriendsMenu';
 import CreatePost from '../components/CreatePost/CreatePost';
 import PerfilUsuario from '../components/PerfilUsuario/PerfilUsuario';
 import Configs from '../components/Configs/Configs';
-import Search from '../components/search/Search';
+import Search from '../components/Search/Search.jsx';
 
 
 import { ComponentProvider, useComponentContext } from '../context/ComponentContext';
@@ -48,11 +48,13 @@ const Home = () => {
 	
 	const ComponentToRender = components[selectedComponent]
 
+	const [searchTerm, setSearchTerm] = useState('');
+
 	
 	return(
 		
 		<div className='homeContainer'>
-			<Navbar />
+			<Navbar setSearchTerm={setSearchTerm}/>
 			
 			<div className="homeContent">
 				<LateralMenu />
@@ -60,7 +62,8 @@ const Home = () => {
 				
 					{
 						// ComponentToRender ? <ComponentToRender /> :  <p className='nothing'>nada aqui por enquanto</p> // aqui esta o component renderizado no centro / na parte principal
-						ComponentToRender ? <ComponentToRender /> : setTimeout(() => {setSelectedComponent('posts')}, 450) // aqui esta o component renderizado no centro / na parte principal
+						selectedComponent == 'search' ? <Search searchTerm={searchTerm} /> : ComponentToRender ? <ComponentToRender /> : setTimeout(() => {setSelectedComponent('posts')}, 600) // aqui esta o component renderizado no centro / na parte principal
+						
 						
 						
 						// e a condição ? = if
