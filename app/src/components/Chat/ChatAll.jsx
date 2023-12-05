@@ -23,6 +23,9 @@ const ChatAll = () => {
 	const [users, setUsers] = useState([])
 	const [chats, setChats] = useState([])
 
+	const [searchTerm, setSearchTerm] = useState('');
+
+
 	useEffect(() => {
 		fetchData()
 	}, []);
@@ -75,6 +78,11 @@ const ChatAll = () => {
 
 	const mergedData = mergedDataApiFirebase(newUsers, chats);
 	
+	const filteredSearchData = mergedData
+    ? mergedData.filter((user) =>
+        user.username.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
 	return (
 		<div id='ChatAll' className='chat'>
@@ -84,23 +92,30 @@ const ChatAll = () => {
 				<hr />
 				<p onClick={() => handleButtonClick('chatRecent')}>Recentes</p>
             </div>
+			
+			<span className='searchSpan'>
+				<input
+					name='search'
+					className='search'
+					type='text'
+					placeholder='Pesquisar...'
+					onChange={(e) => setSearchTerm(e.target.value)}
+				/>
+			</span>
 
 			<div className="chats">
 
 			{	
 				
-				mergedData && mergedData.map((e, key) => {
-					
-					return (
-						
-						<Chat
-						key={key}
-						data={e}
-						imgUrl={e.photourl}
-						username={e.username}
-						/>
-					)
-				})
+				(filteredSearchData && filteredSearchData.length > 0) ? (
+
+					filteredSearchData.map((e, key) => (
+					  <Chat key={key} data={e} imgUrl={e.photourl} username={e.username} />
+					))
+
+				) : (
+					<p className='noData' style={{color:'white', padding:'20px 0'}}>Nenhum usuário encontrado</p>
+				)
 
 			}
 			</div>

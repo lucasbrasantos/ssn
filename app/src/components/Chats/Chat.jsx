@@ -85,7 +85,7 @@ const Chat = (props) => {
 		<div id='Chat' onClick={() => handleChatClick()}>
 			<img src={props.imgUrl || '../../../src/assets/IconDark.png'} alt="" />
 			<div className="box">
-				<p className='username'>{props.username}</p>
+				<p className='username'>@{props.username}</p>
 				<p className='lastMessage'>{chatInfo.lastMessage?.text}</p>
 			</div>
 			
