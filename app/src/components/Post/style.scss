@@ -14,9 +14,12 @@
     height: 700px;
     display: flex;
     flex-direction: column;
-    border: 2px solid #707070;
     margin: 0px auto; //35px
-
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 32px;
+    border: 2px solid #707070;
+    
 
 
     .postTop {
@@ -105,6 +108,42 @@
 
                 &:hover {
                     transform: translateY(-2px);
+                }
+            }
+        }
+
+        .moreButton{
+            padding: 5px 10px;
+            // background: #000;
+            cursor: pointer;
+            
+            position: relative;
+
+            .popupMenu{
+                position: absolute;
+                top: 0;
+                right: 0;
+                transform: translateY(-100%);
+                background: #232123;
+                width: 200px;
+                height: 100px;
+                z-index: 2;
+                border-radius: 16px;
+                display: flex;
+                flex-direction: column;
+                padding: 8px 10px;
+                gap: 6px 0;
+                cursor: auto;
+                text-transform: capitalize;
+
+                .menuOption{
+                    display: flex;
+                    align-items: center;
+                    gap: 0 8px;
+                    cursor: pointer;
+                    padding: 4px 0;
+                    color: clr(text);
+                    border-bottom: 1px solid clr(dark, 400);
                 }
             }
         }

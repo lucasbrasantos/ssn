@@ -34,7 +34,7 @@ const PostComments = ({_postId}) => {
 				
 				return <PostComment _postId={_postId} m={m} key={key} />
 				
-			}) : <p style={{padding:'12px 0', textAlign:'center'}}>nenhum comentário</p>
+			}) : <p style={{padding:'12px 0', textAlign:'center', textTransform:'capitalize'}}>nenhum comentário</p>
 			
 		}
 		

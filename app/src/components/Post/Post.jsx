@@ -36,6 +36,8 @@ const Post = ({postData, postId}) => {
 	const [user, setUser] = useState(postData?.user);
 	const [comment, setComment] = useState(postData?.comment);
 
+	
+
 	useEffect(() => {
 		if (postData) {
 			setUser(postData.user);
@@ -279,7 +281,7 @@ const Post = ({postData, postId}) => {
 			const messageId = uuid();  // id da mensagem
 			const _postId = `_${postId}`;
 
-			console.log(postId);
+			// console.log(postId);
 			
 			const res = await getDoc(doc(db, "postComments", _postId)); 
 			
@@ -322,7 +324,7 @@ const Post = ({postData, postId}) => {
 	
 		const unSub = onSnapshot(query(collection(db, "postComments", `_${postId}`, "messages"), orderBy("date")), (doc) => {
 			const messages = doc.docs.map((doc => doc.data()))
-			setComment(messages).length;
+			setComment(messages)?.length;
 		})
 
 		return() => {
@@ -331,6 +333,100 @@ const Post = ({postData, postId}) => {
 
 	
 	}, [postId])
+
+	///////////
+
+
+	const handleMoreButton = () => {
+	  
+		toggleMoreButton()
+
+		// const popupMenu = document.getElementById('popupMenu').style
+
+	}
+
+	const [isMoreButtonOpen, setIsMoreButtonOpen] = useState(false)
+	
+	const toggleMoreButton = () => {
+
+		setIsMoreButtonOpen(!isMoreButtonOpen);
+	}
+
+	const handleDeletePostBtn = () => {
+	  
+		Swal.fire({
+			title: "Deletar Post",
+			text: "Você não poderá reverter isso!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sim, deletar!",
+			cancelButtonText: "Cancelar"
+
+		  }).then((result) => {
+			if (result.isConfirmed) {
+
+				handleDeletePost()
+			  
+			}
+		  });
+	}
+
+	const handleDeletePost = async() => {
+	  
+		try {
+			
+		
+			const res = await axios.delete(`http://localhost:3000/posts`, {
+				params: {
+					postid: postId,
+				},
+			})
+			
+			console.log(res.data);
+
+			if (res.data.slice(-1) == '1') {
+				
+				Swal.fire({
+					title: "Deletado!",
+					text: "Post deletado com sucesso!",
+					icon: "success"
+				});
+
+			}
+			
+			
+		} catch (error) {
+			console.log(error);
+		}
+		
+		window.location.reload()
+
+	}
+
+	const handleReportPost = () => {
+	  
+		Swal.fire({
+			title: "Reportar Post",
+			text: "Você acredita que o conteúdo deste post é inadequado?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sim, Reportar",
+			cancelButtonText: "Cancelar"
+		  }).then((result) => {
+			if (result.isConfirmed) {
+			  Swal.fire({
+				title: "Post Reportado!",
+				text: "Seu relatório foi enviado com sucesso! Nossos moderadores irão analisar o conteúdo.",
+				icon: "success"
+			  });
+			}
+		  });
+		  
+	}
 
 
 	return (
@@ -343,7 +439,10 @@ const Post = ({postData, postId}) => {
 					<div className='postTop'>
 						<div className='userPostInfo' onClick={() => handleUserClick(user?.userid)} style={{display:'flex', cursor:'pointer', flexDirection:'row', alignItems:'center', gap:'10px'}}>
 							<img className="postAvatar" src={user ? user.photourl : "../../../src/assets/Profile-Avatar-PNG.png"} alt="" />
-							<p>{`${user?.name} | ${user?.username}` || 'usuario'}</p>
+							<div style={{marginLeft:'1ch'}}>
+								<p style={{fontWeight:'600'}}>{`${user?.name}` || 'usuario'}</p>
+								<p style={{fontSize:'.8rem', fontWeight:'300'}}>{`@${user?.username}` || 'usuario'}</p>
+							</div>
 						</div>
 
 					</div>
@@ -369,8 +468,32 @@ const Post = ({postData, postId}) => {
 							}
 							<img style={{marginBottom:"6px"}} src="../../../src/assets/icons/fluent-mdl2_share.png" alt="" />
 						</div>
-						<div style={{marginRight:"25px"}}>
-						<img src="../../../src/assets/icons/fluent-mdl2_more-vertical.png" alt="" />
+						<div onClick={() => handleMoreButton()} className='moreButton' style={{marginRight:"25px"}}>
+							
+							{
+
+								isMoreButtonOpen && (
+									<div className="popupMenu" id='popupMenu'>
+										{
+											post?.userid == currentUserAPI?.userid && (
+												<div className='menuOption' onClick={() => handleDeletePostBtn()}>
+													<p>deletar post</p>
+													<img style={{height:'24px'}} src="../../../src/assets/icons/fluent-mdl2_remove-from-trash.svg" alt="" />
+												</div>
+											)
+										}
+
+										<div className='menuOption' onClick={() => handleReportPost()}>
+											<p>denunciar post</p>
+											<img style={{height:'24px'}} src="../../../src/assets/icons/fluent-mdl2_report_red.svg" alt="" />
+										</div>
+										
+									</div>
+								)
+
+							}
+
+							<img src="../../../src/assets/icons/fluent-mdl2_more-vertical.png" alt="" />
 						</div>
 					</div>
 					
