@@ -141,7 +141,7 @@ const ForumChat = () => {
                     <div className='infosF1'>
                         <img className='fAvatar' src={data.forumBlock.user.photourl || "../../../src/assets/Icon.png"} alt="" />
                         <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                            <p>{`${data.forumBlock.user.username} | ${data.forumBlock.user.name}`}</p>
+                            <p>{`${data.forumBlock.user.name} | @${data.forumBlock.user.username}`}</p>
                             <p>{formatDateToYYYYMMDD(data.forumBlock.created_at)}</p>
                         </div>
                     </div>

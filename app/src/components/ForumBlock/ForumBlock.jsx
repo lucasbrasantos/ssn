@@ -14,12 +14,12 @@ const ForumBlock = (props) => {
 	const {dispatch} = useContext(ForumContext)
 	const {currentUser} = useContext(AuthContext);
 	
-	const forumId = props.data.forumid;	
-	const [userForumId_, setUserForumId_] = useState(`${props.user.firebase}_${forumId}`)
+	const forumId = props.data?.forumid;	
+	const [userForumId_, setUserForumId_] = useState(`${props.user?.firebase}_${forumId}`)
 	
 	const handleForumClick = async() => {
 		
-		const userForumId = `${props.user.firebase}_${forumId}`; // firebase uid + forum id
+		const userForumId = `${props.user?.firebase}_${forumId}`; // firebase uid + forum id
 
 		try {
 			const res = await getDoc(doc(db, "forumChats", userForumId)); 
@@ -199,7 +199,8 @@ const ForumBlock = (props) => {
 			<div className="userInfo">
 				<img src={props.user?.photourl || '../../../src/assets/Icon.png'} alt="" />
 				<div>
-					<p className='username'>{`${props.user.username} | ${props.user.name}`}</p>
+					<p className='name' style={{fontWeight:'500'}} >{`${props.user?.name}`}</p>
+					<p className='username' style={{fontSize:'.85rem',fontWeight:'300'}} >@{`${props.user?.username}`}</p>
 					<p className='timePosted'>{formatDateToYYYYMMDD(props.created_at)}</p>
 				</div>
 			</div>

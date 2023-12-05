@@ -139,7 +139,7 @@ const ForumMessage = ({userForumId, m}) => {
 				<div><img onClick={(e) => updateLikesCount(userForumId, message.id, message.likes)} id={`likeIcon_${message.id}`} className='likeIcon' src="../../../src/assets/icons/fluent-mdl2_heart.png" alt="" />{message.likes}</div>
 			</div>
 			<div className="FMD2">
-				<p>{message.senderUsername}</p>
+				<p>@{message.senderUsername}</p>
 				<p>{newFormatedDate.split(" ")[0]}</p>
 				<p>{newFormatedDate.split(" ")[1]}</p>
 			</div>

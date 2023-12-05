@@ -20,8 +20,11 @@ const Forum = () => {
 
 	
 	const [forum, setForum] = useState([])
+	const [filteredForum, setFilteredForum] = useState([]);
 	const [interests, setInterests] = useState([])
 	const [users, setUsers] = useState([])
+	const [searchTerm, setSearchTerm] = useState('');
+
 
 	const fetchData = async() => {
 		await axios.get('http://localhost:3000/forum')
@@ -41,6 +44,18 @@ const Forum = () => {
 	useEffect(() => {
 		fetchData()
 	}, []);
+
+	useEffect(() => {
+		setFilteredForum(
+		  users && forum?.filter(
+			(forumItem) =>
+			  forumItem?.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			  forumItem?.description.toLowerCase().includes(searchTerm.toLowerCase())
+		  )
+		);
+	}, [searchTerm, forum]);
+
+
 
 	function findTag(tag){
 
@@ -65,16 +80,22 @@ const Forum = () => {
 		<div id='ForumPage'>
 			<h1 className='pageTitle'>forum</h1>
 			
-			<span className='searchSpan' >
-				<input name='search' className='search' type="text" placeholder='Pesquisar...'/>
-				<img onClick={() => handleUserClick()} src="../../../src/assets/icons/Vector.png" alt="" />
+			<span className='searchSpan'>
+				<input
+					name='search'
+					className='search'
+					type='text'
+					placeholder='Pesquisar...'
+					onChange={(e) => setSearchTerm(e.target.value)}
+				/>
+				<img onClick={handleUserClick} src="../../../src/assets/icons/Vector.png" alt='' />
 			</span>
 
 
 			{
-				(forum && users.length > 0 && forum.length > 0) ?
+				(filteredForum && filteredForum.length > 0) ? 
 
-					forum.map((e, key) => {
+					(users.length > 0 && forum.length > 0) && filteredForum.map((e, key) => {
 
 						return <ForumBlock
 						key={key}
@@ -87,7 +108,7 @@ const Forum = () => {
 						likes={e.likes}
 						/>
 					}) : (
-						<p className='noData'>nada aqui</p>
+						<p className='noData'>Nenhum fórum encontrado.</p>
 					)
 			}
 
