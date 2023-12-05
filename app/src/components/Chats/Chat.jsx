@@ -72,7 +72,7 @@ const Chat = (props) => {
 			uid: user.firebase,
 			displayName: user.username,
 			photoURL: user.photourl,
-			userId: user.userid,
+			userid: user.userid,
 		});
 		
 		handleButtonClick('chatUser')
